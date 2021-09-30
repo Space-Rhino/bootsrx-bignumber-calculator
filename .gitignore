@@ -1,0 +1,72 @@
+# GENERAL
+*.tmp
+*.log
+######################
+
+# JAVA
+.mtj.tmp/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+######################
+
+# GRADLE
+bin/
+build/
+.gradle
+.gradletasknamecache
+gradle-app.setting
+!gradle-wrapper.jar
+######################
+
+# INTELLIJ
+out/
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+######################
+
+# ECLIPSE
+.settings/
+/bin
+tmp/
+.metadata
+.classpath
+.project
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.factorypath
+######################
+
+# NETBEANS
+nbproject/private/
+./build
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+######################
+
+# VISUAL STUDIO CODE
+.vscode/
+.code-workspace
+######################
+
+# WINDOWS OS
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+######################
+
+# MAC
+.DS_Store
+######################
