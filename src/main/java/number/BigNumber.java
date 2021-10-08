@@ -13,8 +13,8 @@ import java.util.Objects;
  *
  * @author  Shawn Crahen
  * @version 1.1
- * @see     number.Number
- * @see     java.math.BigDecimal
+ * @see     Number
+ * @see     BigDecimal
  *
  */
 public class BigNumber implements Number, Comparable<BigNumber> {
@@ -101,8 +101,11 @@ public class BigNumber implements Number, Comparable<BigNumber> {
 		return new BigNumber(number.negate());
 	}
 
+	/**
+	 * @throws ArithmeticException if this is zero
+	 */
 	@Override
-	public Number inverse() {
+	public Number inverse() throws ArithmeticException {
 		return (new BigNumber("1")).divide(this);
 	}
 
