@@ -22,7 +22,12 @@ public class Calculator {
 	private Stack<Number> operandStack;
 
 //	private Stack<Operation> operationStack;
-//	private Display display;
+
+	/**
+	 * The display register for this Calculator.
+	 */
+	private Display display;
+
 //	private State state;
 //	private Map<String, Operation> operationMap;
 
@@ -37,11 +42,19 @@ public class Calculator {
 	public Calculator() {
 		operandStack = new Stack<>();
 //		operationStack = new Stack<>();
-//		display = new Display("0");
+		display = new Display("0");
 //		operationMap = new HashMap<>();
 //		initializeOperationMap();
 //		initializeStates();
 //		setState(ready);
+	}
+
+	/*
+	 * This is a utility method for test only. Delete when
+	 * pushDisplayToOperandStack() is complete.
+	 */
+	public void pushToOperandStack(Number number) {
+		operandStack.push(number);
 	}
 
 	/**
@@ -59,7 +72,7 @@ public class Calculator {
 	 * @param value the string representation of the number to display
 	 */
 	public void updateDisplay(String value) {
-//		display.setValue(value.contains(".") ? value.replaceAll("0*$", "").replaceAll("\\.$", "") : value);
+		display.setValue(value.contains(".") ? value.replaceAll("0*$", "").replaceAll("\\.$", "") : value);
 	}
 
 	/**
