@@ -110,7 +110,7 @@ public class BigNumber implements Number, Comparable<BigNumber> {
 	}
 
 	/**
-	 * @return the String representation of this BigNumber
+	 * @return a String representation of this BigNumber
 	 */
 	@Override
 	public String toString() {
@@ -161,5 +161,10 @@ public class BigNumber implements Number, Comparable<BigNumber> {
 	@Override
 	public int compareTo(BigNumber other) {
 		return this.number.compareTo(other.number);
+	}
+
+	@Override
+	public int compareTo(BigNumber other) {
+		return number.compareTo(other.number);
 	}
 }
