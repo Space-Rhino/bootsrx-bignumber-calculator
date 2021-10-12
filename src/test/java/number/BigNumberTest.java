@@ -54,41 +54,11 @@ class BigNumberTest {
 
     @Test
     @Order(2)
-    @DisplayName("BigInteger: over max length")
-    void bigIntegerOverMaxLength_ThrowsNumberFormatException() {
-      BigNumber integerWith250Digits =
-          new BigNumber(
-              "40000000000000000000000000000000000000000000000004"
-                  + "40000000000000000000000000000000000000000000000004"
-                  + "40000000000000000000000000000000000000000000000004"
-                  + "40000000000000000000000000000000000000000000000004"
-                  + "40000000000000000000000000000000000000000000000004");
-      assertThat(
-          integerWith250Digits.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-    }
-
-    @Test
-    @Order(3)
     @DisplayName("BigDecimal: invalid data type")
     void bigDecimalInvalidDataType_ThrowsNumberFormatException() {
       String invalidDecimalType = "12.3abc456789";
       Assertions.assertThrows(
           NumberFormatException.class, () -> bigNumber = new BigNumber(invalidDecimalType));
-    }
-
-    @Test
-    @Order(4)
-    @DisplayName("BigDecimal: over max length")
-    void bigDecimalOverMaxLength_ThrowsNumberFormatException() {
-      BigNumber decimalWith250Digits =
-          new BigNumber(
-              "0.0000000000000000000000000000000000000000000000004"
-                  + "0000000000000000000000000000000000000000000000004"
-                  + "0000000000000000000000000000000000000000000000004"
-                  + "0000000000000000000000000000000000000000000000004"
-                  + "0000000000000000000000000000000000000000000000004");
-      assertThat(
-          decimalWith250Digits.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
   }
 
@@ -440,209 +410,207 @@ class BigNumberTest {
       assertThrows(
           ArithmeticException.class, () -> actual = new BigNumber(decNegX.divide(ZERO).toString()));
     }
+  }
 
-    @Nested
-    @TestMethodOrder(OrderAnnotation.class)
-    class TestSquare {
+  @Nested
+  @TestMethodOrder(OrderAnnotation.class)
+  class TestSquare {
 
-      @Test
-      @Order(1)
-      @DisplayName("BigInteger: one pos operand | x")
-      void bigInteger_OnePositiveOperand() {
-        expected =
-            new BigNumber(
-                "1600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-        actual = new BigNumber(intPosX.square().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongIntResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
-
-      @Test
-      @Order(2)
-      @DisplayName("BigInteger: one neg operand | x")
-      void bigInteger_OneNegativeOperand() {
-        expected =
-            new BigNumber(
-                "1600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-        actual = new BigNumber(intNegX.square().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongIntResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
-
-      @Test
-      @Order(3)
-      @DisplayName("BigDecimal: one pos operand | x")
-      void bigDecimal_OnePositiveOperand() {
-        expected =
-            new BigNumber(
-                "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016");
-        actual = new BigNumber(decPosX.square().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongDecResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
-
-      @Test
-      @Order(4)
-      @DisplayName("BigDecimal: one neg operand | x")
-      void bigDecimal_OneNegativeOperand() {
-        expected =
-            new BigNumber(
-                "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016");
-        actual = new BigNumber(decNegX.square().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongDecResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
+    @Test
+    @Order(1)
+    @DisplayName("BigInteger: one pos operand | x")
+    void bigInteger_OnePositiveOperand() {
+      expected =
+          new BigNumber(
+              "1600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+      actual = new BigNumber(intPosX.square().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
-    @Nested
-    @TestMethodOrder(OrderAnnotation.class)
-    class TestSquareRoot {
-
-      @Test
-      @Order(1)
-      @DisplayName("BigInteger: one pos operand | x")
-      void bigInteger_OnePositiveOperand() {
-        expected =
-            new BigNumber(
-                "6324555320336758663997787.08886543706743911027865043365371500970558518887727847644268849621675860059");
-        actual = new BigNumber(intPosX.squareRoot().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongIntResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
-
-      @Test
-      @Order(2)
-      @DisplayName("BigInteger: one neg operand | x")
-      void bigInteger_OneNegativeOperand() {
-        assertThrows(
-            ArithmeticException.class,
-            () -> actual = new BigNumber(intNegX.squareRoot().toString()));
-      }
-
-      @Test
-      @Order(3)
-      @DisplayName("BigDecimal: one pos operand | x")
-      void bigDecimal_OnePositiveOperand() {
-        expected =
-            new BigNumber(
-                "6.32455532033675866399778708886543706743911027865043365371500970558518887727847644268849621675860059");
-        actual = new BigNumber(decPosX.squareRoot().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongDecResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
-
-      @Test
-      @Order(4)
-      @DisplayName("BigDecimal: one neg operand | x")
-      void bigDecimal_OneNegativeOperand() {
-        assertThrows(
-            ArithmeticException.class,
-            () -> actual = new BigNumber(decNegX.squareRoot().toString()));
-      }
+    @Test
+    @Order(2)
+    @DisplayName("BigInteger: one neg operand | x")
+    void bigInteger_OneNegativeOperand() {
+      expected =
+          new BigNumber(
+              "1600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+      actual = new BigNumber(intNegX.square().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
-    @Nested
-    @TestMethodOrder(OrderAnnotation.class)
-    class TestNegate {
-
-      @Test
-      @Order(1)
-      @DisplayName("BigInteger: one pos operand | x")
-      void bigInteger_OnePositiveOperand() {
-        expected = new BigNumber("-40000000000000000000000000000000000000000000000000");
-        actual = new BigNumber(intPosX.negate().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongIntResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
-
-      @Test
-      @Order(2)
-      @DisplayName("BigInteger: one neg operand | x")
-      void bigInteger_OneNegativeOperand() {
-        expected = new BigNumber("40000000000000000000000000000000000000000000000000");
-        actual = new BigNumber(intNegX.negate().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongIntResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
-
-      @Test
-      @Order(3)
-      @DisplayName("BigDecimal: one pos operand | x")
-      void bigDecimal_OnePositiveOperand() {
-        expected = new BigNumber("-0.0000000000000000000000000000000000000000000000004");
-        actual = new BigNumber(decPosX.negate().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongDecResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
-
-      @Test
-      @Order(4)
-      @DisplayName("BigDecimal: one neg operand | x")
-      void bigDecimal_OneNegativeOperand() {
-        expected = new BigNumber("0.0000000000000000000000000000000000000000000000004");
-        actual = new BigNumber(decNegX.negate().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongDecResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
+    @Test
+    @Order(3)
+    @DisplayName("BigDecimal: one pos operand | x")
+    void bigDecimal_OnePositiveOperand() {
+      expected =
+          new BigNumber(
+              "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016");
+      actual = new BigNumber(decPosX.square().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
-    @Nested
-    @TestMethodOrder(OrderAnnotation.class)
-    class TestInverse {
+    @Test
+    @Order(4)
+    @DisplayName("BigDecimal: one neg operand | x")
+    void bigDecimal_OneNegativeOperand() {
+      expected =
+          new BigNumber(
+              "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016");
+      actual = new BigNumber(decNegX.square().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
+  }
 
-      @Test
-      @Order(1)
-      @DisplayName("BigInteger: one pos operand | x")
-      void bigInteger_OnePositiveOperand() {
-        expected = new BigNumber("0.000000000000000000000000000000000000000000000000025");
-        actual = new BigNumber(intPosX.inverse().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongIntResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
+  @Nested
+  @TestMethodOrder(OrderAnnotation.class)
+  class TestSquareRoot {
 
-      @Test
-      @Order(2)
-      @DisplayName("BigInteger: one neg operand | x")
-      void bigInteger_OneNegativeOperand() {
-        expected = new BigNumber("-0.000000000000000000000000000000000000000000000000025");
-        actual = new BigNumber(intNegX.inverse().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongIntResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
+    @Test
+    @Order(1)
+    @DisplayName("BigInteger: one pos operand | x")
+    void bigInteger_OnePositiveOperand() {
+      expected =
+          new BigNumber(
+              "6324555320336758663997787.08886543706743911027865043365371500970558518887727847644268849621675860059");
+      actual = new BigNumber(intPosX.squareRoot().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
 
-      @Test
-      @Order(3)
-      @DisplayName("BigDecimal: one pos operand | x")
-      void bigDecimal_OnePositiveOperand() {
-        expected = new BigNumber("2500000000000000000000000000000000000000000000000");
-        actual = new BigNumber(decPosX.inverse().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongDecResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
+    @Test
+    @Order(2)
+    @DisplayName("BigInteger: one neg operand | x")
+    void bigInteger_OneNegativeOperand() {
+      assertThrows(
+          ArithmeticException.class, () -> actual = new BigNumber(intNegX.squareRoot().toString()));
+    }
 
-      @Test
-      @Order(4)
-      @DisplayName("BigDecimal: one neg operand | x")
-      void bigDecimal_OneNegativeOperand() {
-        expected = new BigNumber("-2500000000000000000000000000000000000000000000000");
-        actual = new BigNumber(decNegX.inverse().toString());
-        assertThat(expected, Matchers.comparesEqualTo(actual));
-        assertThat(expected, Matchers.not(wrongDecResult));
-        assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
-      }
+    @Test
+    @Order(3)
+    @DisplayName("BigDecimal: one pos operand | x")
+    void bigDecimal_OnePositiveOperand() {
+      expected =
+          new BigNumber(
+              "6.32455532033675866399778708886543706743911027865043365371500970558518887727847644268849621675860059");
+      actual = new BigNumber(decPosX.squareRoot().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("BigDecimal: one neg operand | x")
+    void bigDecimal_OneNegativeOperand() {
+      assertThrows(
+          ArithmeticException.class, () -> actual = new BigNumber(decNegX.squareRoot().toString()));
+    }
+  }
+
+  @Nested
+  @TestMethodOrder(OrderAnnotation.class)
+  class TestNegate {
+
+    @Test
+    @Order(1)
+    @DisplayName("BigInteger: one pos operand | x")
+    void bigInteger_OnePositiveOperand() {
+      expected = new BigNumber("-40000000000000000000000000000000000000000000000000");
+      actual = new BigNumber(intPosX.negate().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("BigInteger: one neg operand | x")
+    void bigInteger_OneNegativeOperand() {
+      expected = new BigNumber("40000000000000000000000000000000000000000000000000");
+      actual = new BigNumber(intNegX.negate().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("BigDecimal: one pos operand | x")
+    void bigDecimal_OnePositiveOperand() {
+      expected = new BigNumber("-0.0000000000000000000000000000000000000000000000004");
+      actual = new BigNumber(decPosX.negate().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("BigDecimal: one neg operand | x")
+    void bigDecimal_OneNegativeOperand() {
+      expected = new BigNumber("0.0000000000000000000000000000000000000000000000004");
+      actual = new BigNumber(decNegX.negate().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
+  }
+
+  @Nested
+  @TestMethodOrder(OrderAnnotation.class)
+  class TestInverse {
+
+    @Test
+    @Order(1)
+    @DisplayName("BigInteger: one pos operand | x")
+    void bigInteger_OnePositiveOperand() {
+      expected = new BigNumber("0.000000000000000000000000000000000000000000000000025");
+      actual = new BigNumber(intPosX.inverse().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("BigInteger: one neg operand | x")
+    void bigInteger_OneNegativeOperand() {
+      expected = new BigNumber("-0.000000000000000000000000000000000000000000000000025");
+      actual = new BigNumber(intNegX.inverse().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("BigDecimal: one pos operand | x")
+    void bigDecimal_OnePositiveOperand() {
+      expected = new BigNumber("2500000000000000000000000000000000000000000000000");
+      actual = new BigNumber(decPosX.inverse().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("BigDecimal: one neg operand | x")
+    void bigDecimal_OneNegativeOperand() {
+      expected = new BigNumber("-2500000000000000000000000000000000000000000000000");
+      actual = new BigNumber(decNegX.inverse().toString());
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
   }
 }
