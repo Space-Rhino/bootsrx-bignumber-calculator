@@ -66,13 +66,12 @@ public class Calculator {
 	}
 
 	/**
-	 * Calls setValue(String) on this.display with the String to display. Trailing
-	 * zeroes are removed.
+	 * Calls setValue(String) on this.display with the String to display.
 	 * 
 	 * @param value the string representation of the number to display
 	 */
 	public void updateDisplay(String value) {
-		display.setValue(value.contains(".") ? value.replaceAll("0*$", "").replaceAll("\\.$", "") : value);
+		display.setValue(value);
 	}
 
 	/**

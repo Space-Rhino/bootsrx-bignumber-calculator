@@ -110,11 +110,30 @@ public class BigNumber implements Number, Comparable<BigNumber> {
 	}
 
 	/**
-	 * @return a String representation of this BigNumber
+	 * Returns a string representation of this BigNumber.
+	 * <p>
+	 * Removes trailing zeroes and trailing decimals. Uses scientific notation per
+	 * the BigDecimal toString() method but limits total digits to 100.
+	 * 
+	 * @return a String representation of this
 	 */
 	@Override
 	public String toString() {
-		return number.toString();
+		String numString = number.toString();
+
+		// remove trailing zeroes and decimals
+		String[] subStrings = numString.split("E");
+		subStrings[0] = subStrings[0].contains(".") ? subStrings[0].replaceAll("0*$", "").replaceAll("\\.$", "")
+				: subStrings[0];
+		numString = String.join("E", subStrings);
+
+		// limit length to 100-digits
+		if (numString.length() > 100) {
+			subStrings[0] = subStrings.length > 1 ? subStrings[0].substring(0, 99 - subStrings[1].length())
+					: subStrings[0].substring(0, 100);
+			numString = String.join("E", subStrings);
+		}
+		return numString;
 	}
 
 	/**
@@ -158,11 +177,6 @@ public class BigNumber implements Number, Comparable<BigNumber> {
 	 * @param  other BigNumber that is compared to another BigNumber
 	 * @return       -1 if less than, 1 if greater than, and 0 if equal to.
 	 */
-	@Override
-	public int compareTo(BigNumber other) {
-		return this.number.compareTo(other.number);
-	}
-
 	@Override
 	public int compareTo(BigNumber other) {
 		return number.compareTo(other.number);
