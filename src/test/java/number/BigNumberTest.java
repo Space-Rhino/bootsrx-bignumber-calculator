@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BigNumberTest {
   private static final BigNumber ZERO = new BigNumber("0");
-  private static final int DEFAULT_CONTEXT = 100;
   private static BigNumber expected;
   private static BigNumber actual;
 
@@ -74,7 +73,6 @@ class BigNumberTest {
       actual = new BigNumber(intPosX.add(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -85,7 +83,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.add(intNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -96,7 +93,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.add(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -107,7 +103,6 @@ class BigNumberTest {
       actual = new BigNumber(decPosX.add(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -118,7 +113,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.add(decNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -129,7 +123,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.add(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
   }
 
@@ -145,7 +138,6 @@ class BigNumberTest {
       actual = new BigNumber(intPosX.subtract(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -156,7 +148,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.subtract(intNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -167,7 +158,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.subtract(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -178,7 +168,6 @@ class BigNumberTest {
       actual = new BigNumber(decPosX.subtract(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -189,7 +178,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.subtract(decNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -200,7 +188,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.subtract(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
   }
 
@@ -218,7 +205,6 @@ class BigNumberTest {
       actual = new BigNumber(intPosX.multiply(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -231,7 +217,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.multiply(intNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -244,7 +229,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.multiply(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -257,7 +241,6 @@ class BigNumberTest {
       actual = new BigNumber(decPosX.multiply(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -270,7 +253,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.multiply(decNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -283,7 +265,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.multiply(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
   }
 
@@ -299,7 +280,6 @@ class BigNumberTest {
       actual = new BigNumber(intPosX.divide(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -310,7 +290,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.divide(intNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -321,7 +300,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.divide(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -332,7 +310,6 @@ class BigNumberTest {
       actual = new BigNumber(decPosX.divide(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -343,7 +320,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.divide(decNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -354,7 +330,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.divide(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -365,12 +340,10 @@ class BigNumberTest {
       actual = new BigNumber(ZERO.divide(intPosX).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
 
       actual = new BigNumber(ZERO.divide(intNegX).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -381,12 +354,10 @@ class BigNumberTest {
       actual = new BigNumber(ZERO.divide(decPosX).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
 
       actual = new BigNumber(ZERO.divide(decNegX).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -426,7 +397,6 @@ class BigNumberTest {
       actual = new BigNumber(intPosX.square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -439,7 +409,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -452,7 +421,6 @@ class BigNumberTest {
       actual = new BigNumber(decPosX.square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -465,7 +433,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
   }
 
@@ -483,7 +450,6 @@ class BigNumberTest {
       actual = new BigNumber(intPosX.squareRoot().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -500,11 +466,10 @@ class BigNumberTest {
     void bigDecimal_OnePositiveOperand() {
       expected =
           new BigNumber(
-              "6.32455532033675866399778708886543706743911027865043365371500970558518887727847644268849621675860059");
+              "6.32455532033675866399778708886543706743911027865043365371500970558518887727847644268849621675860059E-25");
       actual = new BigNumber(decPosX.squareRoot().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -528,7 +493,6 @@ class BigNumberTest {
       actual = new BigNumber(intPosX.negate().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -539,7 +503,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.negate().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -550,7 +513,6 @@ class BigNumberTest {
       actual = new BigNumber(decPosX.negate().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -561,7 +523,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.negate().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
   }
 
@@ -577,7 +538,6 @@ class BigNumberTest {
       actual = new BigNumber(intPosX.inverse().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -588,7 +548,6 @@ class BigNumberTest {
       actual = new BigNumber(intNegX.inverse().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -599,7 +558,6 @@ class BigNumberTest {
       actual = new BigNumber(decPosX.inverse().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
 
     @Test
@@ -610,7 +568,6 @@ class BigNumberTest {
       actual = new BigNumber(decNegX.inverse().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
-      assertThat(actual.toString().length(), Matchers.lessThanOrEqualTo(DEFAULT_CONTEXT));
     }
   }
 }
