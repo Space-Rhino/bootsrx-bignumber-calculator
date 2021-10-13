@@ -12,7 +12,7 @@ import java.util.Objects;
  * java.math.MathContext object.
  *
  * @author  Shawn Crahen
- * @version 1.1
+ * @version 1.2
  * @see     Number
  * @see     BigDecimal
  *

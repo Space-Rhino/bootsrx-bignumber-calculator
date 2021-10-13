@@ -466,7 +466,7 @@ class BigNumberTest {
     void bigDecimal_OnePositiveOperand() {
       expected =
           new BigNumber(
-              "6.32455532033675866399778708886543706743911027865043365371500970558518887727847644268849621675860059E-25");
+              "6.3245553203367586639977870888654370674391102786504336537150097055851888772784764426884962167586E-25");
       actual = new BigNumber(decPosX.squareRoot().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
