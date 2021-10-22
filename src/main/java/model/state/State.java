@@ -1,11 +1,14 @@
-package model;
+package model.state;
+
+import model.operation.Calculator;
+import model.operation.Operation;
 
 /**
  * This class provides a skeletal implementation of a generic calculator state.
  * To implement a state, extend this class and override the its methods.
  * 
  * @author  Shawn Crahen
- * @version 2.1
+ * @version 1.0
  *
  */
 public abstract class State {

@@ -1,8 +1,11 @@
-package model;
+package model.state;
+
+import model.operation.Calculator;
+import model.operation.Operation;
 
 /**
  * @author  Shawn Crahen
- * @version 2.1
+ * @version 1.0
  *
  */
 public class NextOperationState extends State {
@@ -36,18 +39,20 @@ public class NextOperationState extends State {
 		try {
 			calculator.pushDisplayToOperandStack();
 		} catch (NumberFormatException e) {
-			if (op instanceof model.AllClear || op instanceof model.Clear)
+			if (op instanceof model.operation.AllClear || op instanceof model.operation.Clear) {
 				calculator.pushOperation(op);
-			else
+			} else {
 				calculator.updateDisplay("Invalid operation");
+			}
 			return this;
 		}
 		calculator.pushOperation(op);
 
-		if (op.isBinary())
+		if (op.isBinary()) {
 			return calculator.nextOperand;
-		else
+		} else {
 			return calculator.ready;
+		}
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package model;
+package model.operation;
 
 public class AllClear extends Operation {
 

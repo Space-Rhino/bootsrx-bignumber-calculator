@@ -1,8 +1,11 @@
-package model;
+package model.state;
+
+import model.operation.Calculator;
+import model.operation.Operation;
 
 /**
  * @author  Shawn Crahen
- * @version 2.1
+ * @version 1.0
  *
  */
 public class NextOperandState extends State {
@@ -32,15 +35,17 @@ public class NextOperandState extends State {
 	 */
 	@Override
 	public State enterOperation(Operation op) {
-		if (op instanceof model.Clear)
+		if (op instanceof model.operation.Clear) {
 			calculator.executeOperation(op);
-		else
+		} else {
 			calculator.replaceOperation(op);
+		}
 
-		if (op.isBinary() || op instanceof model.Clear)
+		if (op.isBinary() || op instanceof model.operation.Clear) {
 			return this;
-		else
+		} else {
 			return calculator.ready;
+		}
 	}
 
 	/**

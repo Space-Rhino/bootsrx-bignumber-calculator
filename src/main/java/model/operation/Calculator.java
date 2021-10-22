@@ -1,7 +1,22 @@
 package model.operation;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
+import model.binaryoperations.Add;
+import model.binaryoperations.Divide;
+import model.binaryoperations.Multiply;
+import model.binaryoperations.Subtract;
+import model.state.BuildingOperandState;
+import model.state.NextOperandState;
+import model.state.NextOperationState;
+import model.state.ReadyState;
+import model.state.State;
+import model.unaryoperations.Inverse;
+import model.unaryoperations.Negate;
+import model.unaryoperations.Square;
+import model.unaryoperations.SquareRoot;
 import number.BigNumber;
 import number.Number;
 
@@ -12,10 +27,14 @@ import number.Number;
  *
  * @author  Shawn Crahen
 <<<<<<< HEAD:src/main/java/model/operation/Calculator.java
+<<<<<<< HEAD:src/main/java/model/operation/Calculator.java
  * @version 1.0
 =======
  * @version 2.1
 >>>>>>> b3c742d (dev-2.1 complete):src/main/java/model/Calculator.java
+=======
+ * @version 1.0
+>>>>>>> 855449a (reorganize package structure in preparation for rebase on dev-1):src/main/java/model/Calculator.java
  * @see     Number
  * @see     Operation
  */
@@ -55,10 +74,12 @@ public class Calculator {
 	/**
 	 * The state of this calculator.
 	 */
-	@SuppressWarnings("unused") // temporary suppression during development
 	private State state;
 
-//	private Map<String, Operation> operationMap;
+	/**
+	 * 
+	 */
+	private Map<String, Operation> operationMap;
 
 	/**
 	 * An instance of ReadyState.
@@ -105,14 +126,15 @@ public class Calculator {
 =======
 		operationStack = new Stack<>();
 		display = new Display("0");
-//		operationMap = new HashMap<>();
-//		initializeOperationMap();
+		operationMap = new HashMap<>();
+		initializeOperationMap();
 		initializeStates();
 		setState(ready);
 >>>>>>> b3c742d (dev-2.1 complete):src/main/java/model/Calculator.java
 	}
 
 	/**
+<<<<<<< HEAD:src/main/java/model/operation/Calculator.java
 	 * Calls overloaded updateDisplay(String) with the String representation of the
 	 * top number of the operand stack.
 	 */
@@ -130,6 +152,8 @@ public class Calculator {
 	}
 
 	/**
+=======
+>>>>>>> 855449a (reorganize package structure in preparation for rebase on dev-1):src/main/java/model/Calculator.java
 	 * Returns the operand stack.
 	 *
 	 * @return the operandStack
@@ -138,13 +162,26 @@ public class Calculator {
 		return operandStack;
 	}
 
-	/**
-	 * Executes an operation.
-	 * 
-	 * @param op the operation to execute
-	 */
-	public void executeOperation(Operation op) {
-		op.execute(this);
+	public Stack<Operation> getOperationStack() {
+		return operationStack;
+	}
+
+	public Display getDisplay() {
+		return display;
+	}	
+	
+	public void enterOperation(String opString) {
+		Operation op = operationMap.get(opString);
+
+		if (op instanceof model.operation.Pi) {
+			setState(state.enterConstant(op));
+		} else {
+			setState(state.enterOperation(op));
+		}
+	}
+
+	public void enterDigit(String digit) {
+		setState(state.enterDigit(digit));
 	}
 
 	/**
@@ -179,6 +216,15 @@ public class Calculator {
 	}
 
 	/**
+	 * Executes an operation.
+	 * 
+	 * @param op the operation to execute
+	 */
+	public void executeOperation(Operation op) {
+		op.execute(this);
+	}
+
+	/**
 	 * Replaces the last operation with the new operation.
 	 * 
 	 * @param op the new operation
@@ -186,10 +232,30 @@ public class Calculator {
 	public void replaceOperation(Operation op) {
 		if (!operationStack.isEmpty()) {
 			// do not pop operation if operation is the Clear operation
-			if (!(op instanceof model.Clear))
+			if (!(op instanceof model.operation.Clear)) {
 				operationStack.pop();
+			}
 		}
 		pushOperation(op);
+	}
+	
+	public void equals() {
+		while (!operationStack.isEmpty()) {
+			executeOperation(operationStack.pop());
+		}
+	}
+
+	public void clear() {
+		display.clear();
+	}
+	
+	/**
+	 * Resets the operand and operation stacks and clears the display.
+	 */
+	public void allClear() {
+		operandStack.clear();
+		operationStack.clear();
+		display.clear();
 	}
 
 	/**
@@ -205,19 +271,35 @@ public class Calculator {
 	 * @param digit the digit to send to the display
 	 */
 	public void sendDigitToDisplay(String digit) {
-		if (digit.equals("BKSP"))
+		if (digit.equals("BKSP")) {
 			display.deleteDigit();
-		else
+		} else {
 			display.addDigit(digit);
+		}
 	}
 
 	/**
-	 * Resets the operand and operation stacks and clears the display.
+	 * Calls overloaded updateDisplay(String) with the String representation of the
+	 * top number of the operand stack.
 	 */
-	public void allClear() {
-		operandStack.clear();
-		operationStack.clear();
-		display.clear();
+	public void updateDisplay() {
+		updateDisplay(operandStack.peek().toString());
+	}
+
+	/**
+	 * Calls setValue(String) on this.display with the String to display.
+	 * 
+	 * @param value the string representation of the number to display
+	 */
+	public void updateDisplay(String value) {
+		display.setValue(value);
+	}
+
+	/**
+	 * Resets the display register.
+	 */
+	public void resetDisplay() {
+		display.reset();
 	}
 
 	/**
@@ -230,6 +312,21 @@ public class Calculator {
 		buildingOperand = new BuildingOperandState(this);
 	}
 
+	private void initializeOperationMap() {
+		operationMap.put("+", new Add());
+		operationMap.put("-", new Subtract());
+		operationMap.put("*", new Multiply());
+		operationMap.put("/", new Divide());
+		operationMap.put("SQR", new Square());
+		operationMap.put("SQRT", new SquareRoot());
+		operationMap.put("NEG", new Negate());
+		operationMap.put("INV", new Inverse());
+		operationMap.put("PI", new Pi());
+		operationMap.put("AC", new AllClear());
+		operationMap.put("C", new Clear());
+		operationMap.put("=", new Equals());
+	}
+
 	/**
 	 * Sets the state of this calculator.
 	 * 
@@ -237,15 +334,5 @@ public class Calculator {
 	 */
 	private void setState(State newState) {
 		state = newState;
-		// test only
-		// System.out.println("state changed to " + state);
 	}
-
-	/**
-	 * Resets the display register.
-	 */
-	public void resetDisplay() {
-		display.reset();
-	}
-
 }

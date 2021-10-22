@@ -1,8 +1,11 @@
-package model;
+package model.state;
+
+import model.operation.Calculator;
+import model.operation.Operation;
 
 /**
  * @author  Shawn Crahen
- * @version 2.1
+ * @version 1.0
  *
  */
 public class BuildingOperandState extends State {
@@ -33,23 +36,25 @@ public class BuildingOperandState extends State {
 	 */
 	@Override
 	public State enterOperation(Operation op) {
-		if (!(op instanceof model.Clear)) {
+		if (!(op instanceof model.operation.Clear)) {
 			try {
 				calculator.pushDisplayToOperandStack();
 			} catch (NumberFormatException e) {
-				if (op instanceof model.AllClear)
+				if (op instanceof model.operation.AllClear) {
 					calculator.pushOperation(op);
-				else
+				} else {
 					calculator.updateDisplay("Invalid operation");
+				}
 				return calculator.ready;
 			}
 		}
 		calculator.pushOperation(op);
 
-		if (op.isBinary() || op instanceof model.Clear)
+		if (op.isBinary() || op instanceof model.operation.Clear) {
 			return calculator.nextOperand;
-		else
+		} else {
 			return calculator.ready;
+		}
 	}
 
 	/**
