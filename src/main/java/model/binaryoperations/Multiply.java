@@ -1,14 +1,14 @@
-package model;
+package model.binaryoperations;
 
+import model.operation.BinaryOperation;
 import number.Number;
 
 /**
  * This class implements the multiplication operation. (requirement 3.3.3)
- * 
- * @author  Shawn Crahen
- * @version 1.1
- * @see     BinaryOperation
  *
+ * @author  Shawn Crahen
+ * @version 1.0
+ * @see     BinaryOperation
  */
 public class Multiply extends BinaryOperation {
 
@@ -21,7 +21,7 @@ public class Multiply extends BinaryOperation {
 
 	/**
 	 * Executes multiplication.
-	 * 
+	 *
 	 * @return the result of multiplication
 	 */
 	@Override

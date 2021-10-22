@@ -1,12 +1,13 @@
-package model;
+package model.binaryoperations;
 
+import model.operation.BinaryOperation;
 import number.Number;
 
 /**
  * This class implements the addition operation. (requirement 3.3.1)
- * 
+ *
  * @author  Shawn Crahen
- * @version 1.1
+ * @version 1.0
  * @see     BinaryOperation
  */
 public class Add extends BinaryOperation {
@@ -20,7 +21,7 @@ public class Add extends BinaryOperation {
 
 	/**
 	 * Executes addition.
-	 * 
+	 *
 	 * @return the result of addition
 	 */
 	@Override

@@ -1,4 +1,4 @@
-package model;
+package model.operation;
 
 import java.util.Stack;
 
@@ -8,9 +8,9 @@ import number.Number;
  * This class provides a skeletal implementation of a generic calculator
  * operation. To implement an operation, extend this class and override the
  * execute(Calculator) method.
- * 
+ *
  * @author  Shawn Crahen
- * @version 1.1
+ * @version 1.0
  * @see     Calculator
  */
 public abstract class Operation {
@@ -23,7 +23,7 @@ public abstract class Operation {
 	protected int precedence;
 
 	/**
-	 * True iff the concrete implementation is a binary operation.
+	 * True if the concrete implementation is a binary operation.
 	 */
 	protected boolean isBinary;
 
@@ -39,7 +39,7 @@ public abstract class Operation {
 
 	/**
 	 * Returns the precedence of this operation.
-	 * 
+	 *
 	 * @return the precedence of this operation
 	 */
 	public int getPrecedence() {
@@ -48,7 +48,7 @@ public abstract class Operation {
 
 	/**
 	 * Returns whether this operation is a binary operation.
-	 * 
+	 *
 	 * @return true if the operation is a binary operation; else false
 	 */
 	public boolean isBinary() {
@@ -57,7 +57,7 @@ public abstract class Operation {
 
 	/**
 	 * Executes this operation.
-	 * 
+	 *
 	 * @param calculator the Calculator object for this operation
 	 */
 	public abstract void execute(Calculator calculator);

@@ -2,16 +2,19 @@ package number;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.ClassOrderer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestClassOrder;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
 class BigNumberTest {
   private static final BigNumber ZERO = new BigNumber("0");
   private static BigNumber expected;
@@ -38,8 +41,10 @@ class BigNumberTest {
   private final BigNumber wrongDecResult = new BigNumber("123.456789");
 
   @Nested
+  @Order(1)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestBigNumber {
+  class TestBigNumberInstantiation {
+
     BigNumber bigNumber;
 
     @Test
@@ -62,8 +67,9 @@ class BigNumberTest {
   }
 
   @Nested
+  @Order(2)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestAdd {
+  class TestBigNumberAdd {
 
     @Test
     @Order(1)
@@ -127,8 +133,9 @@ class BigNumberTest {
   }
 
   @Nested
+  @Order(3)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestSubtract {
+  class TestBigNumberSubtract {
 
     @Test
     @Order(1)
@@ -192,8 +199,9 @@ class BigNumberTest {
   }
 
   @Nested
+  @Order(4)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestMultiply {
+  class TestBigNumberMultiply {
 
     @Test
     @Order(1)
@@ -201,7 +209,8 @@ class BigNumberTest {
     void bigInteger_TwoPositiveOperands() {
       expected =
           new BigNumber(
-              "800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+              "800000000000000000000000000000000000000000000000000"
+                  + "000000000000000000000000000000000000000000000000");
       actual = new BigNumber(intPosX.multiply(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
@@ -213,7 +222,8 @@ class BigNumberTest {
     void bigInteger_TwoNegativeOperands() {
       expected =
           new BigNumber(
-              "800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+              "800000000000000000000000000000000000000000000000000"
+                  + "000000000000000000000000000000000000000000000000");
       actual = new BigNumber(intNegX.multiply(intNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
@@ -225,7 +235,8 @@ class BigNumberTest {
     void bigInteger_OneNegativeAndOnePositiveOperand() {
       expected =
           new BigNumber(
-              "-800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+              "-80000000000000000000000000000000000000000000000000"
+                  + "0000000000000000000000000000000000000000000000000");
       actual = new BigNumber(intNegX.multiply(intPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
@@ -237,7 +248,8 @@ class BigNumberTest {
     void bigDecimal_TwoPositiveOperands() {
       expected =
           new BigNumber(
-              "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008");
+              "0.0000000000000000000000000000000000000000000000000"
+                  + "0000000000000000000000000000000000000000000000008");
       actual = new BigNumber(decPosX.multiply(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
@@ -249,7 +261,8 @@ class BigNumberTest {
     void bigDecimal_TwoNegativeOperands() {
       expected =
           new BigNumber(
-              "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008");
+              "0.0000000000000000000000000000000000000000000000000"
+                  + "0000000000000000000000000000000000000000000000008");
       actual = new BigNumber(decNegX.multiply(decNegY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
@@ -261,7 +274,8 @@ class BigNumberTest {
     void bigDecimal_OneNegativeAndOnePositiveOperand() {
       expected =
           new BigNumber(
-              "-0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008");
+              "-0.000000000000000000000000000000000000000000000000"
+                  + "00000000000000000000000000000000000000000000000008");
       actual = new BigNumber(decNegX.multiply(decPosY).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
@@ -269,8 +283,9 @@ class BigNumberTest {
   }
 
   @Nested
+  @Order(5)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestDivide {
+  class TestBigNumberDivide {
 
     @Test
     @Order(1)
@@ -384,8 +399,9 @@ class BigNumberTest {
   }
 
   @Nested
+  @Order(6)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestSquare {
+  class TestBigNumberSquare {
 
     @Test
     @Order(1)
@@ -393,7 +409,8 @@ class BigNumberTest {
     void bigInteger_OnePositiveOperand() {
       expected =
           new BigNumber(
-              "1600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+              "160000000000000000000000000000000000000000000000000"
+                  + "0000000000000000000000000000000000000000000000000");
       actual = new BigNumber(intPosX.square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
@@ -405,7 +422,8 @@ class BigNumberTest {
     void bigInteger_OneNegativeOperand() {
       expected =
           new BigNumber(
-              "1600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+              "160000000000000000000000000000000000000000000000000"
+                  + "0000000000000000000000000000000000000000000000000");
       actual = new BigNumber(intNegX.square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
@@ -417,7 +435,8 @@ class BigNumberTest {
     void bigDecimal_OnePositiveOperand() {
       expected =
           new BigNumber(
-              "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016");
+              "0.000000000000000000000000000000000000000000000000"
+                  + "00000000000000000000000000000000000000000000000016");
       actual = new BigNumber(decPosX.square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
@@ -429,7 +448,8 @@ class BigNumberTest {
     void bigDecimal_OneNegativeOperand() {
       expected =
           new BigNumber(
-              "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016");
+              "0.000000000000000000000000000000000000000000000000"
+                  + "00000000000000000000000000000000000000000000000016");
       actual = new BigNumber(decNegX.square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
@@ -437,8 +457,9 @@ class BigNumberTest {
   }
 
   @Nested
+  @Order(7)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestSquareRoot {
+  class TestBigNumberSquareRoot {
 
     @Test
     @Order(1)
@@ -446,7 +467,8 @@ class BigNumberTest {
     void bigInteger_OnePositiveOperand() {
       expected =
           new BigNumber(
-              "6324555320336758663997787.08886543706743911027865043365371500970558518887727847644268849621675860059");
+              "6324555320336758663997787"
+                  + ".08886543706743911027865043365371500970558518887727847644268849621675860059");
       actual = new BigNumber(intPosX.squareRoot().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongIntResult));
@@ -466,7 +488,8 @@ class BigNumberTest {
     void bigDecimal_OnePositiveOperand() {
       expected =
           new BigNumber(
-              "6.3245553203367586639977870888654370674391102786504336537150097055851888772784764426884962167586E-25");
+              "6.32455532033675866399778708886543706743911027865"
+                  + "04336537150097055851888772784764426884962167586E-25");
       actual = new BigNumber(decPosX.squareRoot().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
       assertThat(expected, Matchers.not(wrongDecResult));
@@ -482,8 +505,9 @@ class BigNumberTest {
   }
 
   @Nested
+  @Order(8)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestNegate {
+  class TestBigNumberNegate {
 
     @Test
     @Order(1)
@@ -527,8 +551,9 @@ class BigNumberTest {
   }
 
   @Nested
+  @Order(9)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestInverse {
+  class TestBigNumberInverse {
 
     @Test
     @Order(1)

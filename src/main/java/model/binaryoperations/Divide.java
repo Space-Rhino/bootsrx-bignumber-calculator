@@ -1,14 +1,14 @@
-package model;
+package model.binaryoperations;
 
+import model.operation.BinaryOperation;
 import number.Number;
 
 /**
  * This class implements the division operation. (requirement 3.3.4)
- * 
- * @author  Shawn Crahen
- * @version 1.1
- * @see     BinaryOperation
  *
+ * @author  Shawn Crahen
+ * @version 1.0
+ * @see     BinaryOperation
  */
 public class Divide extends BinaryOperation {
 
@@ -21,7 +21,7 @@ public class Divide extends BinaryOperation {
 
 	/**
 	 * Executes division.
-	 * 
+	 *
 	 * @return                     the result of division
 	 * @throws ArithmeticException if the divisor is zero
 	 */

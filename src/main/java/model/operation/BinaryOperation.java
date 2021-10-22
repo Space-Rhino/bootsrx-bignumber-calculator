@@ -1,4 +1,4 @@
-package model;
+package model.operation;
 
 import java.util.EmptyStackException;
 
@@ -8,12 +8,11 @@ import number.Number;
  * This class provides a skeletal implementation of a generic binary operation.
  * To implement a binary operation, extend this class and override the
  * executeBinary(Number, Number) method.
- * 
+ *
  * @author  Shawn Crahen
- * @version 1.1
+ * @version 1.0
  * @see     Operation
  * @see     Number
- *
  */
 public abstract class BinaryOperation extends Operation {
 
@@ -32,7 +31,7 @@ public abstract class BinaryOperation extends Operation {
 	 * <p>
 	 * If executeBinary(Number, Number) throws and ArithmeticException, updates
 	 * display indicating invalid attempt to divide by zero.
-	 * 
+	 *
 	 * @throws EmptyStackException if stack is empty
 	 */
 	@Override
@@ -50,7 +49,7 @@ public abstract class BinaryOperation extends Operation {
 
 	/**
 	 * Executes this binary operation.
-	 * 
+	 *
 	 * @param  number1 the first operand
 	 * @param  number2 the second operand
 	 * @return         the result of this binary operation

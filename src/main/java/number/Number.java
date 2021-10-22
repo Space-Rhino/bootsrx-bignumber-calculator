@@ -2,15 +2,15 @@ package number;
 
 /**
  * This interface declares the arithmetic methods required for calculator logic.
- * 
+ *
  * @author  Shawn Crahen
- * @version 1.1
+ * @version 1.0
  */
 public interface Number {
 
 	/**
 	 * Adds two numbers. (requirement 3.3.1)
-	 * 
+	 *
 	 * @param  other the augend
 	 * @return       the result of addition
 	 */
@@ -18,7 +18,7 @@ public interface Number {
 
 	/**
 	 * Subtracts two numbers. (requirement 3.3.2)
-	 * 
+	 *
 	 * @param  other the subtrahend
 	 * @return       the result of subtraction
 	 */
@@ -26,7 +26,7 @@ public interface Number {
 
 	/**
 	 * Multiplies two numbers. (requirement 3.3.3)
-	 * 
+	 *
 	 * @param  other the multiplicand
 	 * @return       the result of multiplication
 	 */
@@ -34,7 +34,7 @@ public interface Number {
 
 	/**
 	 * Divides two numbers. (requirement 3.3.4)
-	 * 
+	 *
 	 * @param  other the divisor
 	 * @return       the result of division
 	 */
@@ -42,28 +42,28 @@ public interface Number {
 
 	/**
 	 * Squares a number. (requirement 3.3.11)
-	 * 
+	 *
 	 * @return this squared
 	 */
 	public Number square();
 
 	/**
 	 * Calculates the square root of a number. (requirement 3.3.10)
-	 * 
+	 *
 	 * @return the square root of this
 	 */
 	public Number squareRoot();
 
 	/**
 	 * Negates a number. (requirement 3.3.12)
-	 * 
+	 *
 	 * @return this negated
 	 */
 	public Number negate();
 
 	/**
 	 * Calculates the inverse of a number. (requirement 3.3.13)
-	 * 
+	 *
 	 * @return the inverse of this
 	 */
 	public Number inverse();
