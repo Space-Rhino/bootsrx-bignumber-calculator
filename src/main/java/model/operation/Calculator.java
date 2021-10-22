@@ -2,6 +2,7 @@ package model.operation;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 import model.binaryoperations.Add;
@@ -26,134 +27,71 @@ import number.Number;
  * determines which methods to call for each input type based on state.
  *
  * @author  Shawn Crahen
-<<<<<<< HEAD:src/main/java/model/operation/Calculator.java
-<<<<<<< HEAD:src/main/java/model/operation/Calculator.java
  * @version 1.0
-=======
- * @version 2.1
->>>>>>> b3c742d (dev-2.1 complete):src/main/java/model/Calculator.java
-=======
- * @version 1.0
->>>>>>> 855449a (reorganize package structure in preparation for rebase on dev-1):src/main/java/model/Calculator.java
  * @see     Number
  * @see     Operation
  */
-@SuppressWarnings("CommentedOutCode")
 public class Calculator {
-
+	
 	/**
 	 * A stack to store operands of type Number.
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
 	private Stack<Number> operandStack;
-
-<<<<<<< HEAD:src/main/java/model/operation/Calculator.java
-   //	private Stack<Operation> operationStack;
-=======
+	
 	/**
 	 * A stack to store arithmetic operations.
 	 */
 	private Stack<Operation> operationStack;
->>>>>>> b3c742d (dev-2.1 complete):src/main/java/model/Calculator.java
-
+	
 	/**
 	 * The display register for this Calculator.
 	 */
-	@SuppressWarnings("FieldMayBeFinal")
 	private Display display;
 	
-  // private State state;
-  //	private Map<String, Operation> operationMap;
-
-<<<<<<< HEAD:src/main/java/model/operation/Calculator.java
-  // public State ready;
-  // public State buildingOperand;
-  // public State nextOperand;
-  // public State nextOperation;
-=======
 	/**
 	 * The state of this calculator.
 	 */
 	private State state;
-
+	
 	/**
-	 * 
+	 * A map to provide O(1) access to operations.
 	 */
 	private Map<String, Operation> operationMap;
-
+	
 	/**
 	 * An instance of ReadyState.
 	 */
 	public State ready;
-
+	
 	/**
 	 * An instance of BuildingOperandState.
 	 */
 	public State buildingOperand;
-
+	
 	/**
 	 * An instance of NextOperandState.
 	 */
 	public State nextOperand;
-
+	
 	/**
 	 * An instance of NextOperationState.
 	 */
 	public State nextOperation;
->>>>>>> b3c742d (dev-2.1 complete):src/main/java/model/Calculator.java
-
+	
 	/**
 	 * Class constructor.
 	 */
-	@SuppressWarnings("CommentedOutCode")
 	public Calculator() {
 		operandStack = new Stack<>();
-<<<<<<< HEAD:src/main/java/model/operation/Calculator.java
-		// operationStack = new Stack<>();
-		display = new Display("0");
-		// operationMap = new HashMap<>();
-		// initializeOperationMap();
-		// initializeStates();
-		// setState(ready);
-	}
-
-	/*
-	 * This is a utility method for test only. Delete when
-	 * pushDisplayToOperandStack() is complete.
-	 */
-	public void pushToOperandStack(Number number) {
-		operandStack.push(number);
-=======
 		operationStack = new Stack<>();
 		display = new Display("0");
 		operationMap = new HashMap<>();
 		initializeOperationMap();
 		initializeStates();
 		setState(ready);
->>>>>>> b3c742d (dev-2.1 complete):src/main/java/model/Calculator.java
 	}
-
+	
 	/**
-<<<<<<< HEAD:src/main/java/model/operation/Calculator.java
-	 * Calls overloaded updateDisplay(String) with the String representation of the
-	 * top number of the operand stack.
-	 */
-	public void updateDisplay() {
-		updateDisplay(operandStack.peek().toString());
-	}
-
-	/**
-	 * Calls setValue(String) on this.display with the String to display.
-	 *
-	 * @param value the string representation of the number to display
-	 */
-	public void updateDisplay(String value) {
-		display.setValue(value);
-	}
-
-	/**
-=======
->>>>>>> 855449a (reorganize package structure in preparation for rebase on dev-1):src/main/java/model/Calculator.java
 	 * Returns the operand stack.
 	 *
 	 * @return the operandStack
@@ -161,29 +99,68 @@ public class Calculator {
 	public Stack<Number> getOperandStack() {
 		return operandStack;
 	}
-
+	
+	/**
+	 * Returns the operation stack.
+	 * 
+	 * @return the operationStack
+	 */
 	public Stack<Operation> getOperationStack() {
 		return operationStack;
 	}
-
+	
+	/**
+	 * Returns the display register.
+	 * 
+	 * @return the display
+	 */
 	public Display getDisplay() {
 		return display;
-	}	
+	}
 	
+	/**
+	 * Enters an operation from the current state and sets state to the next state
+	 * per the state machine.
+	 * <p>
+	 * Calls enterOperation(Operation) on the current state object.
+	 * <p>
+	 * The Pi operation calls enterConstant(Operation) on the current state object.
+	 * 
+	 * @param opString the String representation of the operation to enter
+	 */
 	public void enterOperation(String opString) {
-		Operation op = operationMap.get(opString);
-
-		if (op instanceof model.operation.Pi) {
-			setState(state.enterConstant(op));
-		} else {
-			setState(state.enterOperation(op));
+		// only execute if opString is supported
+		if (operationMap.containsKey(opString)) {
+			Operation op = operationMap.get(opString);
+			
+			if (op instanceof model.operation.Pi) {
+				setState(state.enterConstant(op));
+			} else {
+				setState(state.enterOperation(op));
+			}
 		}
 	}
-
+	
+	/**
+	 * Enters a digit from the current state and sets state to the next state per
+	 * the state machine.
+	 * <p>
+	 * Supported digit Strings include: { "0", "1", "2", "3", "4", "5", "6", "7",
+	 * "8", "9", ".", "BKSP" }
+	 * <p>
+	 * (supports requirements 3.1.3, 3.1.5, 3.1.7, 3.3.6)
+	 * 
+	 * @param digit the digit to enter
+	 */
 	public void enterDigit(String digit) {
-		setState(state.enterDigit(digit));
+		Set<String> validDigits = Set.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "BKSP");
+		
+		// only execute if digit is valid
+		if (validDigits.contains(digit)) {
+			setState(state.enterDigit(digit));
+		}
 	}
-
+	
 	/**
 	 * Pushes the value in the display to the operand stack.
 	 * 
@@ -193,7 +170,7 @@ public class Calculator {
 	public void pushDisplayToOperandStack() throws NumberFormatException {
 		operandStack.push(new BigNumber(display.getValue()));
 	}
-
+	
 	/**
 	 * Pushes an operation to the calculator. If the last operation on the operation
 	 * stack has higher precedence, calls executeOperation with that operation.
@@ -214,7 +191,7 @@ public class Calculator {
 			executeOperation(op);
 		}
 	}
-
+	
 	/**
 	 * Executes an operation.
 	 * 
@@ -223,7 +200,7 @@ public class Calculator {
 	public void executeOperation(Operation op) {
 		op.execute(this);
 	}
-
+	
 	/**
 	 * Replaces the last operation with the new operation.
 	 * 
@@ -239,12 +216,18 @@ public class Calculator {
 		pushOperation(op);
 	}
 	
+	/**
+	 * Resolves all pending operations on the operationStack.
+	 */
 	public void equals() {
 		while (!operationStack.isEmpty()) {
 			executeOperation(operationStack.pop());
 		}
 	}
-
+	
+	/**
+	 * Executes the clear operation.
+	 */
 	public void clear() {
 		display.clear();
 	}
@@ -257,16 +240,16 @@ public class Calculator {
 		operationStack.clear();
 		display.clear();
 	}
-
+	
 	/**
 	 * Resets the calculator.
 	 */
 	public void resetCalculator() {
 		allClear();
 	}
-
+	
 	/**
-	 * Sends the next digit to the display.
+	 * Sends the next digit to the display or deletes last digit.
 	 * 
 	 * @param digit the digit to send to the display
 	 */
@@ -277,7 +260,7 @@ public class Calculator {
 			display.addDigit(digit);
 		}
 	}
-
+	
 	/**
 	 * Calls overloaded updateDisplay(String) with the String representation of the
 	 * top number of the operand stack.
@@ -285,7 +268,7 @@ public class Calculator {
 	public void updateDisplay() {
 		updateDisplay(operandStack.peek().toString());
 	}
-
+	
 	/**
 	 * Calls setValue(String) on this.display with the String to display.
 	 * 
@@ -294,14 +277,14 @@ public class Calculator {
 	public void updateDisplay(String value) {
 		display.setValue(value);
 	}
-
+	
 	/**
 	 * Resets the display register.
 	 */
 	public void resetDisplay() {
 		display.reset();
 	}
-
+	
 	/**
 	 * Creates instances of each state in the state hierarchy.
 	 */
@@ -311,7 +294,10 @@ public class Calculator {
 		nextOperation = new NextOperationState(this);
 		buildingOperand = new BuildingOperandState(this);
 	}
-
+	
+	/**
+	 * Builds a map of supported operations to facilitate O(1) access to operations.
+	 */
 	private void initializeOperationMap() {
 		operationMap.put("+", new Add());
 		operationMap.put("-", new Subtract());
@@ -326,7 +312,7 @@ public class Calculator {
 		operationMap.put("C", new Clear());
 		operationMap.put("=", new Equals());
 	}
-
+	
 	/**
 	 * Sets the state of this calculator.
 	 * 

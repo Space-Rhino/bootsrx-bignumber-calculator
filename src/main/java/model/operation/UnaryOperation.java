@@ -10,7 +10,7 @@ import number.Number;
  * executeUnary(Number) method.
  * 
  * @author  Shawn Crahen
- * @version 1.1
+ * @version 1.0
  * @see     Operation
  * @see     Number
  */
