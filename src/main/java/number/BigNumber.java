@@ -12,9 +12,9 @@ import java.util.Objects;
  * java.math.MathContext object.
  *
  * @author  Shawn Crahen
- * @version 1.1
- * @see     number.Number
- * @see     java.math.BigDecimal
+ * @version 1.0
+ * @see     Number
+ * @see     BigDecimal
  *
  */
 public class BigNumber implements Number, Comparable<BigNumber> {
@@ -25,9 +25,9 @@ public class BigNumber implements Number, Comparable<BigNumber> {
 	protected BigDecimal number;
 
 	/**
-	 * The default java.math.MathContext object. This object is used in all
-	 * constructors to explicitly set the precision of all BigNumber instances.
-	 * (facilitates requirement 3.1.2)
+	 * The default MathContext object. This object is used in all constructors to
+	 * explicitly set the precision of all BigNumber instances. (facilitates
+	 * requirement 3.1.2)
 	 */
 	private static final MathContext DEFAULT_CONTEXT = new MathContext(100);
 
@@ -101,25 +101,52 @@ public class BigNumber implements Number, Comparable<BigNumber> {
 		return new BigNumber(number.negate());
 	}
 
+	/**
+	 * @throws ArithmeticException if this is zero
+	 */
 	@Override
-	public Number inverse() {
+	public Number inverse() throws ArithmeticException {
 		return (new BigNumber("1")).divide(this);
 	}
 
 	/**
-	 * @return the String representation of this BigNumber
+	 * Returns a string representation of this BigNumber.
+	 * <p>
+	 * Removes trailing zeroes and trailing decimals. Uses scientific notation per
+	 * the BigDecimal toString() method but limits total digits to 100.
+	 *
+	 * @return a String representation of this
 	 */
 	@Override
 	public String toString() {
-		return number.toString();
+		String numString = number.toString();
+
+		// remove trailing zeroes and decimals
+		String[] subStrings = numString.split("E");
+		subStrings[0] = subStrings[0].contains(".")
+										? subStrings[0].replaceAll("0*$", "")
+																	 .replaceAll("\\.$", "")
+										: subStrings[0];
+		numString = String.join("E", subStrings);
+
+		// limit length to 100-digits
+		if (numString.length() > 100) {
+			subStrings[0] = subStrings.length > 1
+											? subStrings[0].substring(0, 99 - subStrings[1].length())
+											: subStrings[0].substring(0, 100);
+			numString = String.join("E", subStrings);
+		}
+		return numString;
 	}
-	
+
 	/**
-	 * Compares this BigNumber with the specified Object for equality in value and scale.
-	 * For example, 2.0 is not equal to 2.00 when compared by this method, unlike compareTo method.
+	 * Compares this BigNumber with the specified Object for equality in value and
+	 * scale. For example, 2.0 is not equal to 2.00 when compared by this method,
+	 * unlike compareTo method.
 	 *
 	 * @param  object Object to which this BigNumber is being compared to.
-	 * @return only if the Object is a BigNumber with same value and scale as this BigNumber's.
+	 * @return        only if the Object is a BigNumber with same value and scale as
+	 *                this BigNumber's.
 	 */
 	@Override
 	public boolean equals(Object object) {
@@ -132,10 +159,11 @@ public class BigNumber implements Number, Comparable<BigNumber> {
 		BigNumber bigNumber = (BigNumber) object;
 		return Objects.equals(number, bigNumber.number);
 	}
-	
+
 	/**
-	 * Returns the hash code for this BigNumber. If two BigNumber objects are numerically equal but
-	 * differ in scale, for example 2.0 and 2.00, they will generally not have the same hash code.
+	 * Returns the hash code for this BigNumber. If two BigNumber objects are
+	 * numerically equal but differ in scale, for example 2.0 and 2.00, they will
+	 * generally not have the same hash code.
 	 *
 	 * @return hash code for this BigNumber
 	 */
@@ -143,17 +171,17 @@ public class BigNumber implements Number, Comparable<BigNumber> {
 	public int hashCode() {
 		return number != null ? number.hashCode() : 0;
 	}
-	
+
 	/**
-	 * Compares this BigNumber with other given BigNumber. Two BigNumber objects that are equal in
-	 * value but have a different scale, for example 2.0 and 2.00, are treated as equal.
+	 * Compares this BigNumber with other given BigNumber. Two BigNumber objects
+	 * that are equal in value but have a different scale, for example 2.0 and 2.00,
+	 * are treated as equal.
 	 *
-	 * @param other BigNumber that is compared to another BigNumber
-	 * @return -1 if less than, 1 if greater than, and 0 if equal to.
+	 * @param  other BigNumber that is compared to another BigNumber
+	 * @return       -1 if less than, 1 if greater than, and 0 if equal to.
 	 */
 	@Override
 	public int compareTo(BigNumber other) {
-		return this.number.compareTo(other.number);
+		return number.compareTo(other.number);
 	}
-	
 }
