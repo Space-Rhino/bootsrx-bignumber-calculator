@@ -4,12 +4,15 @@ import model.operation.Calculator;
 import model.operation.Operation;
 
 /**
+ * This class is a concrete implementation of the State class which conforms to
+ * this calculator's state diagram.
+ * 
  * @author  Shawn Crahen
  * @version 1.0
- *
+ * @see State
  */
 public class BuildingOperandState extends State {
-
+	
 	/**
 	 * Class constructor.
 	 * 
@@ -18,7 +21,7 @@ public class BuildingOperandState extends State {
 	public BuildingOperandState(Calculator calculator) {
 		super(calculator);
 	}
-
+	
 	/**
 	 * Executes the "enter digit" state transition from the "building operand
 	 * state."
@@ -28,7 +31,7 @@ public class BuildingOperandState extends State {
 		calculator.sendDigitToDisplay(digit);
 		return this;
 	}
-
+	
 	/**
 	 * Executes the "enter operation" state transition from the "building operand
 	 * state." Handles NumberFormatException when display is an invalid
@@ -49,14 +52,14 @@ public class BuildingOperandState extends State {
 			}
 		}
 		calculator.pushOperation(op);
-
+		
 		if (op.isBinary() || op instanceof model.operation.Clear) {
 			return calculator.nextOperand;
 		} else {
 			return calculator.ready;
 		}
 	}
-
+	
 	/**
 	 * Executes the "enter constant" state transition from the "building operand
 	 * state."
@@ -66,5 +69,5 @@ public class BuildingOperandState extends State {
 		calculator.executeOperation(op);
 		return calculator.nextOperation;
 	}
-
+	
 }

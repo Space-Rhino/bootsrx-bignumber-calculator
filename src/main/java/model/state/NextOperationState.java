@@ -4,9 +4,12 @@ import model.operation.Calculator;
 import model.operation.Operation;
 
 /**
+ * This class is a concrete implementation of the State class which conforms to
+ * this calculator's state diagram.
+ * 
  * @author  Shawn Crahen
  * @version 1.0
- *
+ * @see State
  */
 public class NextOperationState extends State {
 
