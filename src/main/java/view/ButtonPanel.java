@@ -209,15 +209,18 @@ public class ButtonPanel extends JPanel {
 					activeOperationButton != null) {
 				activeOperationButton.setBackground(Color.gray);
 			}
-			if (action.equals("NEG") &&
-					activeOperationButton != null &&
-					!Character.isDigit(lastClickedButton.getActionCommand().charAt(0))) {
+			if ((action.equals("NEG") || action.equals("INV") ||
+					action.equals("SQR") || action.equals("SQRT")) &&
+					activeOperationButton != null && 
+					(!Character.isDigit(lastClickedButton.getActionCommand().charAt(0)) &&
+					 lastClickedButton.getActionCommand().charAt(0) != 'P')) {
 				activeOperationButton.setBackground(Color.gray);
 			}
 			if (action.equals("/") || action.equals("*") ||
 					action.equals("+") || action.equals("-")) {
-				if (activeOperationButton != null)
+				if (activeOperationButton != null) {
 					activeOperationButton.setBackground(Color.gray);
+				}
 				activeOperationButton = ((JButton) e.getSource());
 				activeOperationButton.setBackground(Color.orange);
 			}

@@ -27,7 +27,9 @@ public class NextOperationState extends State {
 	 */
 	@Override
 	public State enterDigit(String digit) {
-		calculator.resetDisplay();
+		if (!digit.equals("BKSP")) {
+			calculator.resetDisplay();
+		}
 		calculator.sendDigitToDisplay(digit);
 		return calculator.buildingOperand;
 	}
@@ -39,6 +41,10 @@ public class NextOperationState extends State {
 	 */
 	@Override
 	public State enterOperation(Operation op) {
+		if (op instanceof model.operation.Clear) {
+			calculator.pushOperation(op);
+			return calculator.nextOperand;
+		}
 		try {
 			calculator.pushDisplayToOperandStack();
 		} catch (NumberFormatException e) {
