@@ -10,43 +10,25 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestClassOrder;
 import org.junit.jupiter.api.TestMethodOrder;
+import testutilities.TestNumbers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
 class BigNumberTest {
-  private static final BigNumber ZERO = new BigNumber("0");
+  
   private static BigNumber expected;
   private static BigNumber actual;
-
-  private final BigNumber intPosX =
-      new BigNumber("40000000000000000000000000000000000000000000000000");
-  private final BigNumber intPosY =
-      new BigNumber("20000000000000000000000000000000000000000000000000");
-  private final BigNumber intNegX =
-      new BigNumber("-40000000000000000000000000000000000000000000000000");
-  private final BigNumber intNegY =
-      new BigNumber("-20000000000000000000000000000000000000000000000000");
-  private final BigNumber wrongIntResult = new BigNumber("123456789");
-
-  private final BigNumber decPosX =
-      new BigNumber("0.0000000000000000000000000000000000000000000000004");
-  private final BigNumber decPosY =
-      new BigNumber("0.0000000000000000000000000000000000000000000000002");
-  private final BigNumber decNegX =
-      new BigNumber("-0.0000000000000000000000000000000000000000000000004");
-  private final BigNumber decNegY =
-      new BigNumber("-0.0000000000000000000000000000000000000000000000002");
-  private final BigNumber wrongDecResult = new BigNumber("123.456789");
-
+  TestNumbers number = new TestNumbers();
+  
   @Nested
   @Order(1)
   @TestMethodOrder(OrderAnnotation.class)
   class TestBigNumberInstantiation {
-
+    
     BigNumber bigNumber;
-
+    
     @Test
     @Order(1)
     @DisplayName("BigInteger: invalid data type")
@@ -55,7 +37,7 @@ class BigNumberTest {
       assertThrows(
           NumberFormatException.class, () -> bigNumber = new BigNumber(invalidIntegerType));
     }
-
+    
     @Test
     @Order(2)
     @DisplayName("BigDecimal: invalid data type")
@@ -65,144 +47,144 @@ class BigNumberTest {
           NumberFormatException.class, () -> bigNumber = new BigNumber(invalidDecimalType));
     }
   }
-
+  
   @Nested
   @Order(2)
   @TestMethodOrder(OrderAnnotation.class)
   class TestBigNumberAdd {
-
+    
     @Test
     @Order(1)
     @DisplayName("BigInteger: two pos operands | x + y")
     void bigInteger_TwoPositiveOperands() {
       expected = new BigNumber("60000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intPosX.add(intPosY).toString());
+      actual = new BigNumber(number.getIntPosX().add(number.getIntPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(2)
     @DisplayName("BigInteger: two neg operands | -x + -y")
     void bigInteger_TwoNegativeOperands() {
       expected = new BigNumber("-60000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intNegX.add(intNegY).toString());
+      actual = new BigNumber(number.getIntNegX().add(number.getIntNegY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(3)
     @DisplayName("BigInteger: one neg & one pos operand | -x + y")
     void bigInteger_OneNegativeAndOnePositiveOperand() {
       expected = new BigNumber("-20000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intNegX.add(intPosY).toString());
+      actual = new BigNumber(number.getIntNegX().add(number.getIntPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(4)
     @DisplayName("BigDecimal: two pos operands | x + y")
     void bigDecimal_TwoPositiveOperands() {
       expected = new BigNumber("0.0000000000000000000000000000000000000000000000006");
-      actual = new BigNumber(decPosX.add(decPosY).toString());
+      actual = new BigNumber(number.getDecPosX().add(number.getDecPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(5)
     @DisplayName("BigDecimal: two neg operands | -x + -y")
     void bigDecimal_TwoNegativeOperands() {
       expected = new BigNumber("-0.0000000000000000000000000000000000000000000000006");
-      actual = new BigNumber(decNegX.add(decNegY).toString());
+      actual = new BigNumber(number.getDecNegX().add(number.getDecNegY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(6)
     @DisplayName("BigDecimal: one neg & one pos operand | -x + y")
     void bigDecimal_OneNegativeAndOnePositiveOperand() {
       expected = new BigNumber("-0.0000000000000000000000000000000000000000000000002");
-      actual = new BigNumber(decNegX.add(decPosY).toString());
+      actual = new BigNumber(number.getDecNegX().add(number.getDecPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
   }
-
+  
   @Nested
   @Order(3)
   @TestMethodOrder(OrderAnnotation.class)
   class TestBigNumberSubtract {
-
+    
     @Test
     @Order(1)
     @DisplayName("BigInteger: two pos operands | x - y")
     void bigInteger_TwoPositiveOperands() {
       expected = new BigNumber("20000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intPosX.subtract(intPosY).toString());
+      actual = new BigNumber(number.getIntPosX().subtract(number.getIntPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(2)
     @DisplayName("BigInteger: two neg operands | -x - -y")
     void bigInteger_TwoNegativeOperands() {
       expected = new BigNumber("-20000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intNegX.subtract(intNegY).toString());
+      actual = new BigNumber(number.getIntNegX().subtract(number.getIntNegY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(3)
     @DisplayName("BigInteger: one neg & one pos operand | -x - y")
     void bigInteger_OneNegativeAndOnePositiveOperand() {
       expected = new BigNumber("-60000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intNegX.subtract(intPosY).toString());
+      actual = new BigNumber(number.getIntNegX().subtract(number.getIntPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(4)
     @DisplayName("BigDecimal: two pos operands | x - y")
     void bigDecimal_TwoPositiveOperands() {
       expected = new BigNumber("0.0000000000000000000000000000000000000000000000002");
-      actual = new BigNumber(decPosX.subtract(decPosY).toString());
+      actual = new BigNumber(number.getDecPosX().subtract(number.getDecPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(5)
     @DisplayName("BigDecimal: two neg operands | -x - -y")
     void bigDecimal_TwoNegativeOperands() {
       expected = new BigNumber("-0.0000000000000000000000000000000000000000000000002");
-      actual = new BigNumber(decNegX.subtract(decNegY).toString());
+      actual = new BigNumber(number.getDecNegX().subtract(number.getDecNegY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(6)
     @DisplayName("BigDecimal: one neg & one pos operand | -x - y")
     void bigDecimal_OneNegativeAndOnePositiveOperand() {
       expected = new BigNumber("-0.0000000000000000000000000000000000000000000000006");
-      actual = new BigNumber(decNegX.subtract(decPosY).toString());
+      actual = new BigNumber(number.getDecNegX().subtract(number.getDecPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
   }
-
+  
   @Nested
   @Order(4)
   @TestMethodOrder(OrderAnnotation.class)
   class TestBigNumberMultiply {
-
+    
     @Test
     @Order(1)
     @DisplayName("BigInteger: two pos operands | x * y")
@@ -210,12 +192,12 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "800000000000000000000000000000000000000000000000000"
-                  + "000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intPosX.multiply(intPosY).toString());
+              + "000000000000000000000000000000000000000000000000");
+      actual = new BigNumber(number.getIntPosX().multiply(number.getIntPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(2)
     @DisplayName("BigInteger: two neg operands | -x * -y")
@@ -223,12 +205,12 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "800000000000000000000000000000000000000000000000000"
-                  + "000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intNegX.multiply(intNegY).toString());
+              + "000000000000000000000000000000000000000000000000");
+      actual = new BigNumber(number.getIntNegX().multiply(number.getIntNegY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(3)
     @DisplayName("BigInteger: one neg & one pos operand | -x * y")
@@ -236,12 +218,12 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "-80000000000000000000000000000000000000000000000000"
-                  + "0000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intNegX.multiply(intPosY).toString());
+              + "0000000000000000000000000000000000000000000000000");
+      actual = new BigNumber(number.getIntNegX().multiply(number.getIntPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(4)
     @DisplayName("BigDecimal: two pos operands | x * y")
@@ -249,12 +231,12 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "0.0000000000000000000000000000000000000000000000000"
-                  + "0000000000000000000000000000000000000000000000008");
-      actual = new BigNumber(decPosX.multiply(decPosY).toString());
+              + "0000000000000000000000000000000000000000000000008");
+      actual = new BigNumber(number.getDecPosX().multiply(number.getDecPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(5)
     @DisplayName("BigDecimal: two neg operands | -x * -y")
@@ -262,12 +244,12 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "0.0000000000000000000000000000000000000000000000000"
-                  + "0000000000000000000000000000000000000000000000008");
-      actual = new BigNumber(decNegX.multiply(decNegY).toString());
+              + "0000000000000000000000000000000000000000000000008");
+      actual = new BigNumber(number.getDecNegX().multiply(number.getDecNegY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(6)
     @DisplayName("BigDecimal: one neg & one pos operand | -x * y")
@@ -275,134 +257,138 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "-0.000000000000000000000000000000000000000000000000"
-                  + "00000000000000000000000000000000000000000000000008");
-      actual = new BigNumber(decNegX.multiply(decPosY).toString());
+              + "00000000000000000000000000000000000000000000000008");
+      actual = new BigNumber(number.getDecNegX().multiply(number.getDecPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
   }
-
+  
   @Nested
   @Order(5)
   @TestMethodOrder(OrderAnnotation.class)
   class TestBigNumberDivide {
-
+    
     @Test
     @Order(1)
     @DisplayName("BigInteger: two pos operands | x / y")
     void bigInteger_TwoPositiveOperands() {
       expected = new BigNumber("2");
-      actual = new BigNumber(intPosX.divide(intPosY).toString());
+      actual = new BigNumber(number.getIntPosX().divide(number.getIntPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(2)
     @DisplayName("BigInteger: two neg operands | -x / -y")
     void bigInteger_TwoNegativeOperands() {
       expected = new BigNumber("2");
-      actual = new BigNumber(intNegX.divide(intNegY).toString());
+      actual = new BigNumber(number.getIntNegX().divide(number.getIntNegY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(3)
     @DisplayName("BigInteger: one neg & one pos operand | -x / y")
     void bigInteger_OneNegativeAndOnePositiveOperand() {
       expected = new BigNumber("-2");
-      actual = new BigNumber(intNegX.divide(intPosY).toString());
+      actual = new BigNumber(number.getIntNegX().divide(number.getIntPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(4)
     @DisplayName("BigDecimal: two pos operands | x / y")
     void bigDecimal_TwoPositiveOperands() {
       expected = new BigNumber("2");
-      actual = new BigNumber(decPosX.divide(decPosY).toString());
+      actual = new BigNumber(number.getDecPosX().divide(number.getDecPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(5)
     @DisplayName("BigDecimal: two neg operands | -x / -y")
     void bigDecimal_TwoNegativeOperands() {
       expected = new BigNumber("2");
-      actual = new BigNumber(decNegX.divide(decNegY).toString());
+      actual = new BigNumber(number.getDecNegX().divide(number.getDecNegY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(6)
     @DisplayName("BigDecimal: one neg & one pos operand | -x / y")
     void bigDecimal_OneNegativeAndOnePositiveOperand() {
       expected = new BigNumber("-2");
-      actual = new BigNumber(decNegX.divide(decPosY).toString());
+      actual = new BigNumber(number.getDecNegX().divide(number.getDecPosY()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(7)
     @DisplayName("BigInteger: divide zero by number | 0 / x && 0 / -x")
     void bigNumber_DivideZeroByBigNumber() {
       expected = new BigNumber("0");
-      actual = new BigNumber(ZERO.divide(intPosX).toString());
+      actual = new BigNumber(number.getZERO().divide(number.getIntPosX()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
-
-      actual = new BigNumber(ZERO.divide(intNegX).toString());
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
+      
+      actual = new BigNumber(number.getZERO().divide(number.getIntNegX()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(8)
     @DisplayName("BigDecimal: divide zero by number | 0 / x && 0 / -x")
     void bigDecimal_DivideZeroByBigDecimal() {
       expected = new BigNumber("0");
-      actual = new BigNumber(ZERO.divide(decPosX).toString());
+      actual = new BigNumber(number.getZERO().divide(number.getDecPosX()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
-
-      actual = new BigNumber(ZERO.divide(decNegX).toString());
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
+      
+      actual = new BigNumber(number.getZERO().divide(number.getDecNegX()).toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(9)
     @DisplayName("BigInteger: divide by zero | throws ArithmeticException")
     void bigNumber_DivideByZero() {
       assertThrows(
-          ArithmeticException.class, () -> actual = new BigNumber(intPosX.divide(ZERO).toString()));
-
+          ArithmeticException.class,
+          () -> actual = new BigNumber(number.getIntPosX().divide(number.getZERO()).toString()));
+      
       assertThrows(
-          ArithmeticException.class, () -> actual = new BigNumber(intNegX.divide(ZERO).toString()));
+          ArithmeticException.class,
+          () -> actual = new BigNumber(number.getIntNegX().divide(number.getZERO()).toString()));
     }
-
+    
     @Test
     @Order(10)
     @DisplayName("BigDecimal: divide zero by number | throws ArithmeticException")
     void bigDecimal_DivideByZero() {
       assertThrows(
-          ArithmeticException.class, () -> actual = new BigNumber(decPosX.divide(ZERO).toString()));
-
+          ArithmeticException.class,
+          () -> actual = new BigNumber(number.getDecPosX().divide(number.getZERO()).toString()));
+      
       assertThrows(
-          ArithmeticException.class, () -> actual = new BigNumber(decNegX.divide(ZERO).toString()));
+          ArithmeticException.class,
+          () -> actual = new BigNumber(number.getDecNegX().divide(number.getZERO()).toString()));
     }
   }
-
+  
   @Nested
   @Order(6)
   @TestMethodOrder(OrderAnnotation.class)
   class TestBigNumberSquare {
-
+    
     @Test
     @Order(1)
     @DisplayName("BigInteger: one pos operand | x")
@@ -410,12 +396,12 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "160000000000000000000000000000000000000000000000000"
-                  + "0000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intPosX.square().toString());
+              + "0000000000000000000000000000000000000000000000000");
+      actual = new BigNumber(number.getIntPosX().square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(2)
     @DisplayName("BigInteger: one neg operand | x")
@@ -423,12 +409,12 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "160000000000000000000000000000000000000000000000000"
-                  + "0000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intNegX.square().toString());
+              + "0000000000000000000000000000000000000000000000000");
+      actual = new BigNumber(number.getIntNegX().square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(3)
     @DisplayName("BigDecimal: one pos operand | x")
@@ -436,12 +422,12 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "0.000000000000000000000000000000000000000000000000"
-                  + "00000000000000000000000000000000000000000000000016");
-      actual = new BigNumber(decPosX.square().toString());
+              + "00000000000000000000000000000000000000000000000016");
+      actual = new BigNumber(number.getDecPosX().square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(4)
     @DisplayName("BigDecimal: one neg operand | x")
@@ -449,18 +435,18 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "0.000000000000000000000000000000000000000000000000"
-                  + "00000000000000000000000000000000000000000000000016");
-      actual = new BigNumber(decNegX.square().toString());
+              + "00000000000000000000000000000000000000000000000016");
+      actual = new BigNumber(number.getDecNegX().square().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
   }
-
+  
   @Nested
   @Order(7)
   @TestMethodOrder(OrderAnnotation.class)
   class TestBigNumberSquareRoot {
-
+    
     @Test
     @Order(1)
     @DisplayName("BigInteger: one pos operand | x")
@@ -468,20 +454,21 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "6324555320336758663997787"
-                  + ".08886543706743911027865043365371500970558518887727847644268849621675860059");
-      actual = new BigNumber(intPosX.squareRoot().toString());
+              + ".08886543706743911027865043365371500970558518887727847644268849621675860059");
+      actual = new BigNumber(number.getIntPosX().squareRoot().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(2)
     @DisplayName("BigInteger: one neg operand | x")
     void bigInteger_OneNegativeOperand() {
       assertThrows(
-          ArithmeticException.class, () -> actual = new BigNumber(intNegX.squareRoot().toString()));
+          ArithmeticException.class,
+          () -> actual = new BigNumber(number.getIntNegX().squareRoot().toString()));
     }
-
+    
     @Test
     @Order(3)
     @DisplayName("BigDecimal: one pos operand | x")
@@ -489,110 +476,111 @@ class BigNumberTest {
       expected =
           new BigNumber(
               "6.32455532033675866399778708886543706743911027865"
-                  + "04336537150097055851888772784764426884962167586E-25");
-      actual = new BigNumber(decPosX.squareRoot().toString());
+              + "04336537150097055851888772784764426884962167586E-25");
+      actual = new BigNumber(number.getDecPosX().squareRoot().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(4)
     @DisplayName("BigDecimal: one neg operand | x")
     void bigDecimal_OneNegativeOperand() {
       assertThrows(
-          ArithmeticException.class, () -> actual = new BigNumber(decNegX.squareRoot().toString()));
+          ArithmeticException.class,
+          () -> actual = new BigNumber(number.getDecNegX().squareRoot().toString()));
     }
   }
-
+  
   @Nested
   @Order(8)
   @TestMethodOrder(OrderAnnotation.class)
   class TestBigNumberNegate {
-
+    
     @Test
     @Order(1)
     @DisplayName("BigInteger: one pos operand | x")
     void bigInteger_OnePositiveOperand() {
       expected = new BigNumber("-40000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intPosX.negate().toString());
+      actual = new BigNumber(number.getIntPosX().negate().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(2)
     @DisplayName("BigInteger: one neg operand | x")
     void bigInteger_OneNegativeOperand() {
       expected = new BigNumber("40000000000000000000000000000000000000000000000000");
-      actual = new BigNumber(intNegX.negate().toString());
+      actual = new BigNumber(number.getIntNegX().negate().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(3)
     @DisplayName("BigDecimal: one pos operand | x")
     void bigDecimal_OnePositiveOperand() {
       expected = new BigNumber("-0.0000000000000000000000000000000000000000000000004");
-      actual = new BigNumber(decPosX.negate().toString());
+      actual = new BigNumber(number.getDecPosX().negate().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(4)
     @DisplayName("BigDecimal: one neg operand | x")
     void bigDecimal_OneNegativeOperand() {
       expected = new BigNumber("0.0000000000000000000000000000000000000000000000004");
-      actual = new BigNumber(decNegX.negate().toString());
+      actual = new BigNumber(number.getDecNegX().negate().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
   }
-
+  
   @Nested
   @Order(9)
   @TestMethodOrder(OrderAnnotation.class)
   class TestBigNumberInverse {
-
+    
     @Test
     @Order(1)
     @DisplayName("BigInteger: one pos operand | x")
     void bigInteger_OnePositiveOperand() {
       expected = new BigNumber("0.000000000000000000000000000000000000000000000000025");
-      actual = new BigNumber(intPosX.inverse().toString());
+      actual = new BigNumber(number.getIntPosX().inverse().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(2)
     @DisplayName("BigInteger: one neg operand | x")
     void bigInteger_OneNegativeOperand() {
       expected = new BigNumber("-0.000000000000000000000000000000000000000000000000025");
-      actual = new BigNumber(intNegX.inverse().toString());
+      actual = new BigNumber(number.getIntNegX().inverse().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongIntResult));
+      assertThat(expected, Matchers.not(number.getWrongIntResult()));
     }
-
+    
     @Test
     @Order(3)
     @DisplayName("BigDecimal: one pos operand | x")
     void bigDecimal_OnePositiveOperand() {
       expected = new BigNumber("2500000000000000000000000000000000000000000000000");
-      actual = new BigNumber(decPosX.inverse().toString());
+      actual = new BigNumber(number.getDecPosX().inverse().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
-
+    
     @Test
     @Order(4)
     @DisplayName("BigDecimal: one neg operand | x")
     void bigDecimal_OneNegativeOperand() {
       expected = new BigNumber("-2500000000000000000000000000000000000000000000000");
-      actual = new BigNumber(decNegX.inverse().toString());
+      actual = new BigNumber(number.getDecNegX().inverse().toString());
       assertThat(expected, Matchers.comparesEqualTo(actual));
-      assertThat(expected, Matchers.not(wrongDecResult));
+      assertThat(expected, Matchers.not(number.getWrongDecResult()));
     }
   }
 }
