@@ -5,6 +5,9 @@ import number.BigNumber;
 public class TestNumbers {
   
   private static final BigNumber ZERO = new BigNumber("0");
+  private static final BigNumber PI =
+      new BigNumber("3.1415926535897932384626433832795028841971693993751"
+                    + "0582097494459230781640628620899862803482534211707");
   
   private final BigNumber intPosX =
       new BigNumber("40000000000000000000000000000000000000000000000000");
@@ -28,6 +31,10 @@ public class TestNumbers {
   
   public BigNumber getZERO() {
     return ZERO;
+  }
+  
+  public BigNumber getPI() {
+    return PI;
   }
   
   public BigNumber getIntPosX() {
