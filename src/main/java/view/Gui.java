@@ -21,7 +21,6 @@ import presenter.Presenter;
  * @author  Shawn Crahen
  * @version 1.0
  * @see     JFrame
- * @see     PropertyChangeEvent
  */
 @SuppressWarnings("serial")
 public class Gui extends JFrame {
