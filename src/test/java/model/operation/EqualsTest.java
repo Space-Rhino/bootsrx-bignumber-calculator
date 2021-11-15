@@ -17,7 +17,7 @@ class EqualsTest {
 
   @Test
   @Order(1)
-  @DisplayName("Precedence = 4")
+  @DisplayName("Case# 2.007: Precedence = 4")
   void getPrecedence() {
     int actual = equals.getPrecedence();
     int expected = 4;
@@ -26,7 +26,7 @@ class EqualsTest {
 
   @Test
   @Order(2)
-  @DisplayName("isBinary = false")
+  @DisplayName("Case# 2.008: isBinary = false")
   void isBinary() {
     boolean actual = equals.isBinary();
     assertFalse(actual);
@@ -34,7 +34,7 @@ class EqualsTest {
 
   @Test
   @Order(3)
-  @DisplayName("calculator display equals = expected result")
+  @DisplayName("Case# 2.009: calculator display equals = expected result")
   void execute() {
     boolean operandStack_IsEmpty;
     boolean operationStack_IsEmpty;

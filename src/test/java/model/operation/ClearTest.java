@@ -17,7 +17,7 @@ class ClearTest {
 
   @Test
   @Order(1)
-  @DisplayName("Precedence = 4")
+  @DisplayName("Case# 2.004: Precedence = 4")
   void getPrecedence() {
     int actual = clear.getPrecedence();
     int expected = 4;
@@ -26,7 +26,7 @@ class ClearTest {
 
   @Test
   @Order(2)
-  @DisplayName("isBinary = false")
+  @DisplayName("Case# 2.005: isBinary = false")
   void isBinary() {
     boolean actual = clear.isBinary();
     assertFalse(actual);
@@ -34,7 +34,8 @@ class ClearTest {
 
   @Test
   @Order(3)
-  @DisplayName("calculator display = 0 | operandStack & operationStack isEmpty = false")
+  @DisplayName(
+      "Case# 2.006: calculator display = 0 | operandStack & operationStack isEmpty = false")
   void execute() {
     boolean operandStack_IsEmpty;
     boolean operationStack_IsEmpty;

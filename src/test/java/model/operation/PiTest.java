@@ -18,7 +18,7 @@ class PiTest {
 
   @Test
   @Order(1)
-  @DisplayName("Precedence = 4")
+  @DisplayName("Case# 2.010: Precedence = 4")
   void getPrecedence() {
     int actual = pi.getPrecedence();
     int expected = 4;
@@ -27,7 +27,7 @@ class PiTest {
 
   @Test
   @Order(2)
-  @DisplayName("isBinary = false")
+  @DisplayName("Case# 2.011: isBinary = false")
   void isBinary() {
     boolean actual = pi.isBinary();
     assertFalse(actual);
@@ -35,7 +35,7 @@ class PiTest {
 
   @Test
   @Order(3)
-  @DisplayName("calculator display = 3.14e-97")
+  @DisplayName("Case# 2.012: calculator display = 3.14e-97")
   void execute() {
     pi.execute(calculator);
     String actual = calculator.getDisplay().getValue();
