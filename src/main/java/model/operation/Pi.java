@@ -7,7 +7,7 @@ package model.operation;
  * @version 1.0
  */
 public class Pi extends Operation {
-	
+
 	/**
 	 * String representation of pi with 100-digit precision.
 	 */
@@ -21,7 +21,7 @@ public class Pi extends Operation {
 		precedence = 4;
 		isBinary = false;
 	}
-	
+
 	/**
 	 * Updates the calculator display with pi.
 	 */
@@ -29,5 +29,4 @@ public class Pi extends Operation {
 	public void execute(Calculator calculator) {
 		calculator.updateDisplay(PI);
 	}
-	
 }

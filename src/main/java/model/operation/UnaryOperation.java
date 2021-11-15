@@ -1,8 +1,8 @@
 package model.operation;
 
-import java.util.EmptyStackException;
-
 import number.Number;
+
+import java.util.EmptyStackException;
 
 /**
  * This class provides a skeletal implementation of a generic unary operation.

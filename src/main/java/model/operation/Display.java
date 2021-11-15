@@ -25,7 +25,7 @@ public class Display {
 	 * The display value.
 	 */
 	private String value;
-	
+
 	/**
 	 * Enables binding to a PropertyChangeListener.
 	 */
