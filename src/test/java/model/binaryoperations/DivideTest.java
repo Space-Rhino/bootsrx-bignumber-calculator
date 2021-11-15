@@ -1,6 +1,6 @@
 package model.binaryoperations;
 
-import model.TestNumbers;
+import driver.InputTest;
 import number.BigNumber;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -16,14 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(OrderAnnotation.class)
 class DivideTest {
-  private final TestNumbers number = new TestNumbers();
+
   private final Divide divide = new Divide();
   private BigNumber expected;
   private BigNumber actual;
 
   @Test
   @Order(1)
-  @DisplayName("Precedence equals 2")
+  @DisplayName("Case# 1.071: Precedence equals 2")
   void getPrecedence_IsOne() {
     int actual = divide.getPrecedence();
     int expected = 2;
@@ -32,6 +32,7 @@ class DivideTest {
 
   @Test
   @Order(2)
+  @DisplayName("Case# 1.072: Operation is Binary | isBinary == true")
   void isBinary_IsTrue() {
     boolean actual = divide.isBinary();
     assertTrue(actual);
@@ -39,133 +40,123 @@ class DivideTest {
 
   @Test
   @Order(3)
-  @DisplayName("BigInteger: two pos operands | x / y")
+  @DisplayName("Case# 1.073: Integer two positive 50 digit operands | x / y")
   void bigInteger_TwoPositiveOperands() {
-    expected = new BigNumber("2");
-    actual =
-        new BigNumber(divide.executeBinary(number.getIntPosX(), number.getIntPosY()).toString());
+    expected = InputTest.DIVIDE_IPX_IPY;
+    actual = new BigNumber(divide.executeBinary(InputTest.DPX, InputTest.DPY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
   }
 
   @Test
   @Order(4)
-  @DisplayName("BigInteger: two neg operands | -x / -y")
+  @DisplayName("Case# 1.074: Integer two negative 50 digit operands | -x / -y")
   void bigInteger_TwoNegativeOperands() {
-    expected = new BigNumber("2");
-    actual =
-        new BigNumber(divide.executeBinary(number.getIntNegX(), number.getIntNegY()).toString());
+    expected = InputTest.DIVIDE_INX_INY;
+    actual = new BigNumber(divide.executeBinary(InputTest.INX, InputTest.INY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
   }
 
   @Test
   @Order(5)
-  @DisplayName("BigInteger: one neg & one pos operand | -x / y")
+  @DisplayName("Case# 1.075: Integer one negative & one positive 50 digit operand | -x / y")
   void bigInteger_OneNegativeAndOnePositiveOperand() {
-    expected = new BigNumber("-2");
-    actual =
-        new BigNumber(divide.executeBinary(number.getIntNegX(), number.getIntPosY()).toString());
+    expected = InputTest.DIVIDE_INX_IPY;
+    actual = new BigNumber(divide.executeBinary(InputTest.INX, InputTest.IPY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
   }
 
   @Test
   @Order(6)
-  @DisplayName("BigDecimal: two pos operands | x / y")
+  @DisplayName("Case# 1.076: Decimal two positive 50 digit operands | x / y")
   void bigDecimal_TwoPositiveOperands() {
-    expected = new BigNumber("2");
-    actual =
-        new BigNumber(divide.executeBinary(number.getDecPosX(), number.getDecPosY()).toString());
+    expected = InputTest.DIVIDE_DPX_DPY;
+    actual = new BigNumber(divide.executeBinary(InputTest.DPX, InputTest.DPY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
   }
 
   @Test
   @Order(7)
-  @DisplayName("BigDecimal: two neg operands | -x / -y")
+  @DisplayName("Case# 1.077: Decimal two negative 50 digit operands | -x / -y")
   void bigDecimal_TwoNegativeOperands() {
-    expected = new BigNumber("2");
-    actual =
-        new BigNumber(divide.executeBinary(number.getDecNegX(), number.getDecNegY()).toString());
+    expected = InputTest.DIVIDE_DNX_DNY;
+    actual = new BigNumber(divide.executeBinary(InputTest.DNX, InputTest.DNY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
   }
 
   @Test
   @Order(8)
-  @DisplayName("BigDecimal: one neg & one pos operand | -x / y")
+  @DisplayName("Case# 1.078: Decimal one negative & one positive 50 digit operand | -x / y")
   void bigDecimal_OneNegativeAndOnePositiveOperand() {
-    expected = new BigNumber("-2");
-    actual =
-        new BigNumber(divide.executeBinary(number.getDecNegX(), number.getDecPosY()).toString());
+    expected = InputTest.DIVIDE_DNX_DPY;
+    actual = new BigNumber(divide.executeBinary(InputTest.DNX, InputTest.DPY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
   }
 
   @Test
   @Order(9)
-  @DisplayName("BigInteger: divide zero by number | 0 / x && 0 / -x")
+  @DisplayName("Case# 1.079: Integer divide zero by pos & neg 50 digit operands | 0 / x && 0 / -x")
   void bigNumber_DivideZeroByBigNumber() {
-    expected = new BigNumber("0");
-    actual = new BigNumber(divide.executeBinary(number.getZERO(), number.getIntPosX()).toString());
-    assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    expected = InputTest.ZERO;
 
-    actual = new BigNumber(divide.executeBinary(number.getZERO(), number.getIntNegX()).toString());
+    actual = new BigNumber(divide.executeBinary(InputTest.ZERO, InputTest.IPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
+
+    actual = new BigNumber(divide.executeBinary(InputTest.ZERO, InputTest.INX).toString());
+    assertThat(expected, Matchers.comparesEqualTo(actual));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
   }
 
   @Test
   @Order(10)
-  @DisplayName("BigDecimal: divide zero by number | 0 / x && 0 / -x")
+  @DisplayName("Case# 1.080: Decimal divide zero by pos & neg 50 digit operands | 0 / x && 0 / -x")
   void bigDecimal_DivideZeroByBigDecimal() {
     expected = new BigNumber("0");
-    actual = new BigNumber(divide.executeBinary(number.getZERO(), number.getDecPosX()).toString());
-    assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
 
-    actual = new BigNumber(divide.executeBinary(number.getZERO(), number.getDecNegX()).toString());
+    actual = new BigNumber(divide.executeBinary(InputTest.ZERO, InputTest.DPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
+
+    actual = new BigNumber(divide.executeBinary(InputTest.ZERO, InputTest.DNX).toString());
+    assertThat(expected, Matchers.comparesEqualTo(actual));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
   }
 
   @Test
   @Order(11)
-  @DisplayName("BigInteger: divide by zero | throws ArithmeticException")
+  @DisplayName(
+      "Case# 1.081: Integer pos & neg 50 digit operands divide by zero | throws ArithmeticException")
   void bigNumber_DivideByZero() {
     assertThrows(
         ArithmeticException.class,
         () ->
-            actual =
-                new BigNumber(
-                    divide.executeBinary(number.getIntPosX(), number.getZERO()).toString()));
+            actual = new BigNumber(divide.executeBinary(InputTest.IPX, InputTest.ZERO).toString()));
 
     assertThrows(
         ArithmeticException.class,
         () ->
-            actual =
-                new BigNumber(
-                    divide.executeBinary(number.getIntNegX(), number.getZERO()).toString()));
+            actual = new BigNumber(divide.executeBinary(InputTest.INX, InputTest.ZERO).toString()));
   }
 
   @Test
   @Order(12)
-  @DisplayName("BigDecimal: divide zero by number | throws ArithmeticException")
+  @DisplayName(
+      "Case# 1.082: Decimal pos & neg 50 digit operands divide by zero\n | throws ArithmeticException")
   void bigDecimal_DivideByZero() {
     assertThrows(
         ArithmeticException.class,
         () ->
-            actual =
-                new BigNumber(
-                    divide.executeBinary(number.getDecPosX(), number.getZERO()).toString()));
+            actual = new BigNumber(divide.executeBinary(InputTest.DPX, InputTest.ZERO).toString()));
 
     assertThrows(
         ArithmeticException.class,
         () ->
-            actual =
-                new BigNumber(
-                    divide.executeBinary(number.getDecNegX(), number.getZERO()).toString()));
+            actual = new BigNumber(divide.executeBinary(InputTest.DNX, InputTest.ZERO).toString()));
   }
 }

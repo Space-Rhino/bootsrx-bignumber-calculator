@@ -1,6 +1,6 @@
 package model.unaryoperations;
 
-import model.TestNumbers;
+import driver.InputTest;
 import number.BigNumber;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @TestMethodOrder(OrderAnnotation.class)
 class SquareTest {
-  private final TestNumbers number = new TestNumbers();
+
   private final Square square = new Square();
   private BigNumber expected;
   private BigNumber actual;
 
   @Test
   @Order(1)
-  @DisplayName("Precedence equals 3")
+  @DisplayName("Case# 1.083: Precedence equals 3")
   void getPrecedence_IsOne() {
     int actual = square.getPrecedence();
     int expected = 3;
@@ -31,6 +31,7 @@ class SquareTest {
 
   @Test
   @Order(2)
+  @DisplayName("Case# 1.084: Operation is not Binary | isBinary == false")
   void isBinary_IsTrue() {
     boolean actual = square.isBinary();
     assertFalse(actual);
@@ -38,53 +39,41 @@ class SquareTest {
 
   @Test
   @Order(3)
-  @DisplayName("BigInteger: one pos operand | x")
+  @DisplayName("Case# 1.085: Integer one positive 50 digit operand | x")
   void bigInteger_OnePositiveOperand() {
-    expected =
-        new BigNumber(
-            "160000000000000000000000000000000000000000000000000"
-                + "0000000000000000000000000000000000000000000000000");
-    actual = new BigNumber(square.executeUnary(number.getIntPosX()).toString());
+    expected = InputTest.SQUARE_IPX;
+    actual = new BigNumber(square.executeUnary(InputTest.IPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
   }
 
   @Test
   @Order(4)
-  @DisplayName("BigInteger: one neg operand | x")
+  @DisplayName("Case# 1.086: Integer one negative 50 digit operand | -x")
   void bigInteger_OneNegativeOperand() {
-    expected =
-        new BigNumber(
-            "160000000000000000000000000000000000000000000000000"
-                + "0000000000000000000000000000000000000000000000000");
-    actual = new BigNumber(square.executeUnary(number.getIntNegX()).toString());
+    expected = InputTest.SQUARE_INX;
+    actual = new BigNumber(square.executeUnary(InputTest.INX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
   }
 
   @Test
   @Order(5)
-  @DisplayName("BigDecimal: one pos operand | x")
+  @DisplayName("Case# 1.087: Decimal one positive 50 digit operand | x")
   void bigDecimal_OnePositiveOperand() {
-    expected =
-        new BigNumber(
-            "0.000000000000000000000000000000000000000000000000"
-                + "00000000000000000000000000000000000000000000000016");
-    actual = new BigNumber(square.executeUnary(number.getDecPosX()).toString());
+    expected = InputTest.SQUARE_DPX;
+    actual = new BigNumber(square.executeUnary(InputTest.DPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
   }
 
   @Test
   @Order(6)
-  @DisplayName("BigDecimal: one neg operand | x")
+  @DisplayName("Case# 1.088: Decimal one negative 50 digit operand | -x")
   void bigDecimal_OneNegativeOperand() {
-    expected =
-        new BigNumber(
-            "0.000000000000000000000000000000000000000000000000"
-                + "00000000000000000000000000000000000000000000000016");
-    actual = new BigNumber(square.executeUnary(number.getDecNegX()).toString());
+    expected = InputTest.SQUARE_DNX;
+    actual = new BigNumber(square.executeUnary(InputTest.DNX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
   }
 }
