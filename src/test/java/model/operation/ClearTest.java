@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ClearTest {
+
   Calculator calculator = new Calculator();
   Clear clear = new Clear();
   Add add = new Add();

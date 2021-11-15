@@ -1,10 +1,11 @@
+package driver;
+
 import model.binaryoperations.Add;
 import model.operation.AllClear;
 import model.operation.Calculator;
-import model.operation.Clear;
 import model.operation.Pi;
 
-public class Driver {
+public class Input {
 
   public static void main(String[] args) {
     Calculator calculator = new Calculator();
@@ -13,26 +14,25 @@ public class Driver {
     Add add = new Add();
 
     System.out.println(calculator.getDisplay().getValue());
-    
+
     calculator.executeOperation(pi);
     System.out.println(calculator.getDisplay().getValue());
-    
+
     calculator.clear();
     System.out.println(calculator.getDisplay().getValue());
-  
+
     calculator.updateDisplay("2");
     calculator.pushDisplayToOperandStack();
-    //calculator.enterOperation("+");
+    // calculator.enterOperation("+");
     calculator.pushOperation(add);
     calculator.updateDisplay("2");
     calculator.pushDisplayToOperandStack();
     calculator.equals();
     System.out.println(calculator.getDisplay().getValue());
-  
-    //calculator.allClear();
+
+    // calculator.allClear();
     allClear.execute(calculator);
     System.out.println(calculator.getDisplay().getValue());
     System.out.println("actualOperandStack isEmpty: " + calculator.getOperandStack().isEmpty());
-    
   }
 }

@@ -1,5 +1,6 @@
 package model.unaryoperations;
 
+import driver.InputTest;
 import number.BigNumber;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import testutilities.TestNumbers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @TestMethodOrder(OrderAnnotation.class)
 class InverseTest {
-  private final TestNumbers number = new TestNumbers();
+
   private final Inverse inverse = new Inverse();
   private BigNumber expected;
   private BigNumber actual;
@@ -40,39 +40,39 @@ class InverseTest {
   @Order(3)
   @DisplayName("BigInteger: one pos operand | x")
   void bigInteger_OnePositiveOperand() {
-    expected = new BigNumber("0.000000000000000000000000000000000000000000000000025");
-    actual = new BigNumber(inverse.executeUnary(number.getIntPosX()).toString());
+    expected = InputTest.INVERSE_IPX;
+    actual = new BigNumber(inverse.executeUnary(InputTest.IPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
   }
 
   @Test
   @Order(4)
   @DisplayName("BigInteger: one neg operand | x")
   void bigInteger_OneNegativeOperand() {
-    expected = new BigNumber("-0.000000000000000000000000000000000000000000000000025");
-    actual = new BigNumber(inverse.executeUnary(number.getIntNegX()).toString());
+    expected = InputTest.INVERSE_INX;
+    actual = new BigNumber(inverse.executeUnary(InputTest.INX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
   }
 
   @Test
   @Order(5)
   @DisplayName("BigDecimal: one pos operand | x")
   void bigDecimal_OnePositiveOperand() {
-    expected = new BigNumber("2500000000000000000000000000000000000000000000000");
-    actual = new BigNumber(inverse.executeUnary(number.getDecPosX()).toString());
+    expected = InputTest.INVERSE_DPX;
+    actual = new BigNumber(inverse.executeUnary(InputTest.DPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
   }
 
   @Test
   @Order(6)
   @DisplayName("BigDecimal: one neg operand | x")
   void bigDecimal_OneNegativeOperand() {
-    expected = new BigNumber("-2500000000000000000000000000000000000000000000000");
-    actual = new BigNumber(inverse.executeUnary(number.getDecNegX()).toString());
+    expected = InputTest.INVERSE_DNX;
+    actual = new BigNumber(inverse.executeUnary(InputTest.DNX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
   }
 }

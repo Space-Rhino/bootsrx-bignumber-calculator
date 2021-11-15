@@ -1,19 +1,19 @@
 package model.operation;
 
+import driver.InputTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import testutilities.TestNumbers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @TestMethodOrder(OrderAnnotation.class)
 class PiTest {
+
   Calculator calculator = new Calculator();
-  TestNumbers testNumber = new TestNumbers();
   Pi pi = new Pi();
 
   @Test
@@ -39,7 +39,7 @@ class PiTest {
   void execute() {
     pi.execute(calculator);
     String actual = calculator.getDisplay().getValue();
-    String expected = testNumber.getPI().toString();
+    String expected = InputTest.PI.toString();
     assertEquals(expected, actual);
   }
 }

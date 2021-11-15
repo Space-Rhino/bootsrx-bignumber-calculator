@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EqualsTest {
+
   Calculator calculator = new Calculator();
   Equals equals = new Equals();
   Add add = new Add();

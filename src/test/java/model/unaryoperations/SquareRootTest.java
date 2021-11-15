@@ -1,5 +1,6 @@
 package model.unaryoperations;
 
+import driver.InputTest;
 import number.BigNumber;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import testutilities.TestNumbers;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestMethodOrder(OrderAnnotation.class)
 class SquareRootTest {
-  private final TestNumbers number = new TestNumbers();
+
   private final SquareRoot squareRoot = new SquareRoot();
   private BigNumber expected;
   private BigNumber actual;
@@ -41,13 +41,10 @@ class SquareRootTest {
   @Order(3)
   @DisplayName("BigInteger: one pos operand | x")
   void bigInteger_OnePositiveOperand() {
-    expected =
-        new BigNumber(
-            "6324555320336758663997787"
-                + ".08886543706743911027865043365371500970558518887727847644268849621675860059");
-    actual = new BigNumber(squareRoot.executeUnary(number.getIntPosX()).toString());
+    expected = InputTest.SQUARE_ROOT_IPX;
+    actual = new BigNumber(squareRoot.executeUnary(InputTest.IPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongIntResult()));
+    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
   }
 
   @Test
@@ -56,20 +53,17 @@ class SquareRootTest {
   void bigInteger_OneNegativeOperand() {
     assertThrows(
         ArithmeticException.class,
-        () -> actual = new BigNumber(squareRoot.executeUnary(number.getIntNegX()).toString()));
+        () -> actual = new BigNumber(squareRoot.executeUnary(InputTest.INX).toString()));
   }
 
   @Test
   @Order(5)
   @DisplayName("BigDecimal: one pos operand | x")
   void bigDecimal_OnePositiveOperand() {
-    expected =
-        new BigNumber(
-            "6.32455532033675866399778708886543706743911027865"
-                + "04336537150097055851888772784764426884962167586E-25");
-    actual = new BigNumber(squareRoot.executeUnary(number.getDecPosX()).toString());
+    expected = InputTest.SQUARE_ROOT_DPX;
+    actual = new BigNumber(squareRoot.executeUnary(InputTest.DPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(number.getWrongDecResult()));
+    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
   }
 
   @Test
@@ -78,6 +72,6 @@ class SquareRootTest {
   void bigDecimal_OneNegativeOperand() {
     assertThrows(
         ArithmeticException.class,
-        () -> actual = new BigNumber(squareRoot.executeUnary(number.getDecNegX()).toString()));
+        () -> actual = new BigNumber(squareRoot.executeUnary(InputTest.DNX).toString()));
   }
 }

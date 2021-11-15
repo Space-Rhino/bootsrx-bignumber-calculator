@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(OrderAnnotation.class)
 class AllClearTest {
+
   Calculator calculator = new Calculator();
   AllClear allClear = new AllClear();
   Add add = new Add();
