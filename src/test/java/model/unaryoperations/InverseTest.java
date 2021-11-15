@@ -22,7 +22,7 @@ class InverseTest {
 
   @Test
   @Order(1)
-  @DisplayName("Precedence equals 3")
+  @DisplayName("Case# 1.101: Precedence equals 3")
   void getPrecedence_IsOne() {
     int actual = inverse.getPrecedence();
     int expected = 3;
@@ -31,6 +31,7 @@ class InverseTest {
 
   @Test
   @Order(2)
+  @DisplayName("Case# 1.102: Operation is not Binary | isBinary == false")
   void isBinary_IsTrue() {
     boolean actual = inverse.isBinary();
     assertFalse(actual);
@@ -38,7 +39,7 @@ class InverseTest {
 
   @Test
   @Order(3)
-  @DisplayName("BigInteger: one pos operand | x")
+  @DisplayName("Case# 1.103: Integer one positive 50 digit operand | x")
   void bigInteger_OnePositiveOperand() {
     expected = InputTest.INVERSE_IPX;
     actual = new BigNumber(inverse.executeUnary(InputTest.IPX).toString());
@@ -48,7 +49,7 @@ class InverseTest {
 
   @Test
   @Order(4)
-  @DisplayName("BigInteger: one neg operand | x")
+  @DisplayName("Case# 1.104: Integer one negative 50 digit operand\n | -x")
   void bigInteger_OneNegativeOperand() {
     expected = InputTest.INVERSE_INX;
     actual = new BigNumber(inverse.executeUnary(InputTest.INX).toString());
@@ -58,7 +59,7 @@ class InverseTest {
 
   @Test
   @Order(5)
-  @DisplayName("BigDecimal: one pos operand | x")
+  @DisplayName("Case# 1.105: Decimal one positive 50 digit operand | x")
   void bigDecimal_OnePositiveOperand() {
     expected = InputTest.INVERSE_DPX;
     actual = new BigNumber(inverse.executeUnary(InputTest.DPX).toString());
@@ -68,7 +69,7 @@ class InverseTest {
 
   @Test
   @Order(6)
-  @DisplayName("BigDecimal: one neg operand | x")
+  @DisplayName("Case# 1.106: Decimal one negative 50 digit operand | -x")
   void bigDecimal_OneNegativeOperand() {
     expected = InputTest.INVERSE_DNX;
     actual = new BigNumber(inverse.executeUnary(InputTest.DNX).toString());

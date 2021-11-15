@@ -22,7 +22,7 @@ class NegateTest {
 
   @Test
   @Order(1)
-  @DisplayName("Precedence equals 3")
+  @DisplayName("Case# 1.095: Precedence equals 3")
   void getPrecedence_IsOne() {
     int actual = negate.getPrecedence();
     int expected = 3;
@@ -31,6 +31,7 @@ class NegateTest {
 
   @Test
   @Order(2)
+  @DisplayName("Case# 1.096: Operation is not Binary | isBinary == false")
   void isBinary_IsTrue() {
     boolean actual = negate.isBinary();
     assertFalse(actual);
@@ -38,7 +39,7 @@ class NegateTest {
 
   @Test
   @Order(3)
-  @DisplayName("BigInteger: one pos operand | x")
+  @DisplayName("Case# 1.097: Integer one positive 50 digit operand | x")
   void bigInteger_OnePositiveOperand() {
     expected = InputTest.NEGATE_IPX;
     actual = new BigNumber(negate.executeUnary(InputTest.IPX).toString());
@@ -48,7 +49,7 @@ class NegateTest {
 
   @Test
   @Order(4)
-  @DisplayName("BigInteger: one neg operand | x")
+  @DisplayName("Case# 1.098: Integer one negative 50 digit operand | -x")
   void bigInteger_OneNegativeOperand() {
     expected = InputTest.NEGATE_INX;
     actual = new BigNumber(negate.executeUnary(InputTest.INX).toString());
@@ -58,7 +59,7 @@ class NegateTest {
 
   @Test
   @Order(5)
-  @DisplayName("BigDecimal: one pos operand | x")
+  @DisplayName("Case# 1.099: Decimal one positive 50 digit operand | x")
   void bigDecimal_OnePositiveOperand() {
     expected = InputTest.NEGATE_DPX;
     actual = new BigNumber(negate.executeUnary(InputTest.DPX).toString());
@@ -68,7 +69,7 @@ class NegateTest {
 
   @Test
   @Order(6)
-  @DisplayName("BigDecimal: one neg operand | x")
+  @DisplayName("Case# 1.100: Decimal one negative 50 digit operand | -x")
   void bigDecimal_OneNegativeOperand() {
     expected = InputTest.NEGATE_DNX;
     actual = new BigNumber(negate.executeUnary(InputTest.DNX).toString());

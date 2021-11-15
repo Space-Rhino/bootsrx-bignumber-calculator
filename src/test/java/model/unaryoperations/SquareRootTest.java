@@ -23,7 +23,7 @@ class SquareRootTest {
 
   @Test
   @Order(1)
-  @DisplayName("Precedence equals 3")
+  @DisplayName("Case# 1.089: Precedence equals 3")
   void getPrecedence_IsOne() {
     int actual = squareRoot.getPrecedence();
     int expected = 3;
@@ -32,6 +32,7 @@ class SquareRootTest {
 
   @Test
   @Order(2)
+  @DisplayName("Case# 1.090: Operation is not Binary | isBinary == false")
   void isBinary_IsTrue() {
     boolean actual = squareRoot.isBinary();
     assertFalse(actual);
@@ -39,7 +40,7 @@ class SquareRootTest {
 
   @Test
   @Order(3)
-  @DisplayName("BigInteger: one pos operand | x")
+  @DisplayName("Case# 1.091: Integer one positive 50 digit operand | x")
   void bigInteger_OnePositiveOperand() {
     expected = InputTest.SQUARE_ROOT_IPX;
     actual = new BigNumber(squareRoot.executeUnary(InputTest.IPX).toString());
@@ -49,7 +50,7 @@ class SquareRootTest {
 
   @Test
   @Order(4)
-  @DisplayName("BigInteger: one neg operand | x")
+  @DisplayName("Case# 1.092: Integer one negative 50 digit operand | throws ArithmeticException")
   void bigInteger_OneNegativeOperand() {
     assertThrows(
         ArithmeticException.class,
@@ -58,7 +59,7 @@ class SquareRootTest {
 
   @Test
   @Order(5)
-  @DisplayName("BigDecimal: one pos operand | x")
+  @DisplayName("Case# 1.093: Decimal one positive 50 digit operand | x")
   void bigDecimal_OnePositiveOperand() {
     expected = InputTest.SQUARE_ROOT_DPX;
     actual = new BigNumber(squareRoot.executeUnary(InputTest.DPX).toString());
@@ -68,7 +69,7 @@ class SquareRootTest {
 
   @Test
   @Order(6)
-  @DisplayName("BigDecimal: one neg operand | x")
+  @DisplayName("Case# 1.094: Decimal one negative 50 digit operand | throws ArithmeticException")
   void bigDecimal_OneNegativeOperand() {
     assertThrows(
         ArithmeticException.class,
