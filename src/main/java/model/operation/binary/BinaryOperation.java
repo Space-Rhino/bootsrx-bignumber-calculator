@@ -21,7 +21,7 @@ public abstract class BinaryOperation extends Operation {
 	/**
 	 * Class constructor.
 	 */
-	public BinaryOperation() {
+	protected BinaryOperation() {
 		isBinary = true;
 	}
 

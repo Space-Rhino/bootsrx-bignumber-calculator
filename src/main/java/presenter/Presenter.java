@@ -22,7 +22,7 @@ public class Presenter implements PropertyChangeListener {
 	/**
 	 * The calculator model.
 	 */
-	private Calculator calculator;
+	private final Calculator calculator;
 	
 	/**
 	 * The calculator view.
@@ -71,14 +71,11 @@ public class Presenter implements PropertyChangeListener {
 	 */
 	public static void main(String[] args) {
 		Presenter presenter = new Presenter();
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			// instantiate GUI in event dispatch thread
-			public void run() {
-				gui = new Gui(presenter);
-				gui.setVisible(true);
-				gui.requestFocusInWindow();
-			}
+		// instantiate GUI in event dispatch thread
+		SwingUtilities.invokeLater(() -> {
+			gui = new Gui(presenter);
+			gui.setVisible(true);
+			gui.requestFocusInWindow();
 		});
 	}
 }

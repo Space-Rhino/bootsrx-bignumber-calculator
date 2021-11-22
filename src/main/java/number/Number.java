@@ -14,7 +14,7 @@ public interface Number {
 	 * @param  other the augend
 	 * @return       the result of addition
 	 */
-	public Number add(Number other);
+	Number add(Number other);
 
 	/**
 	 * Subtracts two numbers. (requirement 3.3.2)
@@ -22,7 +22,7 @@ public interface Number {
 	 * @param  other the subtrahend
 	 * @return       the result of subtraction
 	 */
-	public Number subtract(Number other);
+	Number subtract(Number other);
 
 	/**
 	 * Multiplies two numbers. (requirement 3.3.3)
@@ -30,7 +30,7 @@ public interface Number {
 	 * @param  other the multiplicand
 	 * @return       the result of multiplication
 	 */
-	public Number multiply(Number other);
+	Number multiply(Number other);
 
 	/**
 	 * Divides two numbers. (requirement 3.3.4)
@@ -38,33 +38,33 @@ public interface Number {
 	 * @param  other the divisor
 	 * @return       the result of division
 	 */
-	public Number divide(Number other);
+	Number divide(Number other);
 
 	/**
 	 * Squares a number. (requirement 3.3.11)
 	 *
 	 * @return this squared
 	 */
-	public Number square();
+	Number square();
 
 	/**
 	 * Calculates the square root of a number. (requirement 3.3.10)
 	 *
 	 * @return the square root of this
 	 */
-	public Number squareRoot();
+	Number squareRoot();
 
 	/**
 	 * Negates a number. (requirement 3.3.12)
 	 *
 	 * @return this negated
 	 */
-	public Number negate();
+	Number negate();
 
 	/**
 	 * Calculates the inverse of a number. (requirement 3.3.13)
 	 *
 	 * @return the inverse of this
 	 */
-	public Number inverse();
+	Number inverse();
 }

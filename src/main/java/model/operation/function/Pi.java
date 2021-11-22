@@ -13,8 +13,8 @@ public class Pi extends Operation {
 	/**
 	 * String representation of pi with 100-digit precision.
 	 */
-	private static final String PI = "3.1415926535897932384626433832795028841971693993751"
-			+ "0582097494459230781640628620899862803482534211707";
+	private static final String PI_100_DIGITS = "3.1415926535897932384626433832795028841971693993751"
+																							+ "0582097494459230781640628620899862803482534211707";
 	
 	/**
 	 * Class constructor.
@@ -29,6 +29,6 @@ public class Pi extends Operation {
 	 */
 	@Override
 	public void execute(Calculator calculator) {
-		calculator.updateDisplay(PI);
+		calculator.updateDisplay(PI_100_DIGITS);
 	}
 }

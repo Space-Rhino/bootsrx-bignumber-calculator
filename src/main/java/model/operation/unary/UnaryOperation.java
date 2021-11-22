@@ -21,7 +21,7 @@ public abstract class UnaryOperation extends Operation {
 	/**
 	 * Class constructor.
 	 */
-	public UnaryOperation() {
+	protected UnaryOperation() {
 		precedence = 3;
 		isBinary = false;
 	}

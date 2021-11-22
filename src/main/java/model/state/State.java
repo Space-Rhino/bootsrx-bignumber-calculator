@@ -5,7 +5,7 @@ import model.operation.function.Operation;
 
 /**
  * This class provides a skeletal implementation of a generic calculator state.
- * To implement a state, extend this class and override the its methods.
+ * To implement a state, extend this class and override its methods.
  *
  * @author  Shawn Crahen
  * @version 1.0
@@ -24,7 +24,7 @@ public abstract class State {
 	 *
 	 * @param calculator the calculator associated with this state
 	 */
-	public State(Calculator calculator) {
+	protected State(Calculator calculator) {
 		this.calculator = calculator;
 	}
 

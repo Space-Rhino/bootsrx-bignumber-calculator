@@ -42,17 +42,17 @@ public class Calculator {
 	/**
 	 * A stack to store operands of type Number.
 	 */
-	private Stack<Number> operandStack;
+	private final Stack<Number> operandStack;
 	
 	/**
 	 * A stack to store arithmetic operations.
 	 */
-	private Stack<Operation> operationStack;
+	private final Stack<Operation> operationStack;
 	
 	/**
 	 * The display register for this Calculator.
 	 */
-	private Display display;
+	private final Display display;
 	
 	/**
 	 * The state of this calculator.
@@ -62,7 +62,7 @@ public class Calculator {
 	/**
 	 * A map to provide O(1) access to operations.
 	 */
-	private Map<String, Operation> operationMap;
+	private final Map<String, Operation> operationMap;
 	
 	/**
 	 * An instance of ReadyState.

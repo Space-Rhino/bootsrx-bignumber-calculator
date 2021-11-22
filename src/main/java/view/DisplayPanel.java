@@ -16,13 +16,12 @@ import javax.swing.JTextField;
  * @version 1.0
  * @see     JPanel
  */
-@SuppressWarnings("serial")
 public class DisplayPanel extends JPanel {
 	
 	/**
 	 * The text field for this display.
 	 */
-	private JTextField displayField;
+	private final JTextField displayField;
 	
 	/**
 	 * Class constructor.
