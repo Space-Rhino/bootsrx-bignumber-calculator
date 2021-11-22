@@ -2,7 +2,7 @@ package driver;
 
 import number.BigNumber;
 
-public class InputTest {
+public class TestInput {
 
   public static final BigNumber ZERO = new BigNumber("0");
   public static final BigNumber PI =

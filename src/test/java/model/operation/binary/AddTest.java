@@ -1,6 +1,6 @@
 package model.operation.binary;
 
-import driver.InputTest;
+import driver.TestInput;
 import number.BigNumber;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -41,59 +41,59 @@ class AddTest {
   @Order(3)
   @DisplayName("Case# 1.049: Integer two positive 50 digit operands | x + y")
   void bigInteger_TwoPositiveOperands() {
-    expected = InputTest.ADD_IPX_IPY;
-    actual = new BigNumber(add.executeBinary(InputTest.IPX, InputTest.IPY).toString());
+    expected = TestInput.ADD_IPX_IPY;
+    actual = new BigNumber(add.executeBinary(TestInput.IPX, TestInput.IPY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.I_RESULT_WRONG));
   }
 
   @Test
   @Order(4)
   @DisplayName("Case# 1.050: Integer two negative 50 digit operands | -x + -y")
   void bigInteger_TwoNegativeOperands() {
-    expected = InputTest.ADD_INX_INY;
-    actual = new BigNumber(add.executeBinary(InputTest.INX, InputTest.INY).toString());
+    expected = TestInput.ADD_INX_INY;
+    actual = new BigNumber(add.executeBinary(TestInput.INX, TestInput.INY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.I_RESULT_WRONG));
   }
 
   @Test
   @Order(5)
   @DisplayName("Case# 1.051: Integer one negative & one positive 50 digit operand | -x + y")
   void bigInteger_OneNegativeAndOnePositiveOperand() {
-    expected = InputTest.ADD_INX_IPY;
-    actual = new BigNumber(add.executeBinary(InputTest.INX, InputTest.IPY).toString());
+    expected = TestInput.ADD_INX_IPY;
+    actual = new BigNumber(add.executeBinary(TestInput.INX, TestInput.IPY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.I_RESULT_WRONG));
   }
 
   @Test
   @Order(6)
   @DisplayName("Case# 1.052: Decimal two positive 50 digit operands | x + y")
   void bigDecimal_TwoPositiveOperands() {
-    expected = InputTest.ADD_DPX_DPY;
-    actual = new BigNumber(add.executeBinary(InputTest.DPX, InputTest.DPY).toString());
+    expected = TestInput.ADD_DPX_DPY;
+    actual = new BigNumber(add.executeBinary(TestInput.DPX, TestInput.DPY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.D_RESULT_WRONG));
   }
 
   @Test
   @Order(7)
   @DisplayName("Case# 1.053: Decimal two negative 50 digit operands | -x + -y")
   void bigDecimal_TwoNegativeOperands() {
-    expected = InputTest.ADD_DNX_DNY;
-    actual = new BigNumber(add.executeBinary(InputTest.DNX, InputTest.DNY).toString());
+    expected = TestInput.ADD_DNX_DNY;
+    actual = new BigNumber(add.executeBinary(TestInput.DNX, TestInput.DNY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.D_RESULT_WRONG));
   }
 
   @Test
   @Order(8)
   @DisplayName("Case# 1.054: Decimal one negative & one positive 50 digit operand | -x + y")
   void bigDecimal_OneNegativeAndOnePositiveOperand() {
-    expected = InputTest.ADD_DNX_DPY;
-    actual = new BigNumber(add.executeBinary(InputTest.DNX, InputTest.DPY).toString());
+    expected = TestInput.ADD_DNX_DPY;
+    actual = new BigNumber(add.executeBinary(TestInput.DNX, TestInput.DPY).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.D_RESULT_WRONG));
   }
 }

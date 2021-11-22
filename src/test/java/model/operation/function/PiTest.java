@@ -1,6 +1,6 @@
 package model.operation.function;
 
-import driver.InputTest;
+import driver.TestInput;
 import model.app.Calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -40,7 +40,7 @@ class PiTest {
   void execute() {
     pi.execute(calculator);
     String actual = calculator.getDisplay().getValue();
-    String expected = InputTest.PI.toString();
+    String expected = TestInput.PI.toString();
     assertEquals(expected, actual);
   }
 }

@@ -1,6 +1,6 @@
 package model.operation.unary;
 
-import driver.InputTest;
+import driver.TestInput;
 import number.BigNumber;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -42,10 +42,10 @@ class SquareRootTest {
   @Order(3)
   @DisplayName("Case# 1.091: Integer one positive 50 digit operand | x")
   void bigInteger_OnePositiveOperand() {
-    expected = InputTest.SQUARE_ROOT_IPX;
-    actual = new BigNumber(squareRoot.executeUnary(InputTest.IPX).toString());
+    expected = TestInput.SQUARE_ROOT_IPX;
+    actual = new BigNumber(squareRoot.executeUnary(TestInput.IPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.I_RESULT_WRONG));
   }
 
   @Test
@@ -54,17 +54,17 @@ class SquareRootTest {
   void bigInteger_OneNegativeOperand() {
     assertThrows(
         ArithmeticException.class,
-        () -> actual = new BigNumber(squareRoot.executeUnary(InputTest.INX).toString()));
+        () -> actual = new BigNumber(squareRoot.executeUnary(TestInput.INX).toString()));
   }
 
   @Test
   @Order(5)
   @DisplayName("Case# 1.093: Decimal one positive 50 digit operand | x")
   void bigDecimal_OnePositiveOperand() {
-    expected = InputTest.SQUARE_ROOT_DPX;
-    actual = new BigNumber(squareRoot.executeUnary(InputTest.DPX).toString());
+    expected = TestInput.SQUARE_ROOT_DPX;
+    actual = new BigNumber(squareRoot.executeUnary(TestInput.DPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.D_RESULT_WRONG));
   }
 
   @Test
@@ -73,6 +73,6 @@ class SquareRootTest {
   void bigDecimal_OneNegativeOperand() {
     assertThrows(
         ArithmeticException.class,
-        () -> actual = new BigNumber(squareRoot.executeUnary(InputTest.DNX).toString()));
+        () -> actual = new BigNumber(squareRoot.executeUnary(TestInput.DNX).toString()));
   }
 }

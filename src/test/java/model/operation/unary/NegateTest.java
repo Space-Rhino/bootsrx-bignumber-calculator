@@ -1,6 +1,6 @@
 package model.operation.unary;
 
-import driver.InputTest;
+import driver.TestInput;
 import number.BigNumber;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -41,39 +41,39 @@ class NegateTest {
   @Order(3)
   @DisplayName("Case# 1.097: Integer one positive 50 digit operand | x")
   void bigInteger_OnePositiveOperand() {
-    expected = InputTest.NEGATE_IPX;
-    actual = new BigNumber(negate.executeUnary(InputTest.IPX).toString());
+    expected = TestInput.NEGATE_IPX;
+    actual = new BigNumber(negate.executeUnary(TestInput.IPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.I_RESULT_WRONG));
   }
 
   @Test
   @Order(4)
   @DisplayName("Case# 1.098: Integer one negative 50 digit operand | -x")
   void bigInteger_OneNegativeOperand() {
-    expected = InputTest.NEGATE_INX;
-    actual = new BigNumber(negate.executeUnary(InputTest.INX).toString());
+    expected = TestInput.NEGATE_INX;
+    actual = new BigNumber(negate.executeUnary(TestInput.INX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.I_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.I_RESULT_WRONG));
   }
 
   @Test
   @Order(5)
   @DisplayName("Case# 1.099: Decimal one positive 50 digit operand | x")
   void bigDecimal_OnePositiveOperand() {
-    expected = InputTest.NEGATE_DPX;
-    actual = new BigNumber(negate.executeUnary(InputTest.DPX).toString());
+    expected = TestInput.NEGATE_DPX;
+    actual = new BigNumber(negate.executeUnary(TestInput.DPX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.D_RESULT_WRONG));
   }
 
   @Test
   @Order(6)
   @DisplayName("Case# 1.100: Decimal one negative 50 digit operand | -x")
   void bigDecimal_OneNegativeOperand() {
-    expected = InputTest.NEGATE_DNX;
-    actual = new BigNumber(negate.executeUnary(InputTest.DNX).toString());
+    expected = TestInput.NEGATE_DNX;
+    actual = new BigNumber(negate.executeUnary(TestInput.DNX).toString());
     assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(InputTest.D_RESULT_WRONG));
+    assertThat(expected, Matchers.not(TestInput.D_RESULT_WRONG));
   }
 }
