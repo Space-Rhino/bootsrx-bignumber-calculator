@@ -137,7 +137,6 @@ class DivideTest {
         ArithmeticException.class,
         () ->
             actual = new BigNumber(divide.executeBinary(InputTest.IPX, InputTest.ZERO).toString()));
-
     assertThrows(
         ArithmeticException.class,
         () ->
@@ -153,7 +152,6 @@ class DivideTest {
         ArithmeticException.class,
         () ->
             actual = new BigNumber(divide.executeBinary(InputTest.DPX, InputTest.ZERO).toString()));
-
     assertThrows(
         ArithmeticException.class,
         () ->

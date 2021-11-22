@@ -2,7 +2,6 @@ package model.operation.function;
 
 import driver.InputTest;
 import model.app.Calculator;
-import model.operation.function.Pi;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;

@@ -2,7 +2,6 @@ package model.operation.function;
 
 import model.app.Calculator;
 import model.operation.binary.Add;
-import model.operation.function.Clear;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

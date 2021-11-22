@@ -29,7 +29,7 @@ public class Display {
 	/**
 	 * Enables binding to a PropertyChangeListener.
 	 */
-	private PropertyChangeSupport support;
+	private final PropertyChangeSupport support;
 	
 	/**
 	 * Class constructor.
