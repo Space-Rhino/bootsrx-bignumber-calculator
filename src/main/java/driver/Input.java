@@ -1,9 +1,9 @@
 package driver;
 
-import model.binaryoperations.Add;
-import model.operation.AllClear;
-import model.operation.Calculator;
-import model.operation.Pi;
+import model.operation.binary.Add;
+import model.operation.function.AllClear;
+import model.app.Calculator;
+import model.operation.function.Pi;
 
 public class Input {
 

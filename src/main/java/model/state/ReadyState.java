@@ -1,12 +1,14 @@
 package model.state;
 
-import model.operation.Calculator;
-import model.operation.Operation;
+import model.app.Calculator;
+import model.operation.function.Operation;
+import model.operation.function.AllClear;
+import model.operation.function.Clear;
 
 /**
  * This class is a concrete implementation of the State class which conforms to
  * this calculator's state diagram.
- * 
+ *
  * @author  Shawn Crahen
  * @version 1.0
  * @see     State
@@ -15,7 +17,7 @@ public class ReadyState extends State {
 	
 	/**
 	 * Class constructor.
-	 * 
+	 *
 	 * @param calculator the calculator object associated with this state
 	 */
 	public ReadyState(Calculator calculator) {
@@ -33,11 +35,11 @@ public class ReadyState extends State {
 		if (digit.equals("BKSP") && isErrorState) {
 			calculator.clear();
 			return this;
-		} 
+		}
 		// not backspace
 		else if (!digit.equals("BKSP")) {
 			calculator.resetCalculator();
-		} 
+		}
 		// operandStack has expired data
 		else if (!calculator.getOperandStack().isEmpty()) {
 			calculator.getOperandStack().pop();
@@ -59,7 +61,7 @@ public class ReadyState extends State {
 			try {
 				calculator.pushDisplayToOperandStack();
 			} catch (NumberFormatException e) {
-				if (op instanceof model.operation.AllClear || op instanceof model.operation.Clear) {
+				if (op instanceof AllClear || op instanceof Clear) {
 					calculator.pushOperation(op);
 				} else {
 					calculator.updateDisplay("Invalid operation");
@@ -67,13 +69,13 @@ public class ReadyState extends State {
 				return this;
 			}
 		} else {
-			if (op instanceof model.operation.Clear) {
+			if (op instanceof Clear) {
 				calculator.getOperandStack().pop();
 			}
 		}
 		calculator.pushOperation(op);
 		
-		if (op.isBinary() || op instanceof model.operation.Clear) {
+		if (op.isBinary() || op instanceof Clear) {
 			return calculator.nextOperand;
 		} else {
 			return this;

@@ -186,7 +186,7 @@ extends <a href="State.html" title="class in model.state">State</a></pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(model.operation.Calculator)">ReadyState</a></span>&#8203;(<a href="../operation/Calculator.html" title="class in model.operation">Calculator</a>&nbsp;calculator)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(model.app.Calculator)">ReadyState</a></span>&#8203;(<a href="../operation/Calculator.html" title="class in model.operation">Calculator</a>&nbsp;calculator)</code></th>
 <td class="colLast">
 <div class="block">Class constructor.</div>
 </td>
@@ -211,7 +211,7 @@ extends <a href="State.html" title="class in model.state">State</a></pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="State.html" title="class in model.state">State</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enterConstant(model.operation.Operation)">enterConstant</a></span>&#8203;(<a href="../operation/Operation.html" title="class in model.operation">Operation</a>&nbsp;op)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enterConstant(model.operation.function.Operation)">enterConstant</a></span>&#8203;(<a href="../operation/Operation.html" title="class in model.operation">Operation</a>&nbsp;op)</code></th>
 <td class="colLast">
 <div class="block">Executes the "enter constant" state transition from the "ready state."</div>
 </td>
@@ -225,7 +225,7 @@ extends <a href="State.html" title="class in model.state">State</a></pre>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="State.html" title="class in model.state">State</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enterOperation(model.operation.Operation)">enterOperation</a></span>&#8203;(<a href="../operation/Operation.html" title="class in model.operation">Operation</a>&nbsp;op)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enterOperation(model.operation.function.Operation)">enterOperation</a></span>&#8203;(<a href="../operation/Operation.html" title="class in model.operation">Operation</a>&nbsp;op)</code></th>
 <td class="colLast">
 <div class="block">Executes the "enter operation" state transition from the "ready state."
  Handles NumberFormatException when display is an invalid representation of
@@ -256,7 +256,7 @@ extends <a href="State.html" title="class in model.state">State</a></pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(model.operation.Calculator)">
+<a id="&lt;init&gt;(model.app.Calculator)">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -298,7 +298,7 @@ extends <a href="State.html" title="class in model.state">State</a></pre>
 </dl>
 </li>
 </ul>
-<a id="enterOperation(model.operation.Operation)">
+<a id="enterOperation(model.operation.function.Operation)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -310,7 +310,7 @@ extends <a href="State.html" title="class in model.state">State</a></pre>
  BigNumber.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="State.html#enterOperation(model.operation.Operation)">enterOperation</a></code>&nbsp;in class&nbsp;<code><a href="State.html" title="class in model.state">State</a></code></dd>
+<dd><code><a href="State.html#enterOperation(model.operation.function.Operation)">enterOperation</a></code>&nbsp;in class&nbsp;<code><a href="State.html" title="class in model.state">State</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>op</code> - the operation to enter</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -318,7 +318,7 @@ extends <a href="State.html" title="class in model.state">State</a></pre>
 </dl>
 </li>
 </ul>
-<a id="enterConstant(model.operation.Operation)">
+<a id="enterConstant(model.operation.function.Operation)">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -328,7 +328,7 @@ extends <a href="State.html" title="class in model.state">State</a></pre>
 <div class="block">Executes the "enter constant" state transition from the "ready state."</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="State.html#enterConstant(model.operation.Operation)">enterConstant</a></code>&nbsp;in class&nbsp;<code><a href="State.html" title="class in model.state">State</a></code></dd>
+<dd><code><a href="State.html#enterConstant(model.operation.function.Operation)">enterConstant</a></code>&nbsp;in class&nbsp;<code><a href="State.html" title="class in model.state">State</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>op</code> - the operation responsible for the constant entry</dd>
 <dt><span class="returnLabel">Returns:</span></dt>

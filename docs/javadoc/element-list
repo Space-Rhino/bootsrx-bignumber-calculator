@@ -1,7 +1,7 @@
-model.binaryoperations
+model.operation.binary
 model.operation
 model.state
-model.unaryoperations
+model.operation.unary
 number
 presenter
 view
