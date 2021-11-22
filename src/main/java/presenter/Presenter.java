@@ -3,7 +3,6 @@ package presenter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.annotation.processing.Generated;
 import javax.swing.SwingUtilities;
 
 import model.app.Calculator;
