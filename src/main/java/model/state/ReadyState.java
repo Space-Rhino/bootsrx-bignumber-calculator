@@ -1,41 +1,54 @@
 package model.state;
 
-import model.operation.Calculator;
-import model.operation.Operation;
+import model.app.Calculator;
+import model.operation.function.Operation;
+import model.operation.function.AllClear;
+import model.operation.function.Clear;
 
 /**
  * This class is a concrete implementation of the State class which conforms to
  * this calculator's state diagram.
- * 
+ *
  * @author  Shawn Crahen
  * @version 1.0
- * @see State
+ * @see     State
  */
 public class ReadyState extends State {
-
+	
 	/**
 	 * Class constructor.
-	 * 
+	 *
 	 * @param calculator the calculator object associated with this state
 	 */
 	public ReadyState(Calculator calculator) {
 		super(calculator);
 	}
-
+	
 	/**
 	 * Executes the "enter digit" state transition from the "ready state."
 	 */
 	@Override
 	public State enterDigit(String digit) {
-		if (!digit.equals("BKSP")) {
+		boolean isErrorState = (calculator.getDisplay().getValue()).matches(".*[a-z].*");
+
+		// error state: set display to 0 and stay in ready state
+		if (digit.equals("BKSP") && isErrorState) {
+			calculator.clear();
+			return this;
+		}
+		// not backspace
+		else if (!digit.equals("BKSP")) {
 			calculator.resetCalculator();
-		} else if (!calculator.getOperandStack().isEmpty()) {
+		}
+		// operandStack has expired data
+		else if (!calculator.getOperandStack().isEmpty()) {
 			calculator.getOperandStack().pop();
 		}
+
 		calculator.sendDigitToDisplay(digit);
 		return calculator.buildingOperand;
 	}
-
+	
 	/**
 	 * Executes the "enter operation" state transition from the "ready state."
 	 * Handles NumberFormatException when display is an invalid representation of
@@ -48,7 +61,7 @@ public class ReadyState extends State {
 			try {
 				calculator.pushDisplayToOperandStack();
 			} catch (NumberFormatException e) {
-				if (op instanceof model.operation.AllClear || op instanceof model.operation.Clear) {
+				if (op instanceof AllClear || op instanceof Clear) {
 					calculator.pushOperation(op);
 				} else {
 					calculator.updateDisplay("Invalid operation");
@@ -56,19 +69,19 @@ public class ReadyState extends State {
 				return this;
 			}
 		} else {
-			if (op instanceof model.operation.Clear) {
+			if (op instanceof Clear) {
 				calculator.getOperandStack().pop();
 			}
 		}
 		calculator.pushOperation(op);
-
-		if (op.isBinary() || op instanceof model.operation.Clear) {
+		
+		if (op.isBinary() || op instanceof Clear) {
 			return calculator.nextOperand;
 		} else {
 			return this;
 		}
 	}
-
+	
 	/**
 	 * Executes the "enter constant" state transition from the "ready state."
 	 */
@@ -79,5 +92,5 @@ public class ReadyState extends State {
 		calculator.pushDisplayToOperandStack();
 		return this;
 	}
-
+	
 }

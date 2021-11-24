@@ -5,14 +5,14 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.SwingUtilities;
 
-import model.operation.Calculator;
+import model.app.Calculator;
 import view.Gui;
 
 /**
  * This class is the link between the view and model. It implements
  * PropertyChangeListener enabling the class to observe property change events
  * sent from the model. This class is also the driver for the program.
- * 
+ *
  * @author  Shawn Crahen
  * @version 1.0
  * @see     PropertyChangeListener
@@ -22,7 +22,7 @@ public class Presenter implements PropertyChangeListener {
 	/**
 	 * The calculator model.
 	 */
-	private Calculator calculator;
+	private final Calculator calculator;
 	
 	/**
 	 * The calculator view.
@@ -40,7 +40,7 @@ public class Presenter implements PropertyChangeListener {
 	
 	/**
 	 * Passes an operation to the calculator model.
-	 * 
+	 *
 	 * @param opString the operation
 	 */
 	public void enterOperation(String opString) {
@@ -49,7 +49,7 @@ public class Presenter implements PropertyChangeListener {
 	
 	/**
 	 * Passes a digit to the calculator model.
-	 * 
+	 *
 	 * @param digit the digit
 	 */
 	public void enterDigit(String digit) {
@@ -66,19 +66,16 @@ public class Presenter implements PropertyChangeListener {
 	
 	/**
 	 * The driver for this program.
-	 * 
+	 *
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		Presenter presenter = new Presenter();
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			// instantiate GUI in event dispatch thread
-			public void run() {
-				gui = new Gui(presenter);
-				gui.setVisible(true);
-				gui.requestFocusInWindow();
-			}
+		// instantiate GUI in event dispatch thread
+		SwingUtilities.invokeLater(() -> {
+			gui = new Gui(presenter);
+			gui.setVisible(true);
+			gui.requestFocusInWindow();
 		});
 	}
 }

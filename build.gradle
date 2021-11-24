@@ -1,25 +1,63 @@
 plugins {
     id 'java'
+    id 'jacoco'
+    id "org.sonarqube" version "3.3"
 }
-
-group 'org.example'
-version 'dev-1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
 
-    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-junit
-    testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
+    // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.8.1'
 
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testImplementation 'org.assertj:assertj-core:3.21.0'
+
+    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+
+    // https://mvnrepository.com/artifact/org.mockito/mockito-core
+    testImplementation 'org.mockito:mockito-core:4.0.0'
+
+    // https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.0.0'
+
+    // https://mvnrepository.com/artifact/org.jacoco/org.jacoco.ant
+    testImplementation 'org.jacoco:org.jacoco.ant:0.8.7'
+
+    // https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
+    testImplementation 'org.jacoco:org.jacoco.agent:0.8.7'
+
+    // https://mvnrepository.com/artifact/org.jacoco/org.jacoco.report
+    implementation 'org.jacoco:org.jacoco.report:0.8.7'
+
+    // https://mvnrepository.com/artifact/org.jacoco/org.jacoco.core
+    implementation 'org.jacoco:org.jacoco.core:0.8.7'
+
+    // https://mvnrepository.com/artifact/javax.cache/cache-api
+    implementation 'javax.cache:cache-api:1.1.1'
+
+    // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+    compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
 }
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.getRequired()
+        html.getRequired()
+    }
 }

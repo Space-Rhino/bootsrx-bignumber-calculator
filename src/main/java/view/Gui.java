@@ -22,23 +22,22 @@ import presenter.Presenter;
  * @version 1.0
  * @see     JFrame
  */
-@SuppressWarnings("serial")
 public class Gui extends JFrame {
 	
 	/**
 	 * The display panel for this gui. (requirement 3.1.2)
 	 */
-	private DisplayPanel display;
+	private final DisplayPanel display;
 	
 	/**
 	 * The button panel for this gui.
 	 */
-	private ButtonPanel buttonPanel;
+	private final ButtonPanel buttonPanel;
 	
 	/**
 	 * The presenter.
 	 */
-	private Presenter presenter;
+	private final Presenter presenter;
 	
 	/**
 	 * Class constructor.
@@ -114,11 +113,12 @@ public class Gui extends JFrame {
 	 * @see     KeyEvent
 	 */
 	class KeyHandler extends KeyAdapter {
-		
-		/**
+
+    /**
 		 * Handles keyTyped events.
 		 */
-		public void keyTyped(KeyEvent e) {
+    @Override
+    public void keyTyped(KeyEvent e) {
 			char key = e.getKeyChar();
 			switch (key) {
 				case '0':
@@ -150,13 +150,17 @@ public class Gui extends JFrame {
 					// pass operation
 					presenter.enterOperation(String.valueOf(key));
 					break;
+					
+				default:
+					break;
 			}
 		}
-		
-		/**
+
+    /**
 		 * Handles keyPressed events.
 		 */
-		public void keyPressed(KeyEvent e) {
+    @Override
+    public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
 			// handle enter key press
 			if (key == KeyEvent.VK_ENTER) {

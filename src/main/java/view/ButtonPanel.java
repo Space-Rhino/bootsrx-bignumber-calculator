@@ -33,28 +33,17 @@ import javax.swing.JPanel;
  * @version 1.0
  * @see     JPanel
  */
-@SuppressWarnings("serial")
 public class ButtonPanel extends JPanel {
 	
 	/**
 	 * The graphical user interface that contains this.
 	 */
-	private Gui gui;
+	private final Gui gui;
 	
 	/**
-	 * A handler for digit input events.
+	 * A map of buttons - facilitates O(1) access to the buttons.
 	 */
-	private DigitHandler digitHandler;
-	
-	/**
-	 * A handler for operation input events.
-	 */
-	private OperationHandler operationHandler;
-	
-	/**
-	 * A map of buttons - facilitates O(1) access to buttons.
-	 */
-	private Map<String, JButton> buttonMap;
+	private final Map<String, JButton> buttonMap;
 	
 	/**
 	 * The operation button that is active.
@@ -73,8 +62,8 @@ public class ButtonPanel extends JPanel {
 	 */
 	public ButtonPanel(Gui gui) {
 		this.gui = gui;
-		digitHandler = new DigitHandler();
-		operationHandler = new OperationHandler();
+		DigitHandler digitHandler = new DigitHandler();
+		OperationHandler operationHandler = new OperationHandler();
 		buttonMap = new HashMap<>();
 		
 		// set aesthetic for this button panel

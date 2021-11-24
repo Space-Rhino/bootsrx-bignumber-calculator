@@ -1,12 +1,14 @@
 package model.state;
 
-import model.operation.Calculator;
-import model.operation.Operation;
+import model.app.Calculator;
+import model.operation.function.AllClear;
+import model.operation.function.Operation;
+import model.operation.function.Clear;
 
 /**
  * This class is a concrete implementation of the State class which conforms to
  * this calculator's state diagram.
- * 
+ *
  * @author  Shawn Crahen
  * @version 1.0
  * @see State
@@ -15,7 +17,7 @@ public class NextOperationState extends State {
 
 	/**
 	 * Class constructor.
-	 * 
+	 *
 	 * @param calculator the calculator object associated with this state
 	 */
 	public NextOperationState(Calculator calculator) {
@@ -41,14 +43,14 @@ public class NextOperationState extends State {
 	 */
 	@Override
 	public State enterOperation(Operation op) {
-		if (op instanceof model.operation.Clear) {
+		if (op instanceof Clear) {
 			calculator.pushOperation(op);
 			return calculator.nextOperand;
 		}
 		try {
 			calculator.pushDisplayToOperandStack();
 		} catch (NumberFormatException e) {
-			if (op instanceof model.operation.AllClear || op instanceof model.operation.Clear) {
+			if (op instanceof AllClear || op instanceof Clear) {
 				calculator.pushOperation(op);
 			} else {
 				calculator.updateDisplay("Invalid operation");
