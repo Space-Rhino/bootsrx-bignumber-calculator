@@ -1,6 +1,3 @@
 # Unless a later match takes precedence, @Space-Rhino or @sjcrahen
 # will be requested as final reviewer for all pull requests.
 * @Space-Rhino @sjcrahen
-
-# Documentation in docs folder
-/docs/ @ladywrench

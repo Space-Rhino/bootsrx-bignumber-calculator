@@ -1,5 +1,9 @@
 package model.state;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import model.app.Calculator;
 import model.operation.binary.Add;
 import model.operation.function.AllClear;
@@ -11,10 +15,6 @@ import model.operation.unary.Negate;
 import model.operation.unary.Square;
 import model.operation.unary.SquareRoot;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ReadyStateTest {
 
