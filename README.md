@@ -4,7 +4,7 @@ PROJECT NAME	Software Engineering Capstone
 CLIENT          University of Illinois Springfield
 VERSION         1.0.0	
 CLIENT POC	Dr. Roger West	rwest2@uis.edu
-BEGIN DATE	9/13/2021	
+BEGIN DATE	09/13/2021	
 END DATE        12/4/2021
 DURATION        82 days
 </pre>
@@ -14,7 +14,6 @@ DURATION        82 days
 NAME	                TITLE	                       EMAIL
 Shawn Crahen            PM / Design Lead / Coder       scrah2@uis.edu
 Erica Corral	        Documentation Lead / QA        ecorr3@uis.edu
-Haroutioun Kalaidjian	Icon Consultant                hkala4@uis.edu
 Joshua Litwicki	        Testing Lead / Coder	       jlitw2@uis.edu
 </pre>
 
@@ -29,27 +28,35 @@ Joshua Litwicki	        Testing Lead / Coder	       jlitw2@uis.edu
 > with very large and/or very small integral and floating-point operands (up to 100 digits).
 
 ### 2. DELIVERABLES
-* 12/4/2021	The Project Plan
-* 12/4/2021	The Programmer’s Manual
-* 12/4/2021	The User Documentation
-* 12/4/2021	The Final Product
+<pre>
+12/04/2021 - Deliverable #1: The Project Plan
+12/04/2021 - Deliverable #2: The Programmer’s Manual
+12/04/2021 - Deliverable #3: The User Documentation
+12/04/2021 - Deliverable #4: The Final Product
+</pre>
 
 ### 3. ACCEPTANCE CRITERIA
 > The software includes a graphical user interface that displays standard calculator buttons and a 
 > text field that displays the current operand or result of the calculation as applicable. The user 
-> can input operands and operators using GUI buttons or a keyboard (stdin). The result of basic 
+> can input operands and operators using GUI buttons or a keyboard. The result of basic 
 > arithmetic calculations will be accurate using both integral and floating-point operands, 
 > including very large or very small operands. Order of operations will be honored. 
 > Some scientific functions will be implemented.
 
 ### 4. EXCLUSIONS
-> The software will not provide the graphing capability. 
-> The software will not provide the ability to input stored functions.
+<pre>
+The software will not provide the graphing capability.
+The software will not provide the ability to input stored functions.
+</pre>
 
 ### 5. CONSTRAINTS
-> The software will target the Windows environment and will not be compatible with other 
-> operating systems. The software will be developed using the Java language.
+<pre>
+The software will target the Windows environment and will not be compatible with other operating systems. 
+The software will be developed using the Java language.
+</pre>
 
 ### 6. ASSUMPTIONS
-> All team members are available for the duration of the project timeline. 
-> The project scope is approved by Dr. Roger West.		
+<pre>
+All team members are available for the duration of the project timeline. 
+The project scope is approved by Dr. Roger West.
+</pre>

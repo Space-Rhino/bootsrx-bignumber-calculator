@@ -52,5 +52,4 @@ class ButtonPanelTest {
     assertEquals(24, actualButtonPanel.getComponentCount());
     assertEquals(0, actualButtonPanel.getComponentListeners().length);
   }
-
 }

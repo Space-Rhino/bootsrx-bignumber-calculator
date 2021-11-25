@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id "org.sonarqube" version "3.3"
+    id 'org.sonarqube' version '3.3'
 }
 
 repositories {
@@ -52,10 +52,31 @@ dependencies {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+
+    jacoco {
+        excludes = [
+                'presenter/Presenter.class',
+                'view/Gui.class',
+                'view/Gui$KeyHandler.class',
+                'view/ButtonPanel$DigitHandler.class',
+                'view/ButtonPanel$OperationHandler.class',
+        ]
+    }
 }
 
 jacocoTestReport {
     dependsOn test
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'presenter/Presenter.class',
+                    'view/Gui.class',
+                    'view/Gui$KeyHandler.class',
+                    'view/ButtonPanel$DigitHandler.class',
+                    'view/ButtonPanel$OperationHandler.class',
+            ])
+        }))
+    }
     reports {
         xml.getRequired()
         html.getRequired()

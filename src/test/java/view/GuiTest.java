@@ -1,10 +1,10 @@
-package presenter;
+package view;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class PresenterTest {
+class GuiTest {
 
   @BeforeEach
   void setUp() {}
@@ -13,14 +13,11 @@ class PresenterTest {
   void tearDown() {}
 
   @Test
-  void enterOperation() {}
-
-  @Test
   void enterDigit() {}
 
   @Test
-  void propertyChange() {}
+  void enterOperation() {}
 
   @Test
-  void main() {}
+  void updateDisplay() {}
 }
