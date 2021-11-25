@@ -1,13 +1,13 @@
 package view;
 
-import org.junit.jupiter.api.Test;
-
-import java.awt.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.awt.Component;
+import java.awt.Rectangle;
+import org.junit.jupiter.api.Test;
 
 class ButtonPanelTest {
 

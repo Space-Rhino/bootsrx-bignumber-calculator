@@ -1,5 +1,8 @@
 package number;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import driver.TestInput;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -11,9 +14,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestClassOrder;
 import org.junit.jupiter.api.TestMethodOrder;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
 class BigNumberTest {

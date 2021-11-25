@@ -1,15 +1,14 @@
 package model.app;
 
-import org.junit.jupiter.api.Test;
-
-import java.beans.PropertyChangeListener;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+
+import java.beans.PropertyChangeListener;
+import org.junit.jupiter.api.Test;
 
 class DisplayTest {
 

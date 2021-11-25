@@ -12,8 +12,8 @@ public class Pi extends Operation {
 
   /** String representation of pi with 100-digit precision. */
   private static final String PI_100_DIGITS =
-      "3.1415926535897932384626433832795028841971693993751"
-          + "0582097494459230781640628620899862803482534211707";
+      "3.141592653589793238462643383279502884197169399375105"
+          + "82097494459230781640628620899862803482534211707";
 
   /** Class constructor. */
   public Pi() {
