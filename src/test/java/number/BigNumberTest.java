@@ -1,7 +1,11 @@
 package number;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import driver.TestInput;
 import org.hamcrest.Matchers;
@@ -24,7 +28,7 @@ class BigNumberTest {
   @Nested
   @Order(1)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestBigNumberInstantiation {
+  class TestBigNumberObject {
 
     @Test
     @Order(1)
@@ -39,6 +43,70 @@ class BigNumberTest {
     void bigDecimalInvalidDataType_ThrowsNumberFormatException() {
       Assertions.assertThrows(
           NumberFormatException.class, () -> actual = new BigNumber(TestInput.D_INVALID));
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("Case# 1.200: object BigNumber IS same value as other BigNumber")
+    void testEquals() {
+      BigNumber expected = new BigNumber("42");
+      BigNumber actual = new BigNumber("42");
+      BigNumber differentValue = new BigNumber("84");
+
+      assertTrue(actual.equals(expected));
+      assertFalse(expected.equals(differentValue));
+
+      assertFalse(expected.equals(null));
+      assertFalse(expected.equals("String.class"));
+
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(differentValue));
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Case# 1.201: object BigNumber hashcode is same value as other BigNumber")
+    void testHashCode() {
+      BigNumber expected = new BigNumber("42");
+      BigNumber actual = new BigNumber("42");
+      BigNumber differentValue = new BigNumber("42.00000");
+
+      assertTrue(expected.equals(expected));
+      assertTrue(expected.hashCode() == actual.hashCode());
+      assertFalse(expected.hashCode() == differentValue.hashCode());
+
+      assertFalse(expected.equals(null));
+      assertFalse(expected.hashCode() == 0);
+
+      assertEquals(expected.hashCode(), actual.hashCode());
+      assertNotEquals(expected.hashCode(), differentValue.hashCode());
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("Case# 1.202: object BigNumber compareTo is LESS THAN other BigNumber")
+    void testCompareTo_LessThan() {
+      int expected = -1;
+      int actual = new BigNumber("44").compareTo(new BigNumber("88"));
+      assertEquals(expected, actual);
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("Case# 1.203: object BigNumber compareTo is EQUAL TO other BigNumber")
+    void testCompareTo_EqualTo() {
+      int expected = 0;
+      int actual = new BigNumber("44").compareTo(new BigNumber("44"));
+      assertEquals(expected, actual);
+    }
+
+    @Test
+    @Order(7)
+    @DisplayName("Case# 1.204: object BigNumber compareTo is GREATER THAN other BigNumber")
+    void testCompareTo_GreaterThan() {
+      int expected = 1;
+      int actual = new BigNumber("88").compareTo(new BigNumber("44"));
+      assertEquals(expected, actual);
     }
   }
 
