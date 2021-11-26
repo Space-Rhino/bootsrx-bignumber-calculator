@@ -1,9 +1,10 @@
 package model.app;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 import model.operation.binary.Add;
 import model.operation.binary.Divide;
 import model.operation.binary.Multiply;
@@ -38,10 +39,10 @@ import number.Number;
 public class Calculator {
 
   /** A stack to store operands of type Number. */
-  private final Stack<Number> operandStack;
+  private final Deque<Number> operandStack;
 
   /** A stack to store arithmetic operations. */
-  private final Stack<Operation> operationStack;
+  private final Deque<Operation> operationStack;
 
   /** The display register for this Calculator. */
   private final Display display;
@@ -50,28 +51,32 @@ public class Calculator {
   private final Map<String, Operation> operationMap;
 
   /** An instance of ReadyState. */
-  public State ready;
+  public final State ready;
 
   /** An instance of BuildingOperandState. */
-  public State buildingOperand;
+  public final State buildingOperand;
 
   /** An instance of NextOperandState. */
-  public State nextOperand;
+  public final State nextOperand;
 
   /** An instance of NextOperationState. */
-  public State nextOperation;
+  public final State nextOperation;
 
   /** The state of this calculator. */
   private State state;
 
   /** Class constructor. */
   public Calculator() {
-    operandStack = new Stack<>();
-    operationStack = new Stack<>();
+    operandStack = new ArrayDeque<>();
+    operationStack = new ArrayDeque<>();
     display = new Display("0");
     operationMap = new HashMap<>();
     initializeOperationMap();
-    initializeStates();
+    // initializeStates();
+    ready = new ReadyState(this);
+    nextOperand = new NextOperandState(this);
+    nextOperation = new NextOperationState(this);
+    buildingOperand = new BuildingOperandState(this);
     setState(ready);
   }
 
@@ -80,7 +85,7 @@ public class Calculator {
    *
    * @return the operandStack
    */
-  public Stack<Number> getOperandStack() {
+  public Deque<Number> getOperandStack() {
     return operandStack;
   }
 
@@ -89,7 +94,7 @@ public class Calculator {
    *
    * @return the operationStack
    */
-  public Stack<Operation> getOperationStack() {
+  public Deque<Operation> getOperationStack() {
     return operationStack;
   }
 
@@ -256,13 +261,13 @@ public class Calculator {
     display.reset();
   }
 
-  /** Creates instances of each state in the state hierarchy. */
-  private void initializeStates() {
-    ready = new ReadyState(this);
-    nextOperand = new NextOperandState(this);
-    nextOperation = new NextOperationState(this);
-    buildingOperand = new BuildingOperandState(this);
-  }
+  // /** Creates instances of each state in the state hierarchy. */
+  // private void initializeStates() {
+  // ready = new ReadyState(this);
+  // nextOperand = new NextOperandState(this);
+  // nextOperation = new NextOperationState(this);
+  // buildingOperand = new BuildingOperandState(this);
+  // }
 
   /** Builds a map of supported operations to facilitate O(1) access to operations. */
   private void initializeOperationMap() {

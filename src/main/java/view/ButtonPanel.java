@@ -34,6 +34,8 @@ import javax.swing.JPanel;
  */
 public class ButtonPanel extends JPanel {
 
+  private static final long serialVersionUID = 4874287483294177736L;
+
   /** The graphical user interface that contains this. */
   private final Gui gui;
 
@@ -185,11 +187,8 @@ public class ButtonPanel extends JPanel {
         activeOperationButton.setBackground(Color.gray);
       }
 
-      if ((action.equals("NEG")
-              || action.equals("INV")
-              || action.equals("SQR")
-              || action.equals("SQRT"))
-          && activeOperationButton != null
+      if ((action.equals("NEG") || action.equals("INV") || action.equals("SQR")
+          || action.equals("SQRT")) && activeOperationButton != null
           && (!Character.isDigit(lastClickedButton.getActionCommand().charAt(0))
               && lastClickedButton.getActionCommand().charAt(0) != 'P')) {
         activeOperationButton.setBackground(Color.gray);

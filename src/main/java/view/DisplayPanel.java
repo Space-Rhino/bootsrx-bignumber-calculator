@@ -17,6 +17,8 @@ import javax.swing.JTextField;
  */
 public class DisplayPanel extends JPanel {
 
+  private static final long serialVersionUID = 3897471859351034305L;
+
   /** The text field for this display. */
   private final JTextField displayField;
 
