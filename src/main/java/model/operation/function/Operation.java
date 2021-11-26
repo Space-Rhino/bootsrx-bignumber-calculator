@@ -1,6 +1,6 @@
 package model.operation.function;
 
-import java.util.Stack;
+import java.util.Deque;
 import model.app.Calculator;
 import number.Number;
 
@@ -28,7 +28,7 @@ public abstract class Operation {
   protected Calculator calculator;
 
   /** The stack of operands. */
-  protected Stack<Number> stack;
+  protected Deque<Number> stack;
 
   /**
    * Returns the precedence of this operation.

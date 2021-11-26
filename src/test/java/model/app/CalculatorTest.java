@@ -2,15 +2,14 @@ package model.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Stack;
+import java.util.Deque;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import model.operation.binary.Add;
 import model.operation.function.AllClear;
 import model.operation.function.Clear;
 import model.operation.function.Pi;
 import number.Number;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
@@ -39,7 +38,7 @@ class CalculatorTest {
 
     calculator = new Calculator();
     calculator.enterOperation("PI");
-    Stack<Number> operandStack = calculator.getOperandStack();
+    Deque<Number> operandStack = calculator.getOperandStack();
     assertEquals(1, operandStack.size());
     assertTrue(calculator.getOperationStack().isEmpty());
     assertEquals(
@@ -49,7 +48,7 @@ class CalculatorTest {
     assertEquals(
         "3.141592653589793238462643383279502884197169399375105"
             + "82097494459230781640628620899862803482534211707",
-        operandStack.get(0).toString());
+        operandStack.getFirst().toString());
   }
 
   @Test
@@ -72,9 +71,9 @@ class CalculatorTest {
   void testPushDisplayToOperandStack() throws NumberFormatException {
     Calculator calculator = new Calculator();
     calculator.pushDisplayToOperandStack();
-    Stack<Number> operandStack = calculator.getOperandStack();
+    Deque<Number> operandStack = calculator.getOperandStack();
     assertEquals(1, operandStack.size());
-    assertEquals("0", operandStack.get(0).toString());
+    assertEquals("0", operandStack.getFirst().toString());
   }
 
   @Test

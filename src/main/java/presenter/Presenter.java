@@ -37,12 +37,11 @@ public class Presenter implements PropertyChangeListener {
   public static void main(String[] args) {
     Presenter presenter = new Presenter();
     // instantiate GUI in event dispatch thread
-    SwingUtilities.invokeLater(
-        () -> {
-          gui = new Gui(presenter);
-          gui.setVisible(true);
-          gui.requestFocusInWindow();
-        });
+    SwingUtilities.invokeLater(() -> {
+      gui = new Gui(presenter);
+      gui.setVisible(true);
+      gui.requestFocusInWindow();
+    });
   }
 
   /**
