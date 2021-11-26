@@ -190,11 +190,9 @@ public class Calculator {
    * @param op the new operation
    */
   public void replaceOperation(Operation op) {
-    if (!operationStack.isEmpty()) {
-      // do not pop operation if operation is the Clear operation
-      if (!(op instanceof Clear)) {
-        operationStack.pop();
-      }
+    // do not pop operation if operation is the Clear operation
+    if (!operationStack.isEmpty() && !(op instanceof Clear)) {
+      operationStack.pop();
     }
     pushOperation(op);
   }

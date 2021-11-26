@@ -1,7 +1,12 @@
 package number;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import driver.TestInput;
 import org.hamcrest.Matchers;
@@ -20,11 +25,12 @@ class BigNumberTest {
 
   private static BigNumber expected;
   private static BigNumber actual;
+  private static BigNumber nullBigNumber;
 
   @Nested
   @Order(1)
   @TestMethodOrder(OrderAnnotation.class)
-  class TestBigNumberInstantiation {
+  class TestBigNumberObject {
 
     @Test
     @Order(1)
@@ -39,6 +45,80 @@ class BigNumberTest {
     void bigDecimalInvalidDataType_ThrowsNumberFormatException() {
       Assertions.assertThrows(
           NumberFormatException.class, () -> actual = new BigNumber(TestInput.D_INVALID));
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("Case# 1.200: object BigNumber IS same value as other BigNumber")
+    void testEquals() {
+      BigNumber expected = new BigNumber("42");
+      BigNumber actual = new BigNumber("42");
+      BigNumber differentValue = new BigNumber("84");
+      String differentClass = "String.class";
+
+      //noinspection SimplifiableAssertion, EqualsWithItself
+      assertTrue(expected.equals(expected));
+
+      //noinspection SimplifiableAssertion
+      assertTrue(actual.equals(expected));
+
+      // noinspection SimplifiableAssertion
+      assertFalse(expected.equals(nullBigNumber));
+
+      //noinspection SimplifiableAssertion
+      assertFalse(expected.equals(differentValue));
+
+      //noinspection SimplifiableAssertion, EqualsBetweenInconvertibleTypes
+      assertFalse(expected.equals(differentClass));
+
+      assertThat(expected, Matchers.comparesEqualTo(actual));
+      assertThat(expected, Matchers.not(differentValue));
+    }
+
+    @Test
+    @Order(4)
+    @DisplayName("Case# 1.201: object BigNumber hashcode is same value as other BigNumber")
+    void testHashCode() {
+      BigNumber expected = new BigNumber("42");
+      BigNumber actual = new BigNumber("42");
+      BigNumber differentValue = new BigNumber("42.00000");
+
+      assertThat(expected.equals(actual)).isTrue();
+      assertThat(expected.hashCode()).hasSameHashCodeAs(actual.hashCode());
+      assertThat(expected.hashCode()).doesNotHaveSameHashCodeAs(differentValue.hashCode());
+
+      assertThat(expected.equals(nullBigNumber)).isFalse();
+      assertThat(expected.hashCode()).isNotZero();
+
+      assertEquals(expected.hashCode(), actual.hashCode());
+      assertNotEquals(expected.hashCode(), differentValue.hashCode());
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("Case# 1.202: object BigNumber compareTo is LESS THAN other BigNumber")
+    void testCompareTo_LessThan() {
+      int expected = -1;
+      int actual = new BigNumber("44").compareTo(new BigNumber("88"));
+      assertEquals(expected, actual);
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("Case# 1.203: object BigNumber compareTo is EQUAL TO other BigNumber")
+    void testCompareTo_EqualTo() {
+      int expected = 0;
+      int actual = new BigNumber("44").compareTo(new BigNumber("44"));
+      assertEquals(expected, actual);
+    }
+
+    @Test
+    @Order(7)
+    @DisplayName("Case# 1.204: object BigNumber compareTo is GREATER THAN other BigNumber")
+    void testCompareTo_GreaterThan() {
+      int expected = 1;
+      int actual = new BigNumber("88").compareTo(new BigNumber("44"));
+      assertEquals(expected, actual);
     }
   }
 
@@ -342,11 +422,11 @@ class BigNumberTest {
     void bigNumber_DivideByZero() {
       assertThrows(
           ArithmeticException.class,
-          () -> actual = new BigNumber(TestInput.IPX.divide(TestInput.ZERO).toString()));
+          () -> actual = (BigNumber) TestInput.IPX.divide(TestInput.ZERO));
 
       assertThrows(
           ArithmeticException.class,
-          () -> actual = new BigNumber(TestInput.INX.divide(TestInput.ZERO).toString()));
+          () -> actual = (BigNumber) TestInput.INX.divide(TestInput.ZERO));
     }
 
     @Test
@@ -356,11 +436,11 @@ class BigNumberTest {
     void bigDecimal_DivideByZero() {
       assertThrows(
           ArithmeticException.class,
-          () -> actual = new BigNumber(TestInput.DPX.divide(TestInput.ZERO).toString()));
+          () -> actual = (BigNumber) TestInput.DPX.divide(TestInput.ZERO));
 
       assertThrows(
           ArithmeticException.class,
-          () -> actual = new BigNumber(TestInput.DNX.divide(TestInput.ZERO).toString()));
+          () -> actual = (BigNumber) TestInput.DNX.divide(TestInput.ZERO));
     }
   }
 
@@ -430,8 +510,7 @@ class BigNumberTest {
     @DisplayName("Case# 1.036: Integer one negative 50 digit operand | throws ArithmeticException")
     void bigInteger_OneNegativeOperand() {
       assertThrows(
-          ArithmeticException.class,
-          () -> actual = new BigNumber(TestInput.INX.squareRoot().toString()));
+          ArithmeticException.class, () -> actual = (BigNumber) TestInput.INX.squareRoot());
     }
 
     @Test
@@ -449,8 +528,7 @@ class BigNumberTest {
     @DisplayName("Case# 1.038: Decimal one negative 50 digit operand | throws ArithmeticException")
     void bigDecimal_OneNegativeOperand() {
       assertThrows(
-          ArithmeticException.class,
-          () -> actual = new BigNumber(TestInput.DNX.squareRoot().toString()));
+          ArithmeticException.class, () -> actual = (BigNumber) TestInput.DNX.squareRoot());
     }
   }
 

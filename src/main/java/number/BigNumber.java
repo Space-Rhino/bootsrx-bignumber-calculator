@@ -146,7 +146,10 @@ public class BigNumber implements Number, Comparable<BigNumber> {
    */
   @Override
   public int hashCode() {
-    return number != null ? number.hashCode() : 0;
+    if (number != null) {
+      return number.hashCode();
+    }
+    return 0;
   }
 
   /**

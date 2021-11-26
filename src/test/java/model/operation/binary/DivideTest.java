@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import driver.TestInput;
+import model.app.Calculator;
 import number.BigNumber;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +18,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestMethodOrder(OrderAnnotation.class)
 class DivideTest {
 
+  private static final String DIVIDE_BY_ZERO_MESSAGE = "Cannot divide by zero";
+  private final Calculator calculator = new Calculator();
   private final Divide divide = new Divide();
   private BigNumber expected;
   private BigNumber actual;
@@ -135,26 +138,24 @@ class DivideTest {
   void bigNumber_DivideByZero() {
     assertThrows(
         ArithmeticException.class,
-        () ->
-            actual = new BigNumber(divide.executeBinary(TestInput.IPX, TestInput.ZERO).toString()));
+        () -> actual = (BigNumber) divide.executeBinary(TestInput.IPX, TestInput.ZERO));
+
     assertThrows(
         ArithmeticException.class,
-        () ->
-            actual = new BigNumber(divide.executeBinary(TestInput.INX, TestInput.ZERO).toString()));
+        () -> actual = (BigNumber) divide.executeBinary(TestInput.INX, TestInput.ZERO));
   }
 
   @Test
   @Order(12)
   @DisplayName(
-      "Case# 1.082: Decimal pos & neg 50 digit operands divide by zero\n | throws ArithmeticException")
+      "Case# 1.082: Decimal pos & neg 50 digit operands divide by zero | throws ArithmeticException")
   void bigDecimal_DivideByZero() {
     assertThrows(
         ArithmeticException.class,
-        () ->
-            actual = new BigNumber(divide.executeBinary(TestInput.DPX, TestInput.ZERO).toString()));
+        () -> actual = (BigNumber) divide.executeBinary(TestInput.DPX, TestInput.ZERO));
+
     assertThrows(
         ArithmeticException.class,
-        () ->
-            actual = new BigNumber(divide.executeBinary(TestInput.DNX, TestInput.ZERO).toString()));
+        () -> actual = (BigNumber) divide.executeBinary(TestInput.DNX, TestInput.ZERO));
   }
 }
