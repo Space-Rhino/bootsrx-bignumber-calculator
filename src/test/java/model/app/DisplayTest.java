@@ -19,7 +19,7 @@ class DisplayTest {
   private Display actual;
 
   @Test
-  @DisplayName("")
+  @DisplayName("case# 2.200: check display constructor")
   void testDisplayConstructor() {
     actual = new Display("0");
 
@@ -28,6 +28,7 @@ class DisplayTest {
   }
 
   @Test
+  @DisplayName("case# 2.201: confirm setValue and getValue function")
   void testSetValueAndGetValue() {
     actual = new Display("111");
 
@@ -44,6 +45,7 @@ class DisplayTest {
   }
 
   @Test
+  @DisplayName("case# 2.202: addDigit staying in given constraints")
   void testAddDigit_NoBranches() {
     PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
     doNothing().when(propertyChangeListener).propertyChange((any()));
@@ -67,6 +69,7 @@ class DisplayTest {
   }
 
   @Test
+  @DisplayName("case# 2.203: confirm display does not add more than 100 digits to a number")
   void testAddDigit_PreventMaxLength() {
     PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
     doNothing().when(propertyChangeListener).propertyChange((any()));
@@ -114,6 +117,7 @@ class DisplayTest {
   }
 
   @Test
+  @DisplayName("case# 2.204: confirm display does not add more than one decimal to a number")
   void testAddDigit_PreventMultipleDecimals() {
     PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
     doNothing().when(propertyChangeListener).propertyChange((any()));
@@ -142,6 +146,7 @@ class DisplayTest {
   }
 
   @Test
+  @DisplayName("case# 2.205: confirm display does not add leading zeros to a number")
   void testAddDigit_DeleteLeadingZeros() {
     PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
     doNothing().when(propertyChangeListener).propertyChange((any()));
@@ -169,6 +174,7 @@ class DisplayTest {
   }
 
   @Test
+  @DisplayName("case# 2.206: confirm display value of number is correct after deleting a digit")
   void testDeleteDigit() {
     PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
     doNothing().when(propertyChangeListener).propertyChange((any()));
@@ -201,6 +207,7 @@ class DisplayTest {
   }
 
   @Test
+  @DisplayName("case# 2.207: confirm clear display with propertyChangeListener works as intended")
   void testClear_CallSetValue() {
     PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
     doNothing().when(propertyChangeListener).propertyChange(any());
@@ -216,6 +223,7 @@ class DisplayTest {
   }
 
   @Test
+  @DisplayName("case# 2.208: confirm clear display with by setting directly works as intended")
   void testReset_SetDirectly() {
     actual = new Display("12345");
     expected = "0";
@@ -225,6 +233,7 @@ class DisplayTest {
   }
 
   @Test
+  @DisplayName("case# 2.209: confirm testAddPropertyChangeListener works as intended")
   void testAddPropertyChangeListener() {
     actual = new Display("12345");
     expected = "12345";
