@@ -14,11 +14,13 @@ import model.operation.unary.Inverse;
 import model.operation.unary.Negate;
 import model.operation.unary.Square;
 import model.operation.unary.SquareRoot;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class NextOperationStateTest {
 
   @Test
+  @DisplayName("Case# 2.110: verify calculator object associated with this instance of states")
   void testConstructor() {
     Calculator calculator = new Calculator();
     State state = calculator.ready;
@@ -58,132 +60,77 @@ class NextOperationStateTest {
   }
 
   @Test
+  @DisplayName("Case# 2.111: check the enterDigit state transition from the nextOperandState")
   void testEnterDigit() {
     Calculator calculator = new Calculator();
-    assertSame(calculator.buildingOperand, (new NextOperationState(calculator)).enterDigit("8"));
-  }
-
-  @Test
-  void testEnterDigit2() {
-    Calculator calculator = new Calculator();
     assertSame(calculator.buildingOperand, (new NextOperationState(calculator)).enterDigit("4"));
-  }
 
-  @Test
-  void testEnterDigit3() {
-    Calculator calculator = new Calculator();
+    calculator = new Calculator();
+    assertSame(calculator.buildingOperand, (new NextOperationState(calculator)).enterDigit("2"));
+
+    calculator = new Calculator();
     calculator.updateDisplay("42");
     assertSame(calculator.buildingOperand, (new NextOperationState(calculator)).enterDigit("BKSP"));
   }
 
   @Test
+  @DisplayName("Case# 2.112: check the enterOperation state transition from the nextOperandState")
   void testEnterOperation() {
     Calculator calculator = new Calculator();
     NextOperationState nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.nextOperand, nextOperationState.enterOperation(new Add()));
-  }
 
-  @Test
-  void testEnterOperation2() {
-    Calculator calculator = new Calculator();
-    NextOperationState nextOperationState = new NextOperationState(calculator);
+    calculator = new Calculator();
+    nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.nextOperand, nextOperationState.enterOperation(new Clear()));
-  }
 
-  @Test
-  void testEnterOperation3() {
-    Calculator calculator = new Calculator();
-    NextOperationState nextOperationState = new NextOperationState(calculator);
+    calculator = new Calculator();
+    nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.ready, nextOperationState.enterOperation(new AllClear()));
-  }
 
-  @Test
-  void testEnterOperation4() {
-    Calculator calculator = new Calculator();
-    NextOperationState nextOperationState = new NextOperationState(calculator);
+    calculator = new Calculator();
+    nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.ready, nextOperationState.enterOperation(new Equals()));
-  }
 
-  @Test
-  void testEnterOperation5() {
-    Calculator calculator = new Calculator();
-    NextOperationState nextOperationState = new NextOperationState(calculator);
+    calculator = new Calculator();
+    nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.ready, nextOperationState.enterOperation(new Pi()));
-  }
 
-  @Test
-  void testEnterOperation6() {
-    Calculator calculator = new Calculator();
-    NextOperationState nextOperationState = new NextOperationState(calculator);
+    calculator = new Calculator();
+    nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.ready, nextOperationState.enterOperation(new Inverse()));
-  }
 
-  @Test
-  void testEnterOperation7() {
-    Calculator calculator = new Calculator();
+    calculator = new Calculator();
     calculator.updateDisplay("42");
-    NextOperationState nextOperationState = new NextOperationState(calculator);
+    nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.ready, nextOperationState.enterOperation(new Inverse()));
-  }
 
-  @Test
-  void testEnterOperation8() {
-    Calculator calculator = new Calculator();
-    calculator.updateDisplay(".");
-    NextOperationState nextOperationState = new NextOperationState(calculator);
-    assertSame(nextOperationState, nextOperationState.enterOperation(new Inverse()));
-  }
-
-  @Test
-  void testEnterOperation9() {
-    Calculator calculator = new Calculator();
-    calculator.updateDisplay(".");
-    NextOperationState nextOperationState = new NextOperationState(calculator);
-    assertSame(nextOperationState, nextOperationState.enterOperation(new AllClear()));
-  }
-
-  @Test
-  void testEnterOperation10() {
-    Calculator calculator = new Calculator();
-    NextOperationState nextOperationState = new NextOperationState(calculator);
+    calculator = new Calculator();
+    nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.ready, nextOperationState.enterOperation(new Negate()));
-  }
 
-  @Test
-  void testEnterOperation11() {
-    Calculator calculator = new Calculator();
-    NextOperationState nextOperationState = new NextOperationState(calculator);
+    calculator = new Calculator();
+    nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.ready, nextOperationState.enterOperation(new Square()));
-  }
 
-  @Test
-  void testEnterOperation12() {
-    Calculator calculator = new Calculator();
-    NextOperationState nextOperationState = new NextOperationState(calculator);
+    calculator = new Calculator();
+    nextOperationState = new NextOperationState(calculator);
     assertSame(calculator.ready, nextOperationState.enterOperation(new SquareRoot()));
   }
 
   @Test
+  @DisplayName("Case# 2.113: check the enterConstant state transition from the nextOperandState")
   void testEnterConstant() {
     NextOperationState nextOperationState = new NextOperationState(new Calculator());
     assertSame(nextOperationState, nextOperationState.enterConstant(new AllClear()));
-  }
 
-  @Test
-  void testEnterConstant2() {
-    NextOperationState nextOperationState = new NextOperationState(new Calculator());
+    nextOperationState = new NextOperationState(new Calculator());
     assertSame(nextOperationState, nextOperationState.enterConstant(new Clear()));
-  }
 
-  @Test
-  void testEnterConstant3() {
-    NextOperationState nextOperationState = new NextOperationState(new Calculator());
+    nextOperationState = new NextOperationState(new Calculator());
     assertSame(nextOperationState, nextOperationState.enterConstant(new Equals()));
-  }
 
-  @Test
-  void testEnterConstant4() {
-    NextOperationState nextOperationState = new NextOperationState(new Calculator());
+    nextOperationState = new NextOperationState(new Calculator());
     assertSame(nextOperationState, nextOperationState.enterConstant(new Pi()));
   }
 }

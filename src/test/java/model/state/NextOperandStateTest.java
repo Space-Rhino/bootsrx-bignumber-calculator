@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 class NextOperandStateTest {
 
   @Test
-  @DisplayName("Case# 2.100: calculator object associated with this instance of states")
+  @DisplayName("Case# 2.100: verify calculator object associated with this instance of states")
   void testConstructor() {
     Calculator calculator = new Calculator();
     State state = calculator.ready;
@@ -56,7 +56,7 @@ class NextOperandStateTest {
   }
 
   @Test
-  @DisplayName("Case# 2.101: calculator object is same instance as buildingOperand")
+  @DisplayName("Case# 2.101: check the enterDigit state transition from the nextOperandState")
   void testEnterDigit() {
     Calculator calculator = new Calculator();
     assertSame(calculator.buildingOperand, (new NextOperandState(calculator)).enterDigit("8"));
@@ -69,7 +69,7 @@ class NextOperandStateTest {
   }
 
   @Test
-  @DisplayName("Case# 2.102: nextOperandState.enterOperation is same instance as nextOperandState")
+  @DisplayName("Case# 2.102: check the enterOperation state transition from the nextOperandState")
   void testEnterOperation() {
 
     NextOperandState nextOperandState = new NextOperandState(new Calculator());
@@ -92,8 +92,7 @@ class NextOperandStateTest {
   }
 
   @Test
-  @DisplayName(
-      "Case# 2.103: nextOperandState.enterConstant is same instance as calculator.nextOperation")
+  @DisplayName("Case# 2.103: check the enterConstant state transition from the nextOperandState")
   void testEnterConstant() {
     Calculator calculator = new Calculator();
     NextOperandState nextOperandState = new NextOperandState(calculator);
