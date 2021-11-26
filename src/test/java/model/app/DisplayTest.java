@@ -9,6 +9,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.beans.PropertyChangeListener;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DisplayTest {
@@ -18,6 +19,7 @@ class DisplayTest {
   private Display actual;
 
   @Test
+  @DisplayName("")
   void testDisplayConstructor() {
     actual = new Display("0");
 

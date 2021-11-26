@@ -10,11 +10,13 @@ import model.operation.function.AllClear;
 import model.operation.function.Clear;
 import model.operation.function.Equals;
 import model.operation.function.Pi;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class NextOperandStateTest {
 
   @Test
+  @DisplayName("Case# 2.100: calculator object associated with this instance of states")
   void testConstructor() {
     Calculator calculator = new Calculator();
     State state = calculator.ready;
@@ -46,6 +48,7 @@ class NextOperandStateTest {
     assertSame(state6, state7);
     assertSame(calculator1, (state1).calculator);
     assertSame(calculator1, (state7).calculator);
+
     assertEquals("0", calculator1.getDisplay().getValue());
     assertSame(calculator1, (state5).calculator);
     assertSame(calculator1, (state3).calculator);
@@ -53,69 +56,59 @@ class NextOperandStateTest {
   }
 
   @Test
+  @DisplayName("Case# 2.101: calculator object is same instance as buildingOperand")
   void testEnterDigit() {
     Calculator calculator = new Calculator();
     assertSame(calculator.buildingOperand, (new NextOperandState(calculator)).enterDigit("8"));
+
+    calculator = new Calculator();
+    assertSame(calculator.buildingOperand, (new NextOperandState(calculator)).enterDigit("5"));
+
+    calculator = new Calculator();
+    assertSame(calculator.buildingOperand, (new NextOperandState(calculator)).enterDigit("3"));
   }
 
   @Test
+  @DisplayName("Case# 2.102: nextOperandState.enterOperation is same instance as nextOperandState")
   void testEnterOperation() {
+
     NextOperandState nextOperandState = new NextOperandState(new Calculator());
     assertSame(nextOperandState, nextOperandState.enterOperation(new Add()));
-  }
 
-  @Test
-  void testEnterOperation2() {
-    NextOperandState nextOperandState = new NextOperandState(new Calculator());
+    nextOperandState = new NextOperandState(new Calculator());
     assertSame(nextOperandState, nextOperandState.enterOperation(new Clear()));
-  }
 
-  @Test
-  void testEnterOperation3() {
     Calculator calculator = new Calculator();
-    NextOperandState nextOperandState = new NextOperandState(calculator);
+    nextOperandState = new NextOperandState(calculator);
     assertSame(calculator.ready, nextOperandState.enterOperation(new AllClear()));
-  }
 
-  @Test
-  void testEnterOperation4() {
-    Calculator calculator = new Calculator();
-    NextOperandState nextOperandState = new NextOperandState(calculator);
+    calculator = new Calculator();
+    nextOperandState = new NextOperandState(calculator);
     assertSame(calculator.ready, nextOperandState.enterOperation(new Equals()));
-  }
 
-  @Test
-  void testEnterOperation5() {
-    Calculator calculator = new Calculator();
-    NextOperandState nextOperandState = new NextOperandState(calculator);
+    calculator = new Calculator();
+    nextOperandState = new NextOperandState(calculator);
     assertSame(calculator.ready, nextOperandState.enterOperation(new Pi()));
   }
 
   @Test
+  @DisplayName(
+      "Case# 2.103: nextOperandState.enterConstant is same instance as calculator.nextOperation")
   void testEnterConstant() {
     Calculator calculator = new Calculator();
     NextOperandState nextOperandState = new NextOperandState(calculator);
     assertSame(calculator.nextOperation, nextOperandState.enterConstant(new AllClear()));
-  }
 
-  @Test
-  void testEnterConstant2() {
-    Calculator calculator = new Calculator();
-    NextOperandState nextOperandState = new NextOperandState(calculator);
+    calculator = new Calculator();
+    nextOperandState = new NextOperandState(calculator);
     assertSame(calculator.nextOperation, nextOperandState.enterConstant(new Clear()));
-  }
 
-  @Test
-  void testEnterConstant3() {
-    Calculator calculator = new Calculator();
-    NextOperandState nextOperandState = new NextOperandState(calculator);
-    assertSame(calculator.nextOperation, nextOperandState.enterConstant(new Equals()));
-  }
-
-  @Test
-  void testEnterConstant4() {
-    Calculator calculator = new Calculator();
-    NextOperandState nextOperandState = new NextOperandState(calculator);
+    calculator = new Calculator();
+    nextOperandState = new NextOperandState(calculator);
     assertSame(calculator.nextOperation, nextOperandState.enterConstant(new Pi()));
+
+    calculator = new Calculator();
+    nextOperandState = new NextOperandState(calculator);
+    assertSame(calculator.nextOperation, nextOperandState.enterConstant(new Equals()));
   }
 }
