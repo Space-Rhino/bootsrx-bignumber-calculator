@@ -60,7 +60,7 @@ class NextOperationStateTest {
   }
 
   @Test
-  @DisplayName("Case# 2.111: check the enterDigit state transition from the nextOperandState")
+  @DisplayName("Case# 2.111: check the enterDigit state transition from the nextOperationSate")
   void testEnterDigit() {
     Calculator calculator = new Calculator();
     assertSame(calculator.buildingOperand, (new NextOperationState(calculator)).enterDigit("4"));
