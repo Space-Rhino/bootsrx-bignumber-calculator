@@ -34,8 +34,6 @@ import javax.swing.JPanel;
  */
 public class ButtonPanel extends JPanel {
 
-  private static final long serialVersionUID = 4874287483294177736L;
-
   /** The graphical user interface that contains this. */
   private final Gui gui;
 

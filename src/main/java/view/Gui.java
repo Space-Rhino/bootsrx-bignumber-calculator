@@ -23,8 +23,6 @@ import presenter.Presenter;
  */
 public class Gui extends JFrame {
 
-  private static final long serialVersionUID = -1060785532936442692L;
-
   /** The display panel for this gui. (requirement 3.1.2) */
   private final DisplayPanel display;
 
@@ -32,7 +30,7 @@ public class Gui extends JFrame {
   private final ButtonPanel buttonPanel;
 
   /** The presenter. */
-  private final Presenter presenter;
+  private final transient Presenter presenter;
 
   /**
    * Class constructor.

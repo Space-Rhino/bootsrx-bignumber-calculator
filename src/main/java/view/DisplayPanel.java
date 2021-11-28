@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  * This class represents the display panel of a calculator. (requirement 3.1.2)
@@ -16,8 +17,6 @@ import javax.swing.JTextField;
  * @see JPanel
  */
 public class DisplayPanel extends JPanel {
-
-  private static final long serialVersionUID = 3897471859351034305L;
 
   /** The text field for this display. */
   private final JTextField displayField;
@@ -34,7 +33,7 @@ public class DisplayPanel extends JPanel {
     displayField.setFont(new Font("SANS_SERIF", Font.BOLD, 16));
     displayField.setEditable(false);
     displayField.setBackground(new Color(225, 240, 236));
-    displayField.setHorizontalAlignment(JTextField.RIGHT);
+    displayField.setHorizontalAlignment(SwingConstants.RIGHT);
     displayField.setPreferredSize(new Dimension(910, 50));
 
     add(displayField);
