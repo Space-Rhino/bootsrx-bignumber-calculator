@@ -24,7 +24,7 @@ public class BigNumber implements Number, Comparable<BigNumber> {
   private static final MathContext DEFAULT_CONTEXT = new MathContext(100);
 
   /** The BigDecimal representation of this BigNumber. */
-  protected BigDecimal number;
+  protected final BigDecimal number;
 
   /**
    * Class constructor specifying a String number that is the basis for this BigNumber. The default

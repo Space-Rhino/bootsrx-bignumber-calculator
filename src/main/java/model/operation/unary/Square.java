@@ -19,6 +19,6 @@ public class Square extends UnaryOperation {
    */
   @Override
   public Number executeUnary(Number number) {
-    return number.multiply(number);
+    return number.square();
   }
 }
