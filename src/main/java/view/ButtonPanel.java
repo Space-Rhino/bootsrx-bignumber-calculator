@@ -187,8 +187,11 @@ public class ButtonPanel extends JPanel {
         activeOperationButton.setBackground(Color.gray);
       }
 
-      if ((action.equals("NEG") || action.equals("INV") || action.equals("SQR")
-          || action.equals("SQRT")) && activeOperationButton != null
+      if ((action.equals("NEG")
+              || action.equals("INV")
+              || action.equals("SQR")
+              || action.equals("SQRT"))
+          && activeOperationButton != null
           && (!Character.isDigit(lastClickedButton.getActionCommand().charAt(0))
               && lastClickedButton.getActionCommand().charAt(0) != 'P')) {
         activeOperationButton.setBackground(Color.gray);

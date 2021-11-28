@@ -58,14 +58,36 @@ public class Gui extends JFrame {
 
     // build DisplayPanel
     display = new DisplayPanel();
-    GridBagConstraints gbc = new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.EAST,
-        GridBagConstraints.NONE, new Insets(10, 10, 10, 10), 0, 0);
+    GridBagConstraints gbc =
+        new GridBagConstraints(
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            GridBagConstraints.EAST,
+            GridBagConstraints.NONE,
+            new Insets(10, 10, 10, 10),
+            0,
+            0);
     getContentPane().add(display, gbc);
 
     // build buttonPanel
     buttonPanel = new ButtonPanel(this);
-    gbc = new GridBagConstraints(0, 1, 1, 1, 0, 0, GridBagConstraints.EAST, GridBagConstraints.NONE,
-        new Insets(0, 10, 10, 10), 0, 0);
+    gbc =
+        new GridBagConstraints(
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            GridBagConstraints.EAST,
+            GridBagConstraints.NONE,
+            new Insets(0, 10, 10, 10),
+            0,
+            0);
     getContentPane().add(buttonPanel, gbc);
 
     pack();
@@ -135,8 +157,9 @@ public class Gui extends JFrame {
         case '/':
           // handle operation button aesthetic
           JButton operationButton = buttonPanel.getActiveOperationButton();
-          if (operationButton != null)
+          if (operationButton != null) {
             operationButton.setBackground(Color.gray);
+          }
           buttonPanel.setActiveOperationButton(buttonPanel.getButton(String.valueOf(key)));
           buttonPanel.getActiveOperationButton().setBackground(Color.orange);
           buttonPanel.setLastClickedButton(buttonPanel.getButton(String.valueOf(key)));
@@ -156,16 +179,19 @@ public class Gui extends JFrame {
       // handle enter key press
       if (key == KeyEvent.VK_ENTER) {
         JButton operationButton = buttonPanel.getActiveOperationButton();
-        if (operationButton != null)
+        if (operationButton != null) {
           operationButton.setBackground(Color.gray);
+        }
         presenter.enterOperation("=");
       }
       // handle delete key press
-      if (key == KeyEvent.VK_DELETE)
+      if (key == KeyEvent.VK_DELETE) {
         presenter.enterOperation("C");
+      }
       // handle backspace key press
-      if (key == KeyEvent.VK_BACK_SPACE)
+      if (key == KeyEvent.VK_BACK_SPACE) {
         presenter.enterDigit("BKSP");
+      }
     }
   }
 }
