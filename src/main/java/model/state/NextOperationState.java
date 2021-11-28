@@ -48,7 +48,7 @@ public class NextOperationState extends State {
     try {
       calculator.pushDisplayToOperandStack();
     } catch (NumberFormatException e) {
-      if (op instanceof AllClear || op instanceof Clear) {
+      if (op instanceof AllClear) {
         calculator.pushOperation(op);
       } else {
         calculator.updateDisplay("Invalid operation");

@@ -249,7 +249,9 @@ public class Calculator {
    * operand stack.
    */
   public void updateDisplay() {
-    updateDisplay(operandStack.peek().toString());
+    if (operandStack.peek() != null) {
+      updateDisplay(operandStack.peek().toString());
+    }
   }
 
   /**

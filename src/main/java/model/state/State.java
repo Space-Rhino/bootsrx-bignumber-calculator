@@ -13,7 +13,7 @@ import model.operation.function.Operation;
 public abstract class State {
 
   /** The calculator associated with this state. */
-  protected Calculator calculator;
+  protected final Calculator calculator;
 
   /**
    * Class constructor specifying the calculator object associated with this state.
