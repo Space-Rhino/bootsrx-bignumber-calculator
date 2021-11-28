@@ -74,9 +74,8 @@ public class ReadyState extends State {
 
     if (op.isBinary() || op instanceof Clear) {
       return calculator.nextOperand;
-    } else {
-      return this;
     }
+    return this;
   }
 
   /** Executes the "enter constant" state transition from the "ready state." */
