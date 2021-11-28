@@ -72,7 +72,6 @@ public class Calculator {
     display = new Display("0");
     operationMap = new HashMap<>();
     initializeOperationMap();
-    // initializeStates();
     ready = new ReadyState(this);
     nextOperand = new NextOperandState(this);
     nextOperation = new NextOperationState(this);
@@ -205,7 +204,13 @@ public class Calculator {
   /** Resolves all pending operations on the operationStack. */
   public void equals() {
     while (!operationStack.isEmpty()) {
-      executeOperation(operationStack.pop());
+      boolean isErrorState = (getDisplay().getValue()).matches(".*[a-z].*");
+      if (isErrorState) {
+        setState(ready);
+        return;
+      } else {
+        executeOperation(operationStack.pop());
+      }
     }
   }
 
@@ -260,14 +265,6 @@ public class Calculator {
   public void resetDisplay() {
     display.reset();
   }
-
-  // /** Creates instances of each state in the state hierarchy. */
-  // private void initializeStates() {
-  // ready = new ReadyState(this);
-  // nextOperand = new NextOperandState(this);
-  // nextOperation = new NextOperationState(this);
-  // buildingOperand = new BuildingOperandState(this);
-  // }
 
   /** Builds a map of supported operations to facilitate O(1) access to operations. */
   private void initializeOperationMap() {
