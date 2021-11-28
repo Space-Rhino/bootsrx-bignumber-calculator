@@ -2,14 +2,15 @@ package model.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Deque;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import model.operation.binary.Add;
 import model.operation.function.AllClear;
 import model.operation.function.Clear;
 import model.operation.function.Pi;
 import number.Number;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 

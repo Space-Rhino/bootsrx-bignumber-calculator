@@ -38,18 +38,6 @@ import number.Number;
  */
 public class Calculator {
 
-  /** A stack to store operands of type Number. */
-  private final Deque<Number> operandStack;
-
-  /** A stack to store arithmetic operations. */
-  private final Deque<Operation> operationStack;
-
-  /** The display register for this Calculator. */
-  private final Display display;
-
-  /** A map to provide O(1) access to operations. */
-  private final Map<String, Operation> operationMap;
-
   /** An instance of ReadyState. */
   public final State ready;
 
@@ -61,6 +49,18 @@ public class Calculator {
 
   /** An instance of NextOperationState. */
   public final State nextOperation;
+
+  /** A stack to store operands of type Number. */
+  private final Deque<Number> operandStack;
+
+  /** A stack to store arithmetic operations. */
+  private final Deque<Operation> operationStack;
+
+  /** The display register for this Calculator. */
+  private final Display display;
+
+  /** A map to provide O(1) access to operations. */
+  private final Map<String, Operation> operationMap;
 
   /** The state of this calculator. */
   private State state;
@@ -132,7 +132,7 @@ public class Calculator {
   /**
    * Enters a digit from the current state and sets state to the next state per the state machine.
    *
-   * <p>Supported digit Strings include: { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".",
+   * <p>Supported digit Strings include: { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", *
    * "BKSP" }
    *
    * <p>(supports requirements 3.1.3, 3.1.5, 3.1.7, 3.3.6)
