@@ -51,8 +51,8 @@ class BigNumberTest {
     @Order(3)
     @DisplayName("Case# 1.200: object BigNumber IS same value as other BigNumber")
     void testEquals() {
-      BigNumber expected = new BigNumber("42");
-      BigNumber actual = new BigNumber("42");
+      expected = new BigNumber("42");
+      actual = new BigNumber("42");
       BigNumber differentValue = new BigNumber("84");
       String differentClass = "String.class";
 
@@ -79,8 +79,8 @@ class BigNumberTest {
     @Order(4)
     @DisplayName("Case# 1.201: object BigNumber hashcode is same value as other BigNumber")
     void testHashCode() {
-      BigNumber expected = new BigNumber("42");
-      BigNumber actual = new BigNumber("42");
+      expected = new BigNumber("42");
+      actual = new BigNumber("42");
       BigNumber differentValue = new BigNumber("42.00000");
 
       assertThat(expected.equals(actual)).isTrue();
