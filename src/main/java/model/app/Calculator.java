@@ -1,10 +1,5 @@
 package model.app;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import model.operation.binary.Add;
 import model.operation.binary.Divide;
 import model.operation.binary.Multiply;
@@ -26,6 +21,12 @@ import model.state.State;
 import number.BigNumber;
 import number.Number;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * This class is the main model class and contains the methods necessary to complete calculator
  * operations. Calculator implements a state machine which determines which methods to call for each
@@ -38,9 +39,6 @@ import number.Number;
  */
 public class Calculator {
 
-  /** An instance of ReadyState. */
-  public final State ready;
-
   /** An instance of BuildingOperandState. */
   public final State buildingOperand;
 
@@ -50,14 +48,17 @@ public class Calculator {
   /** An instance of NextOperationState. */
   public final State nextOperation;
 
+  /** An instance of ReadyState. */
+  public final State ready;
+
+  /** The display register for this Calculator. */
+  private final Display display;
+
   /** A stack to store operands of type Number. */
   private final Deque<Number> operandStack;
 
   /** A stack to store arithmetic operations. */
   private final Deque<Operation> operationStack;
-
-  /** The display register for this Calculator. */
-  private final Display display;
 
   /** A map to provide O(1) access to operations. */
   private final Map<String, Operation> operationMap;
@@ -77,33 +78,6 @@ public class Calculator {
     nextOperation = new NextOperationState(this);
     buildingOperand = new BuildingOperandState(this);
     setState(ready);
-  }
-
-  /**
-   * Returns the operand stack.
-   *
-   * @return the operandStack
-   */
-  public Deque<Number> getOperandStack() {
-    return operandStack;
-  }
-
-  /**
-   * Returns the operation stack.
-   *
-   * @return the operationStack
-   */
-  public Deque<Operation> getOperationStack() {
-    return operationStack;
-  }
-
-  /**
-   * Returns the display register.
-   *
-   * @return the display
-   */
-  public Display getDisplay() {
-    return display;
   }
 
   /**
@@ -204,7 +178,7 @@ public class Calculator {
   /** Resolves all pending operations on the operationStack. */
   public void equals() {
     while (!operationStack.isEmpty()) {
-      boolean isErrorState = (getDisplay().getValue()).matches(".*[a-z].*");
+      boolean isErrorState = (display.getValue()).matches(".*[a-z].*");
       if (isErrorState) {
         setState(ready);
         return;
@@ -268,6 +242,51 @@ public class Calculator {
     display.reset();
   }
 
+  /**
+   * Returns the display register.
+   *
+   * @return the display
+   */
+  public Display getDisplay() {
+    return display;
+  }
+
+  /**
+   * Returns the operand stack.
+   *
+   * @return the operandStack
+   */
+  public Deque<Number> getOperandStack() {
+    return operandStack;
+  }
+
+  /**
+   * Returns the operation stack.
+   *
+   * @return the operationStack
+   */
+  public Deque<Operation> getOperationStack() {
+    return operationStack;
+  }
+
+  /**
+   * Gets the state of this calculator.
+   *
+   * @return the state of the calculator
+   */
+  public State getState() {
+    return state;
+  }
+
+  /**
+   * Sets the state of this calculator.
+   *
+   * @param newState the new state
+   */
+  private void setState(State newState) {
+    state = newState;
+  }
+
   /** Builds a map of supported operations to facilitate O(1) access to operations. */
   private void initializeOperationMap() {
     operationMap.put("+", new Add());
@@ -282,14 +301,5 @@ public class Calculator {
     operationMap.put("AC", new AllClear());
     operationMap.put("C", new Clear());
     operationMap.put("=", new Equals());
-  }
-
-  /**
-   * Sets the state of this calculator.
-   *
-   * @param newState the new state
-   */
-  private void setState(State newState) {
-    state = newState;
   }
 }
