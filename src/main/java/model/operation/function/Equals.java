@@ -18,6 +18,7 @@ public class Equals extends Operation {
   }
 
   /** Executes the equals operation. */
+  @Override
   public void execute(Calculator calculator) {
     calculator.equals();
   }
