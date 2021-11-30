@@ -1,5 +1,10 @@
 package model.app;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import model.operation.binary.Add;
 import model.operation.binary.Divide;
 import model.operation.binary.Multiply;
@@ -20,12 +25,6 @@ import model.state.ReadyState;
 import model.state.State;
 import number.BigNumber;
 import number.Number;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * This class is the main model class and contains the methods necessary to complete calculator
