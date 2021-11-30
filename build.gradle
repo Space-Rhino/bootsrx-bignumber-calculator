@@ -4,19 +4,29 @@ plugins {
     id 'org.sonarqube' version '3.3'
 }
 
+version '3.0-ALPHA'
+group 'org.example'
+description 'Completing code coverage'
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
+
+    // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-engine
+    implementation 'org.junit.platform:junit-platform-suite-engine:1.8.2'
 
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
-    testImplementation 'org.junit.platform:junit-platform-launcher:1.8.1'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.8.2'
 
     // https://mvnrepository.com/artifact/org.assertj/assertj-core
     testImplementation 'org.assertj:assertj-core:3.21.0'
@@ -25,10 +35,10 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest:2.2'
 
     // https://mvnrepository.com/artifact/org.mockito/mockito-core
-    testImplementation 'org.mockito:mockito-core:4.0.0'
+    testImplementation 'org.mockito:mockito-core:4.1.0'
 
     // https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
-    testImplementation 'org.mockito:mockito-junit-jupiter:4.0.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.1.0'
 
     // https://mvnrepository.com/artifact/org.jacoco/org.jacoco.ant
     testImplementation 'org.jacoco:org.jacoco.ant:0.8.7'
@@ -66,6 +76,7 @@ test {
 
 jacocoTestReport {
     dependsOn test
+
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
@@ -81,4 +92,14 @@ jacocoTestReport {
         xml.getRequired()
         html.getRequired()
     }
+}
+
+task showProperties {
+    println "$project"
+    println "project directory $projectDir"
+    println "$gradle"
+    println "build directory $buildDir"
+    println "Version: $version"
+    println "Group: $project.group"
+    println "Description: $project.description"
 }
