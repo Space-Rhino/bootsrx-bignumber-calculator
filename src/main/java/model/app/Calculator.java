@@ -181,9 +181,8 @@ public class Calculator {
       if (isErrorState) {
         setState(ready);
         return;
-      } else {
-        executeOperation(operationStack.pop());
       }
+      executeOperation(operationStack.pop());
     }
   }
 

@@ -59,9 +59,8 @@ public class NextOperationState extends State {
 
     if (op.isBinary()) {
       return calculator.nextOperand;
-    } else {
-      return calculator.ready;
     }
+    return calculator.ready;
   }
 
   /** Executes the "enter constant" state transition from the "next operation state." */

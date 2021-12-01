@@ -42,9 +42,8 @@ public class NextOperandState extends State {
 
     if (op.isBinary() || op instanceof Clear) {
       return this;
-    } else {
-      return calculator.ready;
     }
+    return calculator.ready;
   }
 
   /** Executes the "enter constant" state transition from the "next operand state." */

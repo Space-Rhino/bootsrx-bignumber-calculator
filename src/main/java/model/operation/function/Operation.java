@@ -24,8 +24,8 @@ public abstract class Operation {
   /** True if the concrete implementation is a binary operation. */
   protected boolean isBinary;
 
-  /** The Calculator object for this operation. */
-  protected Calculator calculator;
+  // /** The Calculator object for this operation. */
+  // protected Calculator calculator;
 
   /** The stack of operands. */
   protected Deque<Number> stack;
