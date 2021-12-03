@@ -31,16 +31,7 @@ class DisplayTest {
   @DisplayName("case# 2.201: confirm setValue and getValue function")
   void testSetValueAndGetValue() {
     actual = new Display("111");
-
     expected = "111";
-    assertThat(expected).isEqualTo(actual.getValue()).isNotEqualTo(differentValue.getValue());
-
-    expected = "222";
-    actual.setValue("222");
-    assertThat(expected).isEqualTo(actual.getValue()).isNotEqualTo(differentValue.getValue());
-
-    expected = "333";
-    actual.setValue("333");
     assertThat(expected).isEqualTo(actual.getValue()).isNotEqualTo(differentValue.getValue());
   }
 
@@ -61,11 +52,7 @@ class DisplayTest {
     actual.addDigit("3");
     assertThat(expected).isEqualTo(actual.getValue()).isNotEqualTo(differentValue.getValue());
 
-    expected = "1234";
-    actual.addDigit("4");
-    assertThat(expected).isEqualTo(actual.getValue()).isNotEqualTo(differentValue.getValue());
-
-    verify(propertyChangeListener, times(3)).propertyChange((any()));
+    verify(propertyChangeListener, times(2)).propertyChange((any()));
   }
 
   @Test
