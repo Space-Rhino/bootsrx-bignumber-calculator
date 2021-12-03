@@ -23,9 +23,9 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestClassOrder(ClassOrderer.OrderAnnotation.class)
 class BigNumberTest {
 
-  private static BigNumber expected;
-  private static BigNumber actual;
-  private static BigNumber nullBigNumber;
+  private BigNumber expected;
+  private BigNumber actual;
+  private BigNumber nullBigNumber;
 
   @Nested
   @Order(1)
@@ -58,9 +58,11 @@ class BigNumberTest {
 
       //noinspection SimplifiableAssertion, EqualsWithItself
       assertTrue(expected.equals(expected));
+      assertThat(expected, Matchers.comparesEqualTo(expected));
 
       //noinspection SimplifiableAssertion
       assertTrue(actual.equals(expected));
+      assertThat(expected, Matchers.comparesEqualTo(expected));
 
       // noinspection SimplifiableAssertion
       assertFalse(expected.equals(nullBigNumber));

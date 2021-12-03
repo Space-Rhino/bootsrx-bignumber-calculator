@@ -1,10 +1,5 @@
 package model.operation.unary;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import driver.TestInput;
 import number.BigNumber;
 import org.hamcrest.Matchers;
@@ -13,6 +8,11 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestMethodOrder(OrderAnnotation.class)
 class SquareRootTest {
@@ -54,7 +54,7 @@ class SquareRootTest {
   void bigInteger_OneNegativeOperand() {
     assertThrows(
         ArithmeticException.class,
-        () -> actual = new BigNumber(squareRoot.executeUnary(TestInput.INX).toString()));
+        () -> actual = (BigNumber) squareRoot.executeUnary(TestInput.INX));
   }
 
   @Test
@@ -73,6 +73,6 @@ class SquareRootTest {
   void bigDecimal_OneNegativeOperand() {
     assertThrows(
         ArithmeticException.class,
-        () -> actual = new BigNumber(squareRoot.executeUnary(TestInput.DNX).toString()));
+        () -> actual = (BigNumber) squareRoot.executeUnary(TestInput.DNX));
   }
 }
