@@ -1,11 +1,11 @@
 package model.operation.binary;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import driver.TestInput;
 import number.BigNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class MultiplyTest {
 
@@ -19,7 +19,7 @@ class MultiplyTest {
   }
 
   @Test
-  @DisplayName("Case# 1.064: Operation is Binary | isBinary == true")
+  @DisplayName("Case# 1.064: Operation is Binary")
   void isBinary_IsTrue() {
     Multiply multiply = new Multiply();
     boolean actual = multiply.isBinary();
@@ -27,7 +27,7 @@ class MultiplyTest {
   }
 
   @Test
-  @DisplayName("Case# 1.065: Integer two positive 50 digit operands | x * y")
+  @DisplayName("Case# 1.065: Integer two positive operands | x * y")
   void bigInteger_TwoPositiveOperands() {
     Multiply multiply = new Multiply();
     BigNumber actual =
@@ -37,7 +37,7 @@ class MultiplyTest {
   }
 
   @Test
-  @DisplayName("Case# 1.066: Integer two negative 50 digit operands | -x * -y")
+  @DisplayName("Case# 1.066: Integer two negative operands | -x * -y")
   void bigInteger_TwoNegativeOperands() {
     Multiply multiply = new Multiply();
     BigNumber actual =
@@ -47,7 +47,7 @@ class MultiplyTest {
   }
 
   @Test
-  @DisplayName("Case# 1.067: Integer one negative & one positive 50 digit operand | -x * y")
+  @DisplayName("Case# 1.067: Integer one negative & one positive operand | -x * y")
   void bigInteger_OneNegativeAndOnePositiveOperand() {
     Multiply multiply = new Multiply();
     BigNumber actual =
@@ -57,7 +57,7 @@ class MultiplyTest {
   }
 
   @Test
-  @DisplayName("Case# 1.068: Decimal two positive 50 digit operands | x * y")
+  @DisplayName("Case# 1.068: Decimal two positive operands | x * y")
   void bigDecimal_TwoPositiveOperands() {
     Multiply multiply = new Multiply();
     BigNumber actual =
@@ -67,7 +67,7 @@ class MultiplyTest {
   }
 
   @Test
-  @DisplayName("Case# 1.069: Decimal two negative 50 digit operands | -x * -y")
+  @DisplayName("Case# 1.069: Decimal two negative operands | -x * -y")
   void bigDecimal_TwoNegativeOperands() {
     Multiply multiply = new Multiply();
     BigNumber actual =
@@ -77,7 +77,7 @@ class MultiplyTest {
   }
 
   @Test
-  @DisplayName("Case# 1.070: Decimal one negative & one positive 50 digit operand | -x * y")
+  @DisplayName("Case# 1.070: Decimal one negative & one positive operand | -x * y")
   void bigDecimal_OneNegativeAndOnePositiveOperand() {
     Multiply multiply = new Multiply();
     BigNumber actual =

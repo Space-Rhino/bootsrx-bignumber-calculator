@@ -1,13 +1,13 @@
 package model.operation.binary;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import driver.TestInput;
 import number.BigNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @TestMethodOrder(OrderAnnotation.class)
 class AddTest {
@@ -22,7 +22,7 @@ class AddTest {
   }
 
   @Test
-  @DisplayName("Case# 1.048: Operation is Binary | isBinary == true")
+  @DisplayName("Case# 1.048: Operation is Binary")
   void isBinary_IsTrue() {
     Add add = new Add();
     boolean actual = add.isBinary();

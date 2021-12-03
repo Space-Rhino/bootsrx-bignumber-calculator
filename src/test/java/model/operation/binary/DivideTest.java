@@ -1,12 +1,12 @@
 package model.operation.binary;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import driver.TestInput;
 import number.BigNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class DivideTest {
 
@@ -20,7 +20,7 @@ class DivideTest {
   }
 
   @Test
-  @DisplayName("Case# 1.072: Operation is Binary | isBinary == true")
+  @DisplayName("Case# 1.072: Operation is Binary")
   void isBinary_IsTrue() {
     Divide divide = new Divide();
     boolean actual = divide.isBinary();

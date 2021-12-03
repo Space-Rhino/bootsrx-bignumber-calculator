@@ -1,5 +1,7 @@
 package model.operation.function;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import model.app.Calculator;
 import model.operation.binary.Add;
 import org.junit.jupiter.api.DisplayName;
@@ -7,13 +9,11 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @TestMethodOrder(OrderAnnotation.class)
 class AllClearTest {
 
   @Test
-  @DisplayName("Case# 2.001: Precedence = 4")
+  @DisplayName("Case# 2.001: Precedence equals 4")
   void getPrecedence() {
     AllClear allClear = new AllClear();
     int actual = allClear.getPrecedence();
@@ -22,7 +22,7 @@ class AllClearTest {
   }
 
   @Test
-  @DisplayName("Case# 2.002: isBinary = false")
+  @DisplayName("Case# 2.002: Operation is NOT Binary")
   void isBinary() {
     AllClear allClear = new AllClear();
     boolean actual = allClear.isBinary();
@@ -30,7 +30,7 @@ class AllClearTest {
   }
 
   @Test
-  @DisplayName("Case# 2.003: calculator display = 0 | operandStack & operationStack isEmpty = true")
+  @DisplayName("Case# 2.003: Display equals 0 | operandStack & operationStack is empty.")
   void execute() {
     Calculator calculator = new Calculator();
     AllClear allClear = new AllClear();

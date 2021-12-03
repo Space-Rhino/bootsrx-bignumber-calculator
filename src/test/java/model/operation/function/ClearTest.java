@@ -1,16 +1,16 @@
 package model.operation.function;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import model.app.Calculator;
 import model.operation.binary.Add;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 class ClearTest {
 
   @Test
-  @DisplayName("Case# 2.004: Precedence = 4")
+  @DisplayName("Case# 2.004: Precedence equals 4")
   void getPrecedence() {
     Clear clear = new Clear();
     int actual = clear.getPrecedence();
@@ -19,7 +19,7 @@ class ClearTest {
   }
 
   @Test
-  @DisplayName("Case# 2.005: isBinary = false")
+  @DisplayName("Case# 2.005: Operation is NOT Binary")
   void isBinary() {
     Clear clear = new Clear();
     boolean actual = clear.isBinary();
@@ -27,8 +27,7 @@ class ClearTest {
   }
 
   @Test
-  @DisplayName(
-      "Case# 2.006: calculator display = 0 | operandStack & operationStack isEmpty = false")
+  @DisplayName("Case# 2.006: Display equals 0 | operandStack & operationStack is NOT empty.")
   void execute() {
     Calculator calculator = new Calculator();
     Clear clear = new Clear();

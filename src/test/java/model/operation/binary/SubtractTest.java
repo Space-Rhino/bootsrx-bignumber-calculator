@@ -1,11 +1,11 @@
 package model.operation.binary;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import driver.TestInput;
 import number.BigNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class SubtractTest {
 
@@ -19,7 +19,7 @@ class SubtractTest {
   }
 
   @Test
-  @DisplayName("Case# 1.056: Operation is Binary | isBinary == true")
+  @DisplayName("Case# 1.056: Operation is Binary")
   void isBinary_IsTrue() {
     Subtract subtract = new Subtract();
     boolean actual = subtract.isBinary();
@@ -27,17 +27,17 @@ class SubtractTest {
   }
 
   @Test
-  @DisplayName("Case# 1.057: Integer two positive 50 digit operands | x - y")
+  @DisplayName("Case# 1.057: Integer two positive operands | x - y")
   void bigInteger_TwoPositiveOperands() {
     Subtract subtract = new Subtract();
     BigNumber actual =
-      new BigNumber(subtract.executeBinary(TestInput.IPX, TestInput.IPY).toString());
+        new BigNumber(subtract.executeBinary(TestInput.IPX, TestInput.IPY).toString());
     BigNumber expected = TestInput.SUBTRACT_IPX_IPY;
     assertThat(actual).isEqualByComparingTo(expected);
   }
 
   @Test
-  @DisplayName("Case# 1.058: Integer two negative 50 digit operands | -x - -y")
+  @DisplayName("Case# 1.058: Integer two negative operands | -x - -y")
   void bigInteger_TwoNegativeOperands() {
     Subtract subtract = new Subtract();
     BigNumber actual =
@@ -47,7 +47,7 @@ class SubtractTest {
   }
 
   @Test
-  @DisplayName("Case# 1.059: Integer one negative & one positive 50 digit operand | -x - y")
+  @DisplayName("Case# 1.059: Integer one negative & one positive operand | -x - y")
   void bigInteger_OneNegativeAndOnePositiveOperand() {
     Subtract subtract = new Subtract();
     BigNumber actual =
@@ -57,7 +57,7 @@ class SubtractTest {
   }
 
   @Test
-  @DisplayName("Case# 1.060: Decimal two positive 50 digit operands | x - y")
+  @DisplayName("Case# 1.060: Decimal two positive operands | x - y")
   void bigDecimal_TwoPositiveOperands() {
     Subtract subtract = new Subtract();
     BigNumber actual =
@@ -67,7 +67,7 @@ class SubtractTest {
   }
 
   @Test
-  @DisplayName("Case# 1.061: Decimal two negative 50 digit operands | -x - -y")
+  @DisplayName("Case# 1.061: Decimal two negative operands | -x - -y")
   void bigDecimal_TwoNegativeOperands() {
     Subtract subtract = new Subtract();
     BigNumber actual =
@@ -77,7 +77,7 @@ class SubtractTest {
   }
 
   @Test
-  @DisplayName("Case# 1.062: Decimal one negative & one positive 50 digit operand | -x - y")
+  @DisplayName("Case# 1.062: Decimal one negative & one positive operand | -x - y")
   void bigDecimal_OneNegativeAndOnePositiveOperand() {
     Subtract subtract = new Subtract();
     BigNumber actual =
