@@ -17,9 +17,6 @@ import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
 
-  private static String expected;
-  private static String actual;
-
   @Test
   @DisplayName("case# 2.300: Check constructor initialized correctly")
   void testConstructor() {
@@ -40,12 +37,11 @@ class CalculatorTest {
   @DisplayName("case# 2.301: Operation contains key and is instance of PI")
   void testEnterOperation() {
     Calculator calculator = new Calculator();
-    String PI_100_DIGITS =
+    calculator.enterOperation("PI");
+    String actual = calculator.getDisplay().getValue();
+    String expected =
         "3.141592653589793238462643383279502884197169399375105"
             + "82097494459230781640628620899862803482534211707";
-    calculator.enterOperation("PI");
-    expected = PI_100_DIGITS;
-    actual = calculator.getDisplay().getValue();
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -56,8 +52,8 @@ class CalculatorTest {
     calculator.enterDigit("4");
     calculator.enterDigit("2");
 
-    expected = "42";
-    actual = calculator.getDisplay().getValue();
+    String actual = calculator.getDisplay().getValue();
+    String expected = "42";
     assertThat(actual).isEqualTo(expected);
 
     calculator.enterDigit("BKSP");
@@ -72,11 +68,10 @@ class CalculatorTest {
     Calculator calculator = new Calculator();
     calculator.enterDigit("4");
     calculator.enterDigit("2");
-    actual = calculator.getDisplay().getValue();
 
     calculator.enterDigit("BKSP");
-    expected = "4";
-    actual = calculator.getDisplay().getValue();
+    String actual = calculator.getDisplay().getValue();
+    String expected = "4";
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -87,8 +82,8 @@ class CalculatorTest {
     calculator.updateDisplay("888");
     calculator.pushDisplayToOperandStack();
 
-    expected = "888";
-    actual = calculator.getOperandStack().getFirst().toString();
+    String actual = calculator.getOperandStack().getFirst().toString();
+    String expected = "888";
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -127,7 +122,7 @@ class CalculatorTest {
   }
 
   @Test
-  @DisplayName("case# 2.305: Execute operation of AllClear ")
+  @DisplayName("case# 2.305: Execute operation of AllClear")
   void testExecuteOperation() {
     Calculator calculator = new Calculator();
 
@@ -169,8 +164,8 @@ class CalculatorTest {
 
     calculator.equals();
     calculator.updateDisplay();
-    expected = "2";
-    actual = calculator.getDisplay().getValue();
+    String actual = calculator.getDisplay().getValue();
+    String expected = "2";
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -196,8 +191,8 @@ class CalculatorTest {
 
     calculator.equals();
     calculator.updateDisplay();
-    expected = "6";
-    actual = calculator.getDisplay().getValue();
+    String actual = calculator.getDisplay().getValue();
+    String expected = "6";
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -221,8 +216,8 @@ class CalculatorTest {
 
     calculator.equals();
     calculator.updateDisplay();
-    expected = "10";
-    actual = calculator.getDisplay().getValue();
+    String actual = calculator.getDisplay().getValue();
+    String expected = "10";
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -251,8 +246,8 @@ class CalculatorTest {
 
     calculator.allClear();
     calculator.updateDisplay();
-    expected = "0";
-    actual = calculator.getDisplay().getValue();
+    String actual = calculator.getDisplay().getValue();
+    String expected = "0";
     assertThat(actual).isEqualTo(expected);
     assertThat(calculator.getOperandStack().isEmpty()).isTrue();
     assertThat(calculator.getOperationStack().isEmpty()).isTrue();
@@ -280,8 +275,8 @@ class CalculatorTest {
     calculator.pushDisplayToOperandStack();
     calculator.sendDigitToDisplay("444");
 
-    expected = "888";
-    actual = Objects.requireNonNull(calculator.getOperandStack().peek()).toString();
+    String expected = "888";
+    String actual = Objects.requireNonNull(calculator.getOperandStack().peek()).toString();
     assertThat(actual).isEqualTo(expected);
   }
 
