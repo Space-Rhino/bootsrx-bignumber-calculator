@@ -1,99 +1,88 @@
 package model.operation.binary;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import driver.TestInput;
 import number.BigNumber;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 
-@TestMethodOrder(OrderAnnotation.class)
 class SubtractTest {
 
-  private final Subtract subtract = new Subtract();
-  private BigNumber expected;
-  private BigNumber actual;
-
   @Test
-  @Order(1)
   @DisplayName("Case# 1.055: Precedence equals 1")
   void getPrecedence_IsOne() {
+    Subtract subtract = new Subtract();
     int actual = subtract.getPrecedence();
     int expected = 1;
-    assertEquals(expected, actual);
+    assertThat(actual).isEqualTo(expected);
   }
 
   @Test
-  @Order(2)
-  @DisplayName("Case# 1.056: Operation is Binary | isBinary == true")
+  @DisplayName("Case# 1.056: Operation is Binary")
   void isBinary_IsTrue() {
+    Subtract subtract = new Subtract();
     boolean actual = subtract.isBinary();
-    assertTrue(actual);
+    assertThat(actual).isTrue();
   }
 
   @Test
-  @Order(3)
-  @DisplayName("Case# 1.057: Integer two positive 50 digit operands | x - y")
+  @DisplayName("Case# 1.057: Integer two positive operands | x - y")
   void bigInteger_TwoPositiveOperands() {
-    expected = TestInput.SUBTRACT_IPX_IPY;
-    actual = new BigNumber(subtract.executeBinary(TestInput.IPX, TestInput.IPY).toString());
-    assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(TestInput.I_RESULT_WRONG));
+    Subtract subtract = new Subtract();
+    BigNumber actual =
+        new BigNumber(subtract.executeBinary(TestInput.IPX, TestInput.IPY).toString());
+    BigNumber expected = TestInput.SUBTRACT_IPX_IPY;
+    assertThat(actual).isEqualByComparingTo(expected);
   }
 
   @Test
-  @Order(4)
-  @DisplayName("Case# 1.058: Integer two negative 50 digit operands | -x - -y")
+  @DisplayName("Case# 1.058: Integer two negative operands | -x - -y")
   void bigInteger_TwoNegativeOperands() {
-    expected = TestInput.SUBTRACT_INX_INY;
-    actual = new BigNumber(subtract.executeBinary(TestInput.INX, TestInput.INY).toString());
-    assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(TestInput.I_RESULT_WRONG));
+    Subtract subtract = new Subtract();
+    BigNumber actual =
+        new BigNumber(subtract.executeBinary(TestInput.INX, TestInput.INY).toString());
+    BigNumber expected = TestInput.SUBTRACT_INX_INY;
+    assertThat(actual).isEqualByComparingTo(expected);
   }
 
   @Test
-  @Order(5)
-  @DisplayName("Case# 1.059: Integer one negative & one positive 50 digit operand | -x - y")
+  @DisplayName("Case# 1.059: Integer one negative & one positive operand | -x - y")
   void bigInteger_OneNegativeAndOnePositiveOperand() {
-    expected = TestInput.SUBTRACT_INX_IPY;
-    actual = new BigNumber(subtract.executeBinary(TestInput.INX, TestInput.IPY).toString());
-    assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(TestInput.I_RESULT_WRONG));
+    Subtract subtract = new Subtract();
+    BigNumber actual =
+        new BigNumber(subtract.executeBinary(TestInput.INX, TestInput.IPY).toString());
+    BigNumber expected = TestInput.SUBTRACT_INX_IPY;
+    assertThat(actual).isEqualByComparingTo(expected);
   }
 
   @Test
-  @Order(6)
-  @DisplayName("Case# 1.060: Decimal two positive 50 digit operands | x - y")
+  @DisplayName("Case# 1.060: Decimal two positive operands | x - y")
   void bigDecimal_TwoPositiveOperands() {
-    expected = TestInput.SUBTRACT_DPX_DPY;
-    actual = new BigNumber(subtract.executeBinary(TestInput.DPX, TestInput.DPY).toString());
-    assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(TestInput.D_RESULT_WRONG));
+    Subtract subtract = new Subtract();
+    BigNumber actual =
+        new BigNumber(subtract.executeBinary(TestInput.DPX, TestInput.DPY).toString());
+    BigNumber expected = TestInput.SUBTRACT_DPX_DPY;
+    assertThat(actual).isEqualByComparingTo(expected);
   }
 
   @Test
-  @Order(7)
-  @DisplayName("Case# 1.061: Decimal two negative 50 digit operands | -x - -y")
+  @DisplayName("Case# 1.061: Decimal two negative operands | -x - -y")
   void bigDecimal_TwoNegativeOperands() {
-    expected = TestInput.SUBTRACT_DNX_DNY;
-    actual = new BigNumber(subtract.executeBinary(TestInput.DNX, TestInput.DNY).toString());
-    assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(TestInput.D_RESULT_WRONG));
+    Subtract subtract = new Subtract();
+    BigNumber actual =
+        new BigNumber(subtract.executeBinary(TestInput.DNX, TestInput.DNY).toString());
+    BigNumber expected = TestInput.SUBTRACT_DNX_DNY;
+    assertThat(actual).isEqualByComparingTo(expected);
   }
 
   @Test
-  @Order(8)
-  @DisplayName("Case# 1.062: Decimal one negative & one positive 50 digit operand | -x - y")
+  @DisplayName("Case# 1.062: Decimal one negative & one positive operand | -x - y")
   void bigDecimal_OneNegativeAndOnePositiveOperand() {
-    expected = TestInput.SUBTRACT_DNX_DPY;
-    actual = new BigNumber(subtract.executeBinary(TestInput.DNX, TestInput.DPY).toString());
-    assertThat(expected, Matchers.comparesEqualTo(actual));
-    assertThat(expected, Matchers.not(TestInput.D_RESULT_WRONG));
+    Subtract subtract = new Subtract();
+    BigNumber actual =
+        new BigNumber(subtract.executeBinary(TestInput.DNX, TestInput.DPY).toString());
+    BigNumber expected = TestInput.SUBTRACT_DNX_DPY;
+    assertThat(actual).isEqualByComparingTo(expected);
   }
 }

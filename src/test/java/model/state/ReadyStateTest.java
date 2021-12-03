@@ -1,8 +1,6 @@
 package model.state;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import model.app.Calculator;
 import model.operation.binary.Add;
@@ -10,129 +8,72 @@ import model.operation.function.AllClear;
 import model.operation.function.Clear;
 import model.operation.function.Equals;
 import model.operation.function.Pi;
-import model.operation.unary.Inverse;
-import model.operation.unary.Negate;
-import model.operation.unary.Square;
-import model.operation.unary.SquareRoot;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ReadyStateTest {
 
   @Test
-  @DisplayName("Case# 2.130: verify calculator object associated with this instance of states")
+  @DisplayName("Case# 2.130: Verify calculator object associated with this instance of states")
   void testConstructor() {
     Calculator calculator = new Calculator();
     State state = calculator.ready;
 
-    Calculator calculator1 = (new ReadyState(calculator)).calculator;
+    Calculator calculator1 = (new BuildingOperandState(calculator)).calculator;
     State state1 = calculator1.ready;
-    assertSame(state, state1);
-    assertTrue(state1 instanceof ReadyState);
-    assertTrue(calculator1.getOperandStack().isEmpty());
-    assertSame(state, state1);
+    assertThat(state1).isInstanceOf(ReadyState.class).isSameAs(state);
 
     State state2 = calculator.nextOperation;
     State state3 = calculator1.nextOperation;
-    assertSame(state2, state3);
-    assertTrue(state3 instanceof NextOperationState);
+    assertThat(state3).isInstanceOf(NextOperationState.class).isSameAs(state2);
 
     State state4 = calculator.buildingOperand;
     State state5 = calculator1.buildingOperand;
-    assertSame(state4, state5);
-    assertTrue(state5 instanceof BuildingOperandState);
-    assertSame(state2, state3);
-    assertSame(state4, state5);
+    assertThat(state5).isInstanceOf(BuildingOperandState.class).isSameAs(state4);
 
     State state6 = calculator.nextOperand;
     State state7 = calculator1.nextOperand;
-    assertSame(state6, state7);
-    assertTrue(state7 instanceof NextOperandState);
-    assertTrue(calculator1.getOperationStack().isEmpty());
-    assertSame(state6, state7);
-    assertSame(calculator1, (state1).calculator);
-    assertSame(calculator1, (state7).calculator);
-    assertEquals("0", calculator1.getDisplay().getValue());
-    assertSame(calculator1, (state5).calculator);
-    assertSame(calculator1, (state3).calculator);
-    assertSame(calculator1, calculator);
+    assertThat(state7).isInstanceOf(NextOperandState.class).isSameAs(state6);
   }
 
   @Test
-  @DisplayName("Case# 2.131: check the enterDigit state transition from the readyState")
+  @DisplayName("Case# 2.131: Check the enterDigit state transition from the readyState")
   void testEnterDigit() {
     Calculator calculator = new Calculator();
-    assertSame(calculator.buildingOperand, (new ReadyState(calculator)).enterDigit("4"));
-
-    calculator = new Calculator();
-    assertSame(calculator.buildingOperand, (new ReadyState(calculator)).enterDigit("3"));
-
-    calculator = new Calculator();
-    calculator.updateDisplay("42");
-    assertSame(calculator.buildingOperand, (new ReadyState(calculator)).enterDigit("8"));
+    assertThat((new ReadyState(calculator)).enterDigit("3")).isSameAs(calculator.buildingOperand);
   }
 
   @Test
-  @DisplayName("Case# 2.132: check enterOperation state transition from the readyState")
+  @DisplayName("Case# 2.132: Check enterOperation state transition from the readyState")
   void testEnterOperation() {
     Calculator calculator = new Calculator();
     ReadyState readyState = new ReadyState(calculator);
-    assertSame(calculator.nextOperand, readyState.enterOperation(new Add()));
+    assertThat(readyState.enterOperation(new Add())).isSameAs(calculator.nextOperand);
 
     readyState = new ReadyState(new Calculator());
-    assertSame(readyState, readyState.enterOperation(new AllClear()));
+    assertThat(readyState.enterOperation(new AllClear())).isSameAs(readyState);
 
     calculator = new Calculator();
     readyState = new ReadyState(calculator);
-    assertSame(calculator.nextOperand, readyState.enterOperation(new Clear()));
+    assertThat(readyState.enterOperation(new Clear())).isSameAs(calculator.nextOperand);
 
     readyState = new ReadyState(calculator);
-    assertSame(readyState, readyState.enterOperation(new Equals()));
-
-    readyState = new ReadyState(calculator);
-    assertSame(readyState, readyState.enterOperation(new Pi()));
-
-    readyState = new ReadyState(calculator);
-    assertSame(readyState, readyState.enterOperation(new Inverse()));
-
-    calculator = new Calculator();
-    calculator.updateDisplay("42");
-    readyState = new ReadyState(calculator);
-    assertSame(readyState, readyState.enterOperation(new Inverse()));
-
-    calculator = new Calculator();
-    calculator.updateDisplay("7");
-    readyState = new ReadyState(calculator);
-    assertSame(readyState, readyState.enterOperation(new Inverse()));
-
-    calculator = new Calculator();
-    calculator.updateDisplay("3");
-    readyState = new ReadyState(calculator);
-    assertSame(readyState, readyState.enterOperation(new AllClear()));
-
-    readyState = new ReadyState(calculator);
-    assertSame(readyState, readyState.enterOperation(new Negate()));
-
-    readyState = new ReadyState(calculator);
-    assertSame(readyState, readyState.enterOperation(new Square()));
-
-    readyState = new ReadyState(calculator);
-    assertSame(readyState, readyState.enterOperation(new SquareRoot()));
+    assertThat(readyState.enterOperation(new Equals())).isSameAs(readyState);
   }
 
   @Test
-  @DisplayName("Case# 2.133: check enterConstant state transition from the readyState")
+  @DisplayName("Case# 2.133: Check enterConstant state transition from the readyState")
   void testEnterConstant() {
     ReadyState readyState = new ReadyState(new Calculator());
-    assertSame(readyState, readyState.enterConstant(new AllClear()));
+    assertThat(readyState.enterConstant(new AllClear())).isSameAs(readyState);
 
     readyState = new ReadyState(new Calculator());
-    assertSame(readyState, readyState.enterConstant(new Clear()));
+    assertThat(readyState.enterConstant(new Clear())).isSameAs(readyState);
 
     readyState = new ReadyState(new Calculator());
-    assertSame(readyState, readyState.enterConstant(new Equals()));
+    assertThat(readyState.enterConstant(new Equals())).isSameAs(readyState);
 
     readyState = new ReadyState(new Calculator());
-    assertSame(readyState, readyState.enterConstant(new Pi()));
+    assertThat(readyState.enterConstant(new Pi())).isSameAs(readyState);
   }
 }

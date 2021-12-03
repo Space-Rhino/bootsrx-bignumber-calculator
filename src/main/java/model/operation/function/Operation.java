@@ -23,7 +23,7 @@ public abstract class Operation {
 
   /** True if the concrete implementation is a binary operation. */
   protected boolean isBinary;
-  
+
   /** The stack of operands. */
   protected Deque<Number> stack;
 
