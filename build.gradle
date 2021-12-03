@@ -62,35 +62,34 @@ dependencies {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
-
     jacoco {
         excludes = [
-                'presenter/Presenter.class',
-                'view/Gui.class',
-                'view/Gui$KeyHandler.class',
-                'view/ButtonPanel$DigitHandler.class',
-                'view/ButtonPanel$OperationHandler.class',
+                'presenter/**',
+                'view/**',
         ]
     }
 }
 
 jacocoTestReport {
     dependsOn test
-
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                    'presenter/Presenter.class',
-                    'view/Gui.class',
-                    'view/Gui$KeyHandler.class',
-                    'view/ButtonPanel$DigitHandler.class',
-                    'view/ButtonPanel$OperationHandler.class',
+                    'presenter/**',
+                    'view/**',
+
             ])
         }))
     }
     reports {
-        xml.getRequired()
-        html.getRequired()
+        xml.required = true
+        html.required = true
+    }
+}
+
+sonarqube {
+    properties {
+        property 'sonar.exclusions', '**/presenter/**, **/view/**'
     }
 }
 
