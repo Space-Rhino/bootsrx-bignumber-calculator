@@ -8,10 +8,6 @@ import model.operation.function.AllClear;
 import model.operation.function.Clear;
 import model.operation.function.Equals;
 import model.operation.function.Pi;
-import model.operation.unary.Inverse;
-import model.operation.unary.Negate;
-import model.operation.unary.Square;
-import model.operation.unary.SquareRoot;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
