@@ -29,7 +29,7 @@ class BigNumberTest {
     }
 
     @Test
-    @DisplayName("Case# 1.200: object BigNumber is same value as other BigNumber")
+    @DisplayName("Case# 1.200: Object BigNumber is same value as other BigNumber")
     void testEquals() {
       BigNumber actual = new BigNumber("42");
       BigNumber expected = new BigNumber("42");
@@ -37,7 +37,7 @@ class BigNumberTest {
     }
 
     @Test
-    @DisplayName("Case# 1.201: object BigNumber hashcode is same value as other BigNumber")
+    @DisplayName("Case# 1.201: Object BigNumber hashcode is same value as other BigNumber")
     void testHashCode_NumberIsNull() throws NullPointerException {
       BigNumber actual = new BigNumber("88");
       BigNumber expected = new BigNumber("88");
@@ -45,7 +45,7 @@ class BigNumberTest {
     }
 
     @Test
-    @DisplayName("Case# 1.202: object BigNumber compareTo is LESS THAN other BigNumber")
+    @DisplayName("Case# 1.202: Object BigNumber compareTo is LESS THAN other BigNumber")
     void testCompareTo_LessThan() {
       int actual = new BigNumber("44").compareTo(new BigNumber("88"));
       int expected = -1;
@@ -53,7 +53,7 @@ class BigNumberTest {
     }
 
     @Test
-    @DisplayName("Case# 1.203: object BigNumber compareTo is EQUAL TO other BigNumber")
+    @DisplayName("Case# 1.203: Object BigNumber compareTo is EQUAL TO other BigNumber")
     void testCompareTo_EqualTo() {
       int actual = new BigNumber("44").compareTo(new BigNumber("44"));
       int expected = 0;
@@ -61,7 +61,7 @@ class BigNumberTest {
     }
 
     @Test
-    @DisplayName("Case# 1.204: object BigNumber compareTo is GREATER THAN other BigNumber")
+    @DisplayName("Case# 1.204: Object BigNumber compareTo is GREATER THAN other BigNumber")
     void testCompareTo_GreaterThan() {
       int actual = new BigNumber("88").compareTo(new BigNumber("44"));
       int expected = 1;

@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 class ReadyStateTest {
 
   @Test
-  @DisplayName("Case# 2.130: verify calculator object associated with this instance of states")
+  @DisplayName("Case# 2.130: Verify calculator object associated with this instance of states")
   void testConstructor() {
     Calculator calculator = new Calculator();
     State state = calculator.ready;
@@ -59,7 +59,7 @@ class ReadyStateTest {
   }
 
   @Test
-  @DisplayName("Case# 2.131: check the enterDigit state transition from the readyState")
+  @DisplayName("Case# 2.131: Check the enterDigit state transition from the readyState")
   void testEnterDigit() {
     Calculator calculator = new Calculator();
     assertSame(calculator.buildingOperand, (new ReadyState(calculator)).enterDigit("4"));
@@ -73,7 +73,7 @@ class ReadyStateTest {
   }
 
   @Test
-  @DisplayName("Case# 2.132: check enterOperation state transition from the readyState")
+  @DisplayName("Case# 2.132: Check enterOperation state transition from the readyState")
   void testEnterOperation() {
     Calculator calculator = new Calculator();
     ReadyState readyState = new ReadyState(calculator);
@@ -121,7 +121,7 @@ class ReadyStateTest {
   }
 
   @Test
-  @DisplayName("Case# 2.133: check enterConstant state transition from the readyState")
+  @DisplayName("Case# 2.133: Check enterConstant state transition from the readyState")
   void testEnterConstant() {
     ReadyState readyState = new ReadyState(new Calculator());
     assertSame(readyState, readyState.enterConstant(new AllClear()));
