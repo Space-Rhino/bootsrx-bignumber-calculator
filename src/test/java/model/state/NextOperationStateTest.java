@@ -46,15 +46,6 @@ class NextOperationStateTest {
     Calculator calculator = new Calculator();
     assertThat((new NextOperationState(calculator)).enterDigit("4"))
         .isSameAs(calculator.buildingOperand);
-
-    calculator = new Calculator();
-    assertThat((new NextOperationState(calculator)).enterDigit("2"))
-        .isSameAs(calculator.buildingOperand);
-
-    calculator = new Calculator();
-    calculator.updateDisplay("42");
-    assertThat((new NextOperationState(calculator)).enterDigit("BKSP"))
-        .isSameAs(calculator.buildingOperand);
   }
 
   @Test
@@ -75,31 +66,6 @@ class NextOperationStateTest {
     calculator = new Calculator();
     nextOperationState = new NextOperationState(calculator);
     assertThat(nextOperationState.enterOperation(new Equals())).isSameAs(calculator.ready);
-
-    calculator = new Calculator();
-    nextOperationState = new NextOperationState(calculator);
-    assertThat(nextOperationState.enterOperation(new Pi())).isSameAs(calculator.ready);
-
-    calculator = new Calculator();
-    nextOperationState = new NextOperationState(calculator);
-    assertThat(nextOperationState.enterOperation(new Inverse())).isSameAs(calculator.ready);
-
-    calculator = new Calculator();
-    calculator.updateDisplay("42");
-    nextOperationState = new NextOperationState(calculator);
-    assertThat(nextOperationState.enterOperation(new Inverse())).isSameAs(calculator.ready);
-
-    calculator = new Calculator();
-    nextOperationState = new NextOperationState(calculator);
-    assertThat(nextOperationState.enterOperation(new Negate())).isSameAs(calculator.ready);
-
-    calculator = new Calculator();
-    nextOperationState = new NextOperationState(calculator);
-    assertThat(nextOperationState.enterOperation(new Square())).isSameAs(calculator.ready);
-
-    calculator = new Calculator();
-    nextOperationState = new NextOperationState(calculator);
-    assertThat(nextOperationState.enterOperation(new SquareRoot())).isSameAs(calculator.ready);
   }
 
   @Test

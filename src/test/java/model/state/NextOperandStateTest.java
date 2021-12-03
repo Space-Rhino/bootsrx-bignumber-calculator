@@ -42,20 +42,11 @@ class NextOperandStateTest {
     Calculator calculator = new Calculator();
     assertThat((new NextOperandState(calculator)).enterDigit("8"))
         .isSameAs(calculator.buildingOperand);
-
-    calculator = new Calculator();
-    assertThat((new NextOperandState(calculator)).enterDigit("5"))
-        .isSameAs(calculator.buildingOperand);
-
-    calculator = new Calculator();
-    assertThat((new NextOperandState(calculator)).enterDigit("3"))
-        .isSameAs(calculator.buildingOperand);
   }
 
   @Test
   @DisplayName("Case# 2.102: Check the enterOperation state transition from the nextOperandState")
   void testEnterOperation() {
-
     NextOperandState nextOperandState = new NextOperandState(new Calculator());
     assertThat(nextOperandState.enterOperation(new Add())).isSameAs(nextOperandState);
 
@@ -69,10 +60,6 @@ class NextOperandStateTest {
     calculator = new Calculator();
     nextOperandState = new NextOperandState(calculator);
     assertThat(nextOperandState.enterOperation(new Equals())).isSameAs(calculator.ready);
-
-    calculator = new Calculator();
-    nextOperandState = new NextOperandState(calculator);
-    assertThat(nextOperandState.enterOperation(new Pi())).isSameAs(calculator.ready);
   }
 
   @Test

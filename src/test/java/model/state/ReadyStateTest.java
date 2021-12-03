@@ -44,14 +44,7 @@ class ReadyStateTest {
   @DisplayName("Case# 2.131: Check the enterDigit state transition from the readyState")
   void testEnterDigit() {
     Calculator calculator = new Calculator();
-    assertThat((new ReadyState(calculator)).enterDigit("4")).isSameAs(calculator.buildingOperand);
-
-    calculator = new Calculator();
     assertThat((new ReadyState(calculator)).enterDigit("3")).isSameAs(calculator.buildingOperand);
-
-    calculator = new Calculator();
-    calculator.updateDisplay("42");
-    assertThat((new ReadyState(calculator)).enterDigit("8")).isSameAs(calculator.buildingOperand);
   }
 
   @Test
@@ -70,36 +63,6 @@ class ReadyStateTest {
 
     readyState = new ReadyState(calculator);
     assertThat(readyState.enterOperation(new Equals())).isSameAs(readyState);
-
-    readyState = new ReadyState(calculator);
-    assertThat(readyState.enterOperation(new Pi())).isSameAs(readyState);
-
-    readyState = new ReadyState(calculator);
-    assertThat(readyState.enterOperation(new Inverse())).isSameAs(readyState);
-
-    calculator = new Calculator();
-    calculator.updateDisplay("42");
-    readyState = new ReadyState(calculator);
-    assertThat(readyState.enterOperation(new Inverse())).isSameAs(readyState);
-
-    calculator = new Calculator();
-    calculator.updateDisplay("7");
-    readyState = new ReadyState(calculator);
-    assertThat(readyState.enterOperation(new Inverse())).isSameAs(readyState);
-
-    calculator = new Calculator();
-    calculator.updateDisplay("3");
-    readyState = new ReadyState(calculator);
-    assertThat(readyState.enterOperation(new AllClear())).isSameAs(readyState);
-
-    readyState = new ReadyState(calculator);
-    assertThat(readyState.enterOperation(new Negate())).isSameAs(readyState);
-
-    readyState = new ReadyState(calculator);
-    assertThat(readyState.enterOperation(new Square())).isSameAs(readyState);
-
-    readyState = new ReadyState(calculator);
-    assertThat(readyState.enterOperation(new SquareRoot())).isSameAs(readyState);
   }
 
   @Test
